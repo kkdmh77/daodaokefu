@@ -7,8 +7,14 @@
 //
 
 #import "XZMineViewController.h"
+#import "XZLoginViewController.h"
 
 @interface XZMineViewController ()
+@property (weak, nonatomic) IBOutlet UILabel *username;
+@property (weak, nonatomic) IBOutlet UILabel *accountNumber;
+@property (weak, nonatomic) IBOutlet UILabel *name;
+@property (weak, nonatomic) IBOutlet UILabel *usersex;
+@property (weak, nonatomic) IBOutlet UISwitch *isloginSwitch;
 
 @end
 
@@ -16,14 +22,11 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view.
+    
     
 }
 
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
-}
+
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{
     
@@ -34,7 +37,19 @@
     
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     
+    if(indexPath.section == 2){
+        
+        // 登出
+        [self logoutAction];
+    }
+    
     [XZToolManager showConfirmAlertView:@"提示" andMessage:@"此功能正在开发中,请敬请期待!" andVC:self];
 }
 
+
+// 退出操作
+- (void)logoutAction {
+    
+    kAppWindow.rootViewController = [XZLoginViewController new];
+}
 @end

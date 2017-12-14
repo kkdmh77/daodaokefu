@@ -36,13 +36,15 @@
     // 设置圆角
     self.loginButton.layer.cornerRadius = 10;
     
+    [kNotificationCenter addObserver:self selector:@selector(textFieldDidBeginEditing:) name: UITextFieldTextDidBeginEditingNotification object:nil];
+    
     UIButton *accountButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 15, 24, 20)];
     accountButton.imageEdgeInsets = UIEdgeInsetsMake(0, 0, 0, 10);
     accountButton.userInteractionEnabled = false;
-    [accountButton setImage:[UIImage imageNamed:@"更多"] forState:UIControlStateNormal];
+    [accountButton setImage:[UIImage imageNamed:@"用户名icon-未点亮"] forState:UIControlStateNormal];
     
     self.accountButton = accountButton;
-    
+    self.account.leftViewMode = UITextFieldViewModeAlways;
     self.account.leftView = accountButton;
     
     UIButton *passwordButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 15, 24, 20)];
@@ -51,21 +53,51 @@
     [passwordButton setImage:[UIImage imageNamed:@"密码icon-未点亮"] forState:UIControlStateNormal];
     
     self.passwordButton = passwordButton;
+    self.password.leftViewMode = UITextFieldViewModeAlways;
     self.password.leftView = passwordButton;
     
     self.account.delegate = self;
-    self.account.delegate = self;
+    self.password.delegate = self;
     
 }
-- (void)textFieldDidBeginEditing{
+
+- (void)textFieldDidBeginEditing:(UITextField *)textField{
     
     if(self.account.isFirstResponder){
         
-         [_accountButton setImage:[UIImage imageNamed:@"用户名icon-点亮"] forState:UIControlStateNormal];
+        [self setAccountbuttonimage:YES];
+
     }else{
-         [_passwordButton setImage:[UIImage imageNamed:@"密码icon-点亮"] forState:UIControlStateNormal];
         
+        [self setPasswordbuttonimage:YES];
     }
+    
+}
+
+- (void)textFieldDidEndEditing:(UITextField *)textField{
+    
+    if(self.account.text.length == 0){
+        
+        [self setAccountbuttonimage:NO];
+    }
+    
+    if(self.password.text.length == 0){
+        
+        [self setPasswordbuttonimage:NO];
+    }
+    
+}
+
+// 抽象公共方法
+- (void)setAccountbuttonimage:(BOOL)isSet{
+    
+    [self.accountButton setImage:isSet ? [UIImage imageNamed:@"用户名icon"] : [UIImage imageNamed:@"用户名icon-未点亮"] forState:UIControlStateNormal];
+    
+}
+
+- (void)setPasswordbuttonimage:(BOOL)isSet{
+    
+    [self.passwordButton setImage:isSet ? [UIImage imageNamed:@"密码icon"] : [UIImage imageNamed:@"密码icon-未点亮"] forState:UIControlStateNormal];
 }
 
 - (IBAction)loginclickButtonAction:(id)sender {

@@ -52,7 +52,7 @@
 - (void)PushHomeMessageVc:(NSString *)account andPassword:(NSString *)password {
     [self.view endEditing:YES];
     
-    if( [self loginPushjudgeAction:account andErrorStr:@"亲你还没输入账号呐"] || [self loginPushjudgeAction:account andErrorStr:@"亲你还没输入密码呐"]) return;
+    if( [self loginPushjudgeAction:account andErrorStr:@"亲你还没输入账号呐"] || [self loginPushjudgeAction:password andErrorStr:@"亲你还没输入密码呐"]) return;
     
     
     [[XZNetWorkingManager sharderinstance] firstLogin:account andPassworrd:password andSucceed:^{
