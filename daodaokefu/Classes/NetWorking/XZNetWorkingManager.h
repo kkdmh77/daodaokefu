@@ -7,7 +7,7 @@
 //
 
 #import "AFHTTPSessionManager.h"
-
+#import "XZUserinfoModel.h"
 @interface XZNetWorkingManager : AFHTTPSessionManager
 
 /**
@@ -17,6 +17,10 @@
  */
 + (instancetype)sharderinstance;
 
+/**
+ 退出登录API
+ */
+- (void)logout;
 
 /**
  账号密码登录API
@@ -26,5 +30,8 @@
  @param succeedBlock 成功回调
  @param errorBlock 失败回调
  */
-- (void)firstLogin:(NSString *)account andPassworrd:(NSString *)Passworrd andSucceed:(void(^)(void))succeedBlock andError:(void(^)(NSString *))errorBlock;
+- (void)firstLogin:(NSString *)account andPassworrd:(NSString *)Passworrd andSucceed:(void(^)(XZUserinfoModel *model))succeedBlock andError:(void(^)(NSString *err))errorBlock;
+
+
+
 @end

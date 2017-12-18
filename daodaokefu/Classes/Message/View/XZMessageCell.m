@@ -7,7 +7,7 @@
 //
 
 #import "XZMessageCell.h"
-
+#import "UIImageView+WebCache.h"
 static const CGFloat topPadding = 8;
 static const CGFloat leftPadding = 9;
 @interface XZMessageCell ()
@@ -64,13 +64,25 @@ static const CGFloat leftPadding = 9;
         [self.unreadLabel setTitle:@" " forState:UIControlStateNormal];
         self.unreadLabel.backgroundColor = self.backgroundColor;
     }
-    _avatarImageView.image = [UIImage imageNamed:@"猫"];
+    
+    if(group.imageurl != nil){
+        
+        [_avatarImageView sd_setImageWithURL:[NSURL URLWithString:group.imageurl]];
+        
+    }else if(group.photoId != nil){
+        
+        _avatarImageView.image = [UIImage imageNamed:group.photoId];
+    }else{
+        
+       _avatarImageView.image = [UIImage imageNamed:@"猫"];
+    }
+    
     
     
     [_messageLabel setText:group.lastMsgString];
     [_usernameLabel setText:group.gName];
 
-    _dateLabel.text = @"11:20";
+    _dateLabel.text = [NSString stringWithFormat:@"%ld",(long)group.lastMsgTime];
 }
 
 - (void)layoutSubviews
@@ -120,14 +132,13 @@ static const CGFloat leftPadding = 9;
         _avatarImageView = imageV;
         _avatarImageView.layer.cornerRadius = 5;
         _avatarImageView.layer.masksToBounds = YES;
-        
     }
     return _avatarImageView;
 }
 
 - (void)tapavatarImageView{
     
-    NSLog(@"我点击了用户的头像哦");
+    [kNotificationCenter postNotificationName:@"clickavatarImageView" object:nil];
 }
 
 - (UIImageView *)weChatStatusImageView

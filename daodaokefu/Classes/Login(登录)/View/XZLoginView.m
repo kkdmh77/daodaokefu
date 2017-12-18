@@ -34,7 +34,18 @@
 - (void)awakeFromNib{
     [super awakeFromNib];
     // 设置圆角
-    self.loginButton.layer.cornerRadius = 10;
+   
+    
+    CAGradientLayer *gradient = [CAGradientLayer layer];
+    //设置开始和结束位置(设置渐变的方向)
+    gradient.startPoint = CGPointMake(0, 0);
+    gradient.endPoint = CGPointMake(1, 0);
+    gradient.frame =self.loginButton.bounds;
+    gradient.colors = [NSArray arrayWithObjects:(id)[UIColor colorWithRed:41 / 255.0 green:89/255.0 blue:244/255.0 alpha:1].CGColor,(id)[UIColor colorWithRed:0 green:200/255.0 blue:250/255.0 alpha:1].CGColor,nil];
+    [self.loginButton.layer insertSublayer:gradient atIndex:0];
+    
+    self.loginButton.layer.cornerRadius = 20;
+    self.loginButton.layer.masksToBounds = YES;
     
     [kNotificationCenter addObserver:self selector:@selector(textFieldDidBeginEditing:) name: UITextFieldTextDidBeginEditingNotification object:nil];
     

@@ -28,6 +28,8 @@
 #define APIURL                @"http://workbench.daokf.cn/kf/"
 //首次登录API
 #define APIfirstLogin              [APIURL stringByAppendingString:@"/app/login"]
+//退出登录API
+#define APIlogOut              [APIURL stringByAppendingString:@"/app/logout"]
 
 
 
@@ -129,7 +131,7 @@
 #define kPathCache [NSSearchPathForDirectoriesInDomains(NSCachesDirectory, NSUserDomainMask, YES) firstObject]
 
 // 定义image对象
-#define ImageNamed(_pointer) [UIImage imageNamed:[UIUtil imageName:_pointer］
+#define ImageNamed(_pointer) [UIImage imageNamed:_pointer］
 
 // 弹出AlertView
 #define showAlertView(TITLE,MESSAGE,QUVC) UIAlertController *alertController = [UIAlertController alertControllerWithTitle:TITLE message:MESSAGE preferredStyle:UIAlertControllerStyleAlert];\[alertController addAction:[UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:nil]];\

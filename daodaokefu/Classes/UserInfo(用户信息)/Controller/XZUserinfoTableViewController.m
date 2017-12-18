@@ -9,6 +9,9 @@
 #import "XZUserinfoTableViewController.h"
 
 @interface XZUserinfoTableViewController ()
+@property (weak, nonatomic) IBOutlet UIButton *blacklistButton;
+
+@property (weak, nonatomic) IBOutlet UIView *footerView;
 
 @end
 
@@ -17,18 +20,53 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    // Uncomment the following line to preserve selection between presentations.
-    // self.clearsSelectionOnViewWillAppear = NO;
+    #pragma mark - 布局UI
+    [self setupUI];
+}
+
+- (void)setupUI {
+    _blacklistButton.layer.cornerRadius = 10;
+    self.tableView.backgroundColor =  [UIColor colorWithRed:235 / 255.0 green:235 / 255.0 blue:235 / 255.0 alpha:1];
+}
+
+- (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section {
     
-    // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-    // self.navigationItem.rightBarButtonItem = self.editButtonItem;
+    if (section == 0){
+        return @"基本信息";
+    }else if(section == 1){
+        return @"会员信息";
+    }else {
+        return nil;
+    }
 }
 
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
+- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{
+    
+    return 30.5;
 }
 
+- (void)tableView:(UITableView *)tableView willDisplayHeaderView:(UIView *)view forSection:(NSInteger)section{
+    
+    view.tintColor = [UIColor colorWithRed:235 / 255.0 green:235 / 255.0 blue:235 / 255.0 alpha:1];
+    UITableViewHeaderFooterView *headerView = (UITableViewHeaderFooterView *)view;
+    headerView.textLabel.textColor = [UIColor lightGrayColor];
+    headerView.textLabel.font = [UIFont systemFontOfSize:14];
+    
+}
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+    
+    [tableView deselectRowAtIndexPath:indexPath animated:NO];
+}
+
+
+- (IBAction)laheiAction:(id)sender {
+    
+    
+    // 调用拉黑接口
+}
+
+/*
 #pragma mark - Table view data source
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
@@ -41,7 +79,7 @@
     return 0;
 }
 
-/*
+
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:<#@"reuseIdentifier"#> forIndexPath:indexPath];
     

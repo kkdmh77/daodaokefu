@@ -10,6 +10,7 @@
 #import "ICMessageModel.h"
 #import "ICMessage.h"
 #import "ICMessageTopView.h"
+#import "UIImageView+WebCache.h"
 
 @interface ICChatMessageBaseCell ()
 
@@ -31,6 +32,9 @@
     }
     return self;
 }
+
+
+
 
 #pragma mark - UI
 
@@ -125,19 +129,34 @@
         } else {
             self.bubbleView.image = [UIImage imageNamed:@"liaotianbeijing2"];
         }
-        [self.headImageView.imageView setImage:[UIImage imageNamed:@"苹果"]];
+        [self.headImageView.imageView setImage:[UIImage imageNamed:@"咖啡"]];
     } else {    // 接收者
         self.retryButton.hidden  = YES;
         self.bubbleView.image    = [UIImage imageNamed:@"liaotianbeijing1"];
-        [self.headImageView.imageView setImage:[UIImage imageNamed:@"猫"]];
+
+        if(modelFrame.model.Senderimageurl != nil){
+            
+             [self.headImageView.imageView sd_setImageWithURL:[NSURL URLWithString:modelFrame.model.Senderimageurl]];
+        }else{
+            
+            [self.headImageView.imageView setImage:[UIImage imageNamed:@"猫"]];
+        }
+       
     }
 }
 
+//点击头像
 - (void)headClicked
 {
-    if ([self.longPressDelegate respondsToSelector:@selector(headImageClicked:)]) {
-        [self.longPressDelegate headImageClicked:_modelFrame.model.message.from];
+    
+    if(!_modelFrame.model.isSender){
+        
+        if ([self.longPressDelegate respondsToSelector:@selector(headImageClicked:)]) {
+            [self.longPressDelegate headImageClicked:_modelFrame.model.message.from];
+        }
     }
+    
+  
 }
 
 #pragma mark - longPress delegate

@@ -18,6 +18,7 @@
 // 是否是群聊
 //@property (nonatomic, assign) BOOL isChatGroup;
 
+@property (nonatomic, copy) NSString *Senderimageurl;
 
 @property (nonatomic, strong) ICMessage * message;
 

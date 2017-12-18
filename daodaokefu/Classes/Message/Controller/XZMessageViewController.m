@@ -96,7 +96,7 @@
                                                       title:@"创建会话"
                                                      action:^(IFMMenuItem *item) {
                                                          
-                                                         [XZToolManager showConfirmAlertView:@"提示" andMessage:@"此功能正在开发当中,请敬请期待谢谢!" andVC:self];
+                                                         [self addsession];
                                                          
                                                      }], nil];
     
@@ -112,10 +112,21 @@
     [menu showFromNavigationController:self.navigationController WithX:self.view.frame.size.width - 60];
 }
 
+- (void)addsession {
+    
+    XZGroup *group = [[XZGroup alloc] init];
+    group.unReadCount = 6;
+    group.gName = @"张国瑞";
+    group.lastMsgString = @"你看到我的九去哪里了么?";
+    group.imageurl = @"https://avatars1.githubusercontent.com/u/6919743?s=400&v=4";
+    [self.dataArray addObject:group];
+    [self.tableView reloadData];
+}
+
 - (void)openScan{
    
     NSString *cardName = @"迷宫已失 - 土土";
-    UIImage *avatar = [UIImage imageNamed:@"猫"];
+    UIImage *avatar = [UIImage imageNamed:@"咖啡"];
     
     // 实例化扫描控制器
     HMScannerController *scanner = [HMScannerController scannerWithCardName:cardName avatar:avatar completion:^(NSString *stringValue) {
@@ -167,14 +178,22 @@
     //设置删除按钮
     UITableViewRowAction * deleteRowAction = [UITableViewRowAction rowActionWithStyle:UITableViewRowActionStyleDefault title:@"删除" handler:^(UITableViewRowAction * _Nonnull action, NSIndexPath * _Nonnull indexPath) {
 //        [self deleteLocalGroup:indexPath];
+        [self.dataArray removeObjectAtIndex:indexPath.row];
+        [self.tableView reloadData];
     }];
     //置顶
     UITableViewRowAction * topRowAction = [UITableViewRowAction rowActionWithStyle:UITableViewRowActionStyleDefault title:topTitle handler:^(UITableViewRowAction * _Nonnull action, NSIndexPath * _Nonnull indexPath) {
 //        [self setTopCellWithIndexPath:indexPath currentTop:group.isTop];
+        [self.dataArray exchangeObjectAtIndex:indexPath.row withObjectAtIndex:0];
+        [self.tableView reloadData];
     }];
     //标记已读
     UITableViewRowAction * collectRowAction = [UITableViewRowAction rowActionWithStyle:UITableViewRowActionStyleDefault title:readTitle handler:^(UITableViewRowAction * _Nonnull action, NSIndexPath * _Nonnull indexPath) {
 //        [self markerReadWithIndexPath:indexPath currentUnReadCount:group.unReadCount];
+        XZGroup *gp = self.dataArray[indexPath.row];
+        gp.unReadCount = 0;
+        self.dataArray[indexPath.row] = gp;
+        [self.tableView reloadRowsAtIndexPaths:[NSArray arrayWithObjects:[NSIndexPath indexPathForRow:indexPath.row inSection:indexPath.section], nil] withRowAnimation:UITableViewRowAnimationNone];
     }];
     collectRowAction.backgroundColor = [UIColor grayColor];
     topRowAction.backgroundColor     = [UIColor orangeColor];

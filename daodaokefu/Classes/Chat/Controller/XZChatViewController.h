@@ -7,8 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
-
-@interface XZChatViewController : UIViewController
+#import "XZViewController.h"
+@interface XZChatViewController :XZViewController
 
 @property (nonatomic, strong) XZGroup *group;
 

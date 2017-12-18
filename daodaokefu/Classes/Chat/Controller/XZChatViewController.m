@@ -8,6 +8,8 @@
 
 #import "XZChatViewController.h"
 #import "ICChatHearder.h"
+#import "XZUserinfoTableViewController.h"
+#import "UIImageView+WebCache.h"
 
 @interface XZChatViewController ()<ICChatBoxViewControllerDelegate,UITableViewDelegate,UITableViewDataSource,ICRecordManagerDelegate,UIViewControllerTransitioningDelegate,UIViewControllerAnimatedTransitioning,BaseCellDelegate>
 {
@@ -49,7 +51,11 @@
     self.view.backgroundColor = [UIColor whiteColor];
     self.title = self.group.gName;
     
+    [self addNotification];
+    
     [self setupUI];
+    
+    [self setupNavUI];
     
     [self registerCell];
     
@@ -68,7 +74,74 @@
     self.tableView.backgroundColor = IColor(240, 237, 237);
     // self.view的高度有时候是不准确的
     self.tableView.frame = CGRectMake(0, HEIGHT_NAVBAR+HEIGHT_STATUSBAR, self.view.width, APP_Frame_Height-HEIGHT_TABBAR-HEIGHT_NAVBAR-HEIGHT_STATUSBAR);
+    
 }
+
+- (void)setupNavUI{
+    
+    UIBarButtonItem *rigthButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"更多"] style:UIBarButtonItemStylePlain target:self action:@selector(NavrigthButtonAction)];
+    
+    self.navigationController.navigationItem.rightBarButtonItem = rigthButtonItem;[self.navigationItem setRightBarButtonItem:rigthButtonItem];
+}
+
+- (void)NavrigthButtonAction{
+    
+    
+    UIAlertController *actionSheet = [UIAlertController alertControllerWithTitle:nil message:nil preferredStyle:UIAlertControllerStyleActionSheet];
+    
+    UIAlertAction *takePhotoes = [UIAlertAction actionWithTitle:@"客户资料" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+        
+        // 1.获取当前的StoryBoard面板
+        UIStoryboard *storyBoard = [UIStoryboard storyboardWithName:@"Mine" bundle:nil];
+        
+        // 2.通过标识符找到对应的页面
+        XZUserinfoTableViewController *userinfoVc = [storyBoard instantiateViewControllerWithIdentifier:@"XZUserinfoTableViewController"];
+        
+        
+        [self.navigationController pushViewController:userinfoVc animated:YES];
+    }];
+    
+    UIAlertAction *changeAction = [UIAlertAction actionWithTitle:@"转接会话" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+        
+    }];
+    
+    UIAlertAction *photoesAlbum = [UIAlertAction actionWithTitle:@"关闭会话" style:UIAlertActionStyleDestructive handler:^(UIAlertAction * _Nonnull action) {
+        
+        
+        [self.navigationController popViewControllerAnimated:YES];
+    }];
+    
+    UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
+        
+        
+    }];
+    
+    [actionSheet addAction:takePhotoes];
+    [actionSheet addAction:changeAction];
+    [actionSheet addAction:photoesAlbum];
+    [actionSheet addAction:cancelAction];
+    
+    [self presentViewController:actionSheet animated:YES completion:nil];
+    
+    
+}
+
+- (void)addNotification {
+    
+    [kNotificationCenter addObserverForName:@"clickavatarImageView" object:nil queue:[NSOperationQueue mainQueue] usingBlock:^(NSNotification * _Nonnull note) {
+       
+        // 1.获取当前的StoryBoard面板
+        UIStoryboard *storyBoard = [UIStoryboard storyboardWithName:@"Mine" bundle:nil];
+        
+        // 2.通过标识符找到对应的页面
+        XZUserinfoTableViewController *userinfoVc = [storyBoard instantiateViewControllerWithIdentifier:@"XZUserinfoTableViewController"];
+        
+        
+        [self.navigationController pushViewController:userinfoVc animated:YES];
+        
+    }];
+}
+
 
 - (void)registerCell
 {
@@ -77,6 +150,19 @@
     [self.tableView registerClass:[ICChatMessageVideoCell class] forCellReuseIdentifier:TypeVideo];
     [self.tableView registerClass:[ICChatMessageVoiceCell class] forCellReuseIdentifier:TypeVoice];
     [self.tableView registerClass:[ICChatMessageFileCell class] forCellReuseIdentifier:TypeFile];
+}
+
+#pragma mark -  点击头像触发的代理方法
+- (void)headImageClicked:(NSString *)eId{
+    
+    // 1.获取当前的StoryBoard面板
+    UIStoryboard *storyBoard = [UIStoryboard storyboardWithName:@"Mine" bundle:nil];
+    
+    // 2.通过标识符找到对应的页面
+    XZUserinfoTableViewController *userinfoVc = [storyBoard instantiateViewControllerWithIdentifier:@"XZUserinfoTableViewController"];
+    
+    
+    [self.navigationController pushViewController:userinfoVc animated:YES];
 }
 
 // 加载数据
@@ -108,7 +194,9 @@
         ICChatMessageBaseCell *cell    = [tableView dequeueReusableCellWithIdentifier:ID];
         cell.longPressDelegate         = self;
         [[ICMediaManager sharedManager] clearReuseImageMessage:cell.modelFrame.model];
+        modelFrame.model.Senderimageurl=self.group.imageurl;
         cell.modelFrame                = modelFrame;
+        
         return cell;
     }
 }
@@ -250,7 +338,14 @@
         messageF.model.message.deliveryState = ICMessageDeliveryState_Delivered;
 //        [self sendImageMessageWithImgPath1:messageF.model.mediaPath];
         [self timerInvalue]; // 销毁定时器
-        ICMessageFrame *messageFs = [ICMessageHelper createMessageFrame:TypeVoice content:@"[语音]" path:messageF.model.mediaPath from:@"gxz" to:self.group.gId fileKey:nil isSender:NO receivedSenderByYourself:NO];
+        
+//        // 自动回复
+//        ICMessageFrame *messageFs = [ICMessageHelper createMessageFrame:TypeVoice content:@"[语音]" path:messageF.model.mediaPath from:@"gxz" to:self.group.gId fileKey:nil isSender:NO receivedSenderByYourself:NO];
+//        [self addObject:messageFs isSender:YES];
+//        [self messageSendSucced:messageFs];
+        
+        // 自动回复
+        ICMessageFrame *messageFs = [ICMessageHelper createMessageFrame:TypeText content:messageF.model.message.content path:nil from:@"gxz" to:self.group.gId fileKey:nil isSender:NO receivedSenderByYourself:NO];
         [self addObject:messageFs isSender:YES];
         [self messageSendSucced:messageFs];
 
@@ -674,6 +769,10 @@
 }
 
 
+- (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event{
+    
+    [self.view endEditing:YES];
+}
 
 
 @end

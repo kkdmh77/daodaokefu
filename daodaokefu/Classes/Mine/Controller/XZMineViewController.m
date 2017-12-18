@@ -8,6 +8,7 @@
 
 #import "XZMineViewController.h"
 #import "XZLoginViewController.h"
+#import "AppDelegate.h"
 
 @interface XZMineViewController ()
 @property (weak, nonatomic) IBOutlet UILabel *username;
@@ -23,10 +24,19 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    
+    #pragma mark - 设置数据
+    [self setData];
 }
 
-
+- (void)setData {
+    
+    AppDelegate *sd=(AppDelegate *)[[UIApplication sharedApplication] delegate];
+    
+    self.username.text = sd.uesrmodel.name;
+    self.name.text = sd.uesrmodel.name;
+    self.usersex.text = sd.uesrmodel.sex == 0 ? @"男":@"女";
+    
+}
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{
     
@@ -37,18 +47,38 @@
     
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     
-    if(indexPath.section == 2){
+    if(indexPath.section == 3){
         
         // 登出
         [self logoutAction];
     }
     
-    [XZToolManager showConfirmAlertView:@"提示" andMessage:@"此功能正在开发中,请敬请期待!" andVC:self];
+    if(indexPath.section == 0 || indexPath.section == 2){
+        
+        [XZToolManager showConfirmAlertView:@"提示" andMessage:@"此功能正在开发中,请敬请期待!" andVC:self];
+    }
+    
+    
+    
 }
 
+- (IBAction)setStatusAction:(UISwitch *)sender {
+    
+    if(sender.isOn){
+        
+        
+        
+    }else{
+        
+        [[XZNetWorkingManager sharderinstance] logout];
+        
+    }
+}
 
 // 退出操作
 - (void)logoutAction {
+    
+    [[XZNetWorkingManager sharderinstance] logout];
     
     kAppWindow.rootViewController = [XZLoginViewController new];
 }

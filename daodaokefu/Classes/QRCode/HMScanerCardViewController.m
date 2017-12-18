@@ -26,9 +26,12 @@
     if (self) {
         self.cardName = cardName;
         self.avatar = avatar;
+        
     }
     return self;
 }
+
+
 
 #pragma mark - 设置界面
 - (void)viewDidLoad {

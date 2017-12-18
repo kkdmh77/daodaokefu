@@ -9,8 +9,13 @@
 #import "XZLoginViewController.h"
 #import "XZLoginView.h"
 #import "XZTabBarController.h"
+#import "DHGuidePageHUD.h"
+#import <AVFoundation/AVFoundation.h>
+#import "XZUserinfoModel.h"
+#import "AppDelegate.h"
 @interface XZLoginViewController ()<PushHomeMessageVc>
 
+//@property(nonatomic,strong)AVPlayer *player;
 @end
 
 @implementation XZLoginViewController
@@ -23,6 +28,8 @@
     
     #pragma mark - 设置UI相关
     [self setupUI];
+    
+    [self leadpage];
     
 }
 
@@ -43,11 +50,6 @@
     loginView.delegate = self;
 }
 
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
-}
-
 #pragma mark -  loginView delegate
 - (void)PushHomeMessageVc:(NSString *)account andPassword:(NSString *)password {
     [self.view endEditing:YES];
@@ -55,8 +57,13 @@
     if( [self loginPushjudgeAction:account andErrorStr:@"亲你还没输入账号呐"] || [self loginPushjudgeAction:password andErrorStr:@"亲你还没输入密码呐"]) return;
     
     
-    [[XZNetWorkingManager sharderinstance] firstLogin:account andPassworrd:password andSucceed:^{
+    [[XZNetWorkingManager sharderinstance] firstLogin:account andPassworrd:password andSucceed:^(XZUserinfoModel *model){
        
+        
+        AppDelegate *sd=(AppDelegate *)[[UIApplication sharedApplication] delegate];
+        
+        sd.uesrmodel = model;
+        
         UIWindow *window = [UIApplication sharedApplication].keyWindow;
         
         window.rootViewController = [[XZTabBarController alloc] init];
@@ -107,6 +114,25 @@
     
   
 }
+
+- (void)leadpage{
+
+    if (![[NSUserDefaults standardUserDefaults] boolForKey:BOOLFORKEY]) {
+        [[NSUserDefaults standardUserDefaults] setBool:YES forKey:BOOLFORKEY];
+        // 视频引导页
+        [self setStaticGuidePage];
+    }
+}
+
+#pragma mark - 设置APP静态图片引导页
+- (void)setStaticGuidePage {
+    // 初始化视频URL
+    NSURL *videoURL = [NSURL fileURLWithPath:[[NSBundle mainBundle] pathForResource:@"QQLoginVideo" ofType:@"mp4"]];
+    // 创建并添加引导页
+    DHGuidePageHUD *guidePage = [[DHGuidePageHUD alloc] dh_initWithFrame:self.view.bounds videoURL:videoURL];
+    [self.view addSubview:guidePage];
+}
+
 
 - (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event{
     
