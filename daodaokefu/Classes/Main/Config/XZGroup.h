@@ -22,7 +22,7 @@
 // 组成员
 @property (nonatomic, strong) NSMutableArray<XZUser *> *userList;
 // 组的未读数
-@property (nonatomic, assign) int unReadCount;
+@property (nonatomic, assign) NSInteger unReadCount;
 // 组状态
 @property (nonatomic, assign) int valid;
 // 当期用户设置该群的群属性 免打扰（0: 不是 1：是 ）
@@ -32,7 +32,7 @@
 // 最后一条消息内容
 @property (nonatomic, copy) NSString * lastMsgString;
 // 最后一条消息时间
-@property (nonatomic, assign) NSInteger lastMsgTime;
+@property (nonatomic, assign) NSString* lastMsgTime;
 
 @property (nonatomic, copy) NSString *drafts;
 

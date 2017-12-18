@@ -82,7 +82,7 @@ static const CGFloat leftPadding = 9;
     [_messageLabel setText:group.lastMsgString];
     [_usernameLabel setText:group.gName];
 
-    _dateLabel.text = [NSString stringWithFormat:@"%ld",(long)group.lastMsgTime];
+    _dateLabel.text = group.lastMsgTime;
 }
 
 - (void)layoutSubviews

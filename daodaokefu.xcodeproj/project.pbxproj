@@ -49,7 +49,8 @@
 		186F03C11FE279E00024D38E /* DHGifImageOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = 186F03BD1FE279E00024D38E /* DHGifImageOperation.m */; };
 		186F03C21FE279E00024D38E /* DHGuidePageHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = 186F03BF1FE279E00024D38E /* DHGuidePageHUD.m */; };
 		186F03C31FE279E00024D38E /* GuideImage.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 186F03C01FE279E00024D38E /* GuideImage.bundle */; };
-		186F03C51FE27E4D0024D38E /* QQLoginVideo.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = 186F03C41FE27E4D0024D38E /* QQLoginVideo.mp4 */; };
+		187D21CE1FE7A18300FDFB1A /* XZClientModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 187D21CD1FE7A18300FDFB1A /* XZClientModel.m */; };
+		187D21D41FE7B4E100FDFB1A /* XZHomeSessionListModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 187D21D31FE7B4E100FDFB1A /* XZHomeSessionListModel.m */; };
 		18885E231FDFA72700F2348F /* LoginViewViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 18885E221FDFA72700F2348F /* LoginViewViewController.xib */; };
 		18885E261FDFA79400F2348F /* XZLoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 18885E251FDFA79400F2348F /* XZLoginViewController.m */; };
 		18885E291FDFA7DD00F2348F /* XZLoginView.m in Sources */ = {isa = PBXBuildFile; fileRef = 18885E281FDFA7DD00F2348F /* XZLoginView.m */; };
@@ -277,7 +278,10 @@
 		186F03BE1FE279E00024D38E /* DHGuidePageHUD.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DHGuidePageHUD.h; sourceTree = "<group>"; };
 		186F03BF1FE279E00024D38E /* DHGuidePageHUD.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DHGuidePageHUD.m; sourceTree = "<group>"; };
 		186F03C01FE279E00024D38E /* GuideImage.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = GuideImage.bundle; sourceTree = "<group>"; };
-		186F03C41FE27E4D0024D38E /* QQLoginVideo.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = QQLoginVideo.mp4; sourceTree = "<group>"; };
+		187D21CC1FE7A18300FDFB1A /* XZClientModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = XZClientModel.h; path = "daodaokefu/Classes/UserInfo(用户信息)/Model/XZClientModel.h"; sourceTree = SOURCE_ROOT; };
+		187D21CD1FE7A18300FDFB1A /* XZClientModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = XZClientModel.m; path = "daodaokefu/Classes/UserInfo(用户信息)/Model/XZClientModel.m"; sourceTree = SOURCE_ROOT; };
+		187D21D21FE7B4E100FDFB1A /* XZHomeSessionListModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = XZHomeSessionListModel.h; path = "daodaokefu/Classes/UserInfo(用户信息)/Model/XZHomeSessionListModel.h"; sourceTree = SOURCE_ROOT; };
+		187D21D31FE7B4E100FDFB1A /* XZHomeSessionListModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = XZHomeSessionListModel.m; path = "daodaokefu/Classes/UserInfo(用户信息)/Model/XZHomeSessionListModel.m"; sourceTree = SOURCE_ROOT; };
 		18885E221FDFA72700F2348F /* LoginViewViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LoginViewViewController.xib; sourceTree = "<group>"; };
 		18885E241FDFA79400F2348F /* XZLoginViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = XZLoginViewController.h; sourceTree = "<group>"; };
 		18885E251FDFA79400F2348F /* XZLoginViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = XZLoginViewController.m; sourceTree = "<group>"; };
@@ -1326,7 +1330,6 @@
 				18E44DEF1FE131D10070AE58 /* UserInfo(用户信息) */,
 				5FBCC13E1D9A1E4900AD6A6B /* Other */,
 				18E44E001FE215D20070AE58 /* NetWorking */,
-				186F03C41FE27E4D0024D38E /* QQLoginVideo.mp4 */,
 			);
 			path = Classes;
 			sourceTree = "<group>";
@@ -1437,6 +1440,10 @@
 		5FBCC1491D9A230700AD6A6B /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				187D21CC1FE7A18300FDFB1A /* XZClientModel.h */,
+				187D21CD1FE7A18300FDFB1A /* XZClientModel.m */,
+				187D21D21FE7B4E100FDFB1A /* XZHomeSessionListModel.h */,
+				187D21D31FE7B4E100FDFB1A /* XZHomeSessionListModel.m */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -1599,7 +1606,6 @@
 				18E44E311FE21A0C0070AE58 /* README.md in Resources */,
 				18885E491FDFDE2F00F2348F /* Mine.storyboard in Resources */,
 				5F80D7241D9BCD3700F8D164 /* mahuateng.jpeg in Resources */,
-				186F03C51FE27E4D0024D38E /* QQLoginVideo.mp4 in Resources */,
 				5F80D7151D9B677D00F8D164 /* LICENSE in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1704,6 +1710,7 @@
 				5F80D6DC1D9A71CB00F8D164 /* ICRecordManager.m in Sources */,
 				18E44E2B1FE21A0C0070AE58 /* AFNetworkReachabilityManager.m in Sources */,
 				186EE9771FE78E1E009CEE47 /* SDImageCacheConfig.m in Sources */,
+				187D21D41FE7B4E100FDFB1A /* XZHomeSessionListModel.m in Sources */,
 				186EE9821FE78E1E009CEE47 /* SDWebImagePrefetcher.m in Sources */,
 				5F80D6701D9A6DE200F8D164 /* NSObject+MJKeyValue.m in Sources */,
 				18E44E4E1FE240C30070AE58 /* SVProgressAnimatedView.m in Sources */,
@@ -1723,6 +1730,7 @@
 				18885E311FDFBB3B00F2348F /* XZViewController.m in Sources */,
 				5F80D6E61D9A773100F8D164 /* ICDocumentViewController.m in Sources */,
 				5F80D5F71D9A4B7900F8D164 /* NSArray+MASAdditions.m in Sources */,
+				187D21CE1FE7A18300FDFB1A /* XZClientModel.m in Sources */,
 				5F80D6971D9A70DB00F8D164 /* ICDetailButton.m in Sources */,
 				5F80D69B1D9A70DB00F8D164 /* ICSearchBar.m in Sources */,
 				5F80D5FD1D9A4BCA00F8D164 /* XZBaseTableViewCell.m in Sources */,

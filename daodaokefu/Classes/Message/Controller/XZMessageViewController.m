@@ -12,6 +12,7 @@
 #import "XZChatViewController.h"
 #import "IFMMenu.h"
 #import "HMScannerController.h"
+#import "XZToolManager.h"
 
 @interface XZMessageViewController ()<UITableViewDataSource,UITableViewDelegate>
 
@@ -56,7 +57,7 @@
     self.definesPresentationContext = YES;
     searchController.view.backgroundColor = [UIColor whiteColor];
     searchController.hidesNavigationBarDuringPresentation = YES;
-    self.tableView.frame  = CGRectMake(0,0, self.view.width, APP_Frame_Height-searchController.searchBar.bottom-8-49);
+    self.tableView.frame  = CGRectMake(0,0, self.view.width, SCREEN_HEIGHT);
 //
     UIBarButtonItem *rigthItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"加号"] style:UIBarButtonItemStylePlain target:self action:@selector(rightBarButtonAction)];
     
@@ -71,6 +72,16 @@
     group.gName = @"迷宫已失";
     group.lastMsgString = @"滑板和吉他🎸哪个更好那？";
     [self.dataArray addObject:group];
+    
+    [[XZNetWorkingManager sharderinstance] getMessageDataSucceed:^(NSMutableArray *DataArray) {
+        self.dataArray = DataArray;
+        [self.tableView reloadData];
+    } andError:^(NSString *err) {
+        
+        [XZToolManager showErrorWithStatus:err];
+        
+    }];
+    
 }
 
 - (void)rightBarButtonAction {

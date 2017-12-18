@@ -30,7 +30,10 @@
 #define APIfirstLogin              [APIURL stringByAppendingString:@"/app/login"]
 //退出登录API
 #define APIlogOut              [APIURL stringByAppendingString:@"/app/logout"]
-
+//获取客户历史会话列表
+#define APIGetRecentUserInf              [APIURL stringByAppendingString:@"/app/get_recent_user_info"]
+//获取活跃会话
+#define APILiveSession            [APIURL stringByAppendingString:@"/app/live_session"]
 
 
 
