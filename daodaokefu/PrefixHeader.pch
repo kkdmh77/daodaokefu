@@ -34,7 +34,8 @@
 #define APIGetRecentUserInf              [APIURL stringByAppendingString:@"/app/get_recent_user_info"]
 //获取活跃会话
 #define APILiveSession            [APIURL stringByAppendingString:@"/app/live_session"]
-
+//token二次登录
+#define APILoginbytoken            [APIURL stringByAppendingString:@"/app/login_by_token"]
 
 
 

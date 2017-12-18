@@ -23,6 +23,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+  
     #pragma mark - 添加监听
     [self addNotification];
     
@@ -33,12 +34,13 @@
     
 }
 
+
 - (void)addNotification {
     
     // 监听键盘出现的出现和消失
     [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(keyboardWillShow:) name:UIKeyboardWillShowNotification object:nil];
     [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(keyboardWillHide:) name:UIKeyboardWillHideNotification object:nil];
-    
+
 }
 - (void)setupUI {
     
@@ -63,6 +65,8 @@
         AppDelegate *sd=(AppDelegate *)[[UIApplication sharedApplication] delegate];
         
         sd.uesrmodel = model;
+        
+        [kUserDefaults setObject:model.token forKey:@"token"];
         
         UIWindow *window = [UIApplication sharedApplication].keyWindow;
         

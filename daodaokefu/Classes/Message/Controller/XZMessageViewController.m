@@ -13,6 +13,8 @@
 #import "IFMMenu.h"
 #import "HMScannerController.h"
 #import "XZToolManager.h"
+#import "XZUserinfoModel.h"
+#import "AppDelegate.h"
 
 @interface XZMessageViewController ()<UITableViewDataSource,UITableViewDelegate>
 
@@ -26,20 +28,42 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    #pragma mark - 自动登录
+    [self tokenLogin];
     
     [self setupUI];
-    
-    [self loadDataSource];
 }
 
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
     
-    
 }
 
-
+- (void)tokenLogin {
+    
+    NSString *token =  [kUserDefaults objectForKey:@"token"];
+    if(token != nil){
+        
+        [[XZNetWorkingManager sharderinstance] loginbytoken:token andSucceed:^(XZUserinfoModel *model){
+            
+            AppDelegate *sd=(AppDelegate *)[[UIApplication sharedApplication] delegate];
+            
+            sd.uesrmodel = model;
+            
+            [kUserDefaults setObject:model.token forKey:@"token"];
+            
+            [self loadDataSource];
+            
+        } andError:^(NSString *err) {
+            
+            
+        }];
+    }else{
+        
+            [self loadDataSource];
+    }
+}
 - (void)setupUI
 {
     self.view.backgroundColor = XZRGB(0xf4f1f1);

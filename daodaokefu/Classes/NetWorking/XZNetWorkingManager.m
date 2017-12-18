@@ -65,7 +65,7 @@ typedef enum {
     NSDictionary *dict = @{@"username":account,@"password":Passworrd};
     [self requestType:Post andRequesturl:APIfirstLogin andparameters:dict andSucceed:^(id  _Nullable responseObject) {
         // 字典转模型
-        XZUserinfoModel *model  = [XZUserinfoModel yy_modelWithJSON:responseObject[@"data"]];
+        XZUserinfoModel *model = [XZUserinfoModel yy_modelWithJSON:responseObject[@"data"]];
         succeedBlock(model);
     } andError:^(NSString *err) {
         errorBlock(err);
@@ -84,10 +84,10 @@ typedef enum {
         NSArray *arr = [NSArray yy_modelArrayWithClass:[XZClientModel class] json:responseObject[@"data"]];
         NSMutableArray *arrM = [NSMutableArray array];
         for(XZClientModel *model in arr) {
-            XZGroup *gp = [XZGroup new];
-            gp.gName = model.name;
-            gp.imageurl = model.avatar;
-            gp.lastMsgTime = [self StrTrunDate:model.lastChatTime];
+            XZGroup *gp      = [XZGroup new];
+            gp.gName         = model.name;
+            gp.imageurl      = model.avatar;
+            gp.lastMsgTime   = [self StrTrunDate:model.lastChatTime];
             [arrM addObject:gp];
         }
         succeedBlock(arrM);
@@ -100,20 +100,34 @@ typedef enum {
         NSArray *arr = [NSArray yy_modelArrayWithClass:[XZHomeSessionListModel class] json:responseObject[@"data"]];
         NSMutableArray *arrM = [NSMutableArray array];
         for(XZHomeSessionListModel *model in arr) {
-            XZGroup *gp = [XZGroup new];
-            gp.gName = model.clientName;
-            gp.imageurl = model.imgUrl;
-            gp.unReadCount = model.unreadCount;
-            gp.lastMsgTime = [self StrTrunDate:model.lastChatLogTime];
+            XZGroup *gp      = [XZGroup new];
+            gp.gName         = model.clientName;
+            gp.imageurl      = model.imgUrl;
+            gp.unReadCount   = model.unreadCount;
+            gp.lastMsgTime   = [self StrTrunDate:model.lastChatLogTime];
             gp.lastMsgString = model.lastChatLog;
             [arrM addObject:gp];
         }
-        
         succeedBlock(arrM);
     } andError:^(NSString *err) {
          errorBlock(err);
     }];
 }
+
+- (void)loginbytoken:(NSString *)token andSucceed:(void(^)(XZUserinfoModel *model))succeedBlock andError:(void(^)(NSString *err))errorBlock{
+    
+    NSDictionary *dict = @{@"token":token
+                           };
+    
+    [self requestType:Post andRequesturl:APILoginbytoken andparameters:dict andSucceed:^(id  _Nullable responseObject) {
+        XZUserinfoModel *model = [XZUserinfoModel yy_modelWithJSON:responseObject[@"data"]];
+        succeedBlock(model);
+    } andError:^(NSString *err) {
+        
+        errorBlock(err);
+    }];
+}
+
 - (NSString *)StrTrunDate:(NSString *)DateStr{
     // 格式化时间
     NSDateFormatter* formatter = [[NSDateFormatter alloc] init];

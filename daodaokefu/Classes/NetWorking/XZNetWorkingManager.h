@@ -51,4 +51,13 @@
  */
 - (void)getMessageDataSucceed:(void(^)(NSMutableArray *DataArray))succeedBlock andError:(void(^)(NSString *err))errorBlock;
 
+
+/**
+ token二次登录
+
+ @param token        登录唯一凭证token
+ @param succeedBlock 成功回调
+ @param errorBlock   失败回调
+ */
+- (void)loginbytoken:(NSString *)token andSucceed:(void(^)(XZUserinfoModel *model))succeedBlock andError:(void(^)(NSString *err))errorBlock;
 @end

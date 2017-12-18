@@ -34,7 +34,6 @@
 
 @property (nonatomic, assign) NSInteger staffId;
 
-
 /**
  0男1女
  */
