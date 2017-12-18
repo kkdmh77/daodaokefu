@@ -68,6 +68,8 @@
         
         [kUserDefaults setObject:model.token forKey:@"token"];
         
+        [kUserDefaults setBool:YES forKey:@"isLogin"];
+        
         UIWindow *window = [UIApplication sharedApplication].keyWindow;
         
         window.rootViewController = [[XZTabBarController alloc] init];
@@ -131,7 +133,10 @@
 #pragma mark - 设置APP静态图片引导页
 - (void)setStaticGuidePage {
     // 初始化视频URL
-    NSURL *videoURL = [NSURL fileURLWithPath:[[NSBundle mainBundle] pathForResource:@"QQLoginVideo" ofType:@"mp4"]];
+    NSString *filepath = [[NSBundle mainBundle] pathForResource:@"qqLogin.mp4" ofType:nil];
+     if(filepath == nil) return;
+    NSURL *videoURL = [NSURL fileURLWithPath:filepath];
+   
     // 创建并添加引导页
     DHGuidePageHUD *guidePage = [[DHGuidePageHUD alloc] dh_initWithFrame:self.view.bounds videoURL:videoURL];
     [self.view addSubview:guidePage];

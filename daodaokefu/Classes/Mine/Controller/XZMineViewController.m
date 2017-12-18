@@ -65,20 +65,36 @@
 - (IBAction)setStatusAction:(UISwitch *)sender {
     
     if(sender.isOn){
+        NSString *token = [kUserDefaults objectForKey:@"token"];
         
+        [[XZNetWorkingManager sharderinstance] loginbytoken:token andSucceed:^(XZUserinfoModel *model){
+            
+            AppDelegate *sd=(AppDelegate *)[[UIApplication sharedApplication] delegate];
+            
+            sd.uesrmodel = model;
+            
+            [kUserDefaults setObject:model.token forKey:@"token"];
+            
+        } andError:^(NSString *err) {
+
+            [XZToolManager showErrorWithStatus:@"出现故障请请重试"];
+        }];
         
+       
         
     }else{
-        
         [[XZNetWorkingManager sharderinstance] logout];
-        
+       
     }
 }
 
 // 退出操作
 - (void)logoutAction {
     
+   
     [[XZNetWorkingManager sharderinstance] logout];
+    
+    [kUserDefaults setBool:NO forKey:@"isLogin"];
     
     kAppWindow.rootViewController = [XZLoginViewController new];
 }

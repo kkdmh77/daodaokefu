@@ -282,6 +282,7 @@
 		187D21CD1FE7A18300FDFB1A /* XZClientModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = XZClientModel.m; path = "daodaokefu/Classes/UserInfo(用户信息)/Model/XZClientModel.m"; sourceTree = SOURCE_ROOT; };
 		187D21D21FE7B4E100FDFB1A /* XZHomeSessionListModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = XZHomeSessionListModel.h; path = "daodaokefu/Classes/UserInfo(用户信息)/Model/XZHomeSessionListModel.h"; sourceTree = SOURCE_ROOT; };
 		187D21D31FE7B4E100FDFB1A /* XZHomeSessionListModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = XZHomeSessionListModel.m; path = "daodaokefu/Classes/UserInfo(用户信息)/Model/XZHomeSessionListModel.m"; sourceTree = SOURCE_ROOT; };
+		187D21D51FE7C5BE00FDFB1A /* qqLogin.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = qqLogin.mp4; sourceTree = "<group>"; };
 		18885E221FDFA72700F2348F /* LoginViewViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LoginViewViewController.xib; sourceTree = "<group>"; };
 		18885E241FDFA79400F2348F /* XZLoginViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = XZLoginViewController.h; sourceTree = "<group>"; };
 		18885E251FDFA79400F2348F /* XZLoginViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = XZLoginViewController.m; sourceTree = "<group>"; };
@@ -1030,6 +1031,7 @@
 		5F80D6081D9A579B00F8D164 /* Source */ = {
 			isa = PBXGroup;
 			children = (
+				187D21D51FE7C5BE00FDFB1A /* qqLogin.mp4 */,
 				5F80D72B1D9BD03C00F8D164 /* normal_face.plist */,
 				5F80D7251D9BCF5100F8D164 /* emoji.plist */,
 				5F80D7231D9BCD3700F8D164 /* mahuateng.jpeg */,

@@ -153,13 +153,39 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "daodaokefu/Classes/Login(&#x767b;&#x5f55;)/Controller/XZLoginViewController.m"
-            timestampString = "535281848.053001"
+            filePath = "daodaokefu/Classes/NetWorking/XZNetWorkingManager.m"
+            timestampString = "535284584.764682"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "65"
-            endingLineNumber = "65"
-            landmarkName = "-PushHomeMessageVc:andPassword:"
+            startingLineNumber = "47"
+            endingLineNumber = "47"
+            landmarkName = "-requestType:andRequesturl:andparameters:andSucceed:andError:"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.ExceptionBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            scope = "0"
+            stopOnStyle = "0">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "daodaokefu/Classes/Mine/Controller/XZMineViewController.m"
+            timestampString = "535284584.764965"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "94"
+            endingLineNumber = "94"
+            landmarkName = "-logoutAction"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -169,14 +195,46 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "daodaokefu/Classes/NetWorking/XZNetWorkingManager.m"
-            timestampString = "535281848.05313"
+            filePath = "daodaokefu/Classes/Login(&#x767b;&#x5f55;)/Controller/XZLoginViewController.m"
+            timestampString = "535284584.765172"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "47"
-            endingLineNumber = "47"
-            landmarkName = "-requestType:andRequesturl:andparameters:andSucceed:andError:"
+            startingLineNumber = "62"
+            endingLineNumber = "62"
+            landmarkName = "-PushHomeMessageVc:andPassword:"
             landmarkType = "7">
+            <Locations>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "-[XZLoginViewController PushHomeMessageVc:andPassword:]"
+                  moduleName = "daodaokefu"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/apple/Desktop/git/daodaokefu-ios/daodaokefu/Classes/Login(%E7%99%BB%E5%BD%95)/Controller/XZLoginViewController.m"
+                  timestampString = "535284584.942868"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "62"
+                  endingLineNumber = "62"
+                  offsetFromSymbolStart = "268">
+               </Location>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "__55-[XZLoginViewController PushHomeMessageVc:andPassword:]_block_invoke"
+                  moduleName = "daodaokefu"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/apple/Desktop/git/daodaokefu-ios/daodaokefu/Classes/Login(%E7%99%BB%E5%BD%95)/Controller/XZLoginViewController.m"
+                  timestampString = "535284584.944779"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "65"
+                  endingLineNumber = "65"
+                  offsetFromSymbolStart = "64">
+               </Location>
+            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>
