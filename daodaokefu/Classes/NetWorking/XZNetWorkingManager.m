@@ -115,23 +115,47 @@ typedef enum {
 }
 
 - (void)loginbytoken:(NSString *)token andSucceed:(void(^)(XZUserinfoModel *model))succeedBlock andError:(void(^)(NSString *err))errorBlock{
-    
-    NSDictionary *dict = @{@"token":token
-                           };
-    
+    NSDictionary *dict = @{@"token":token};
     [self requestType:Post andRequesturl:APILoginbytoken andparameters:dict andSucceed:^(id  _Nullable responseObject) {
         XZUserinfoModel *model = [XZUserinfoModel yy_modelWithJSON:responseObject[@"data"]];
         succeedBlock(model);
     } andError:^(NSString *err) {
-        
         errorBlock(err);
     }];
 }
 
+- (void)PulltheblackSucceed:(void(^)(void))succeedBlock andError:(void(^)(NSString *err))errorBlock{
+    [self requestType:Post andRequesturl:APIBlock_user andparameters:nil andSucceed:^(id  _Nullable responseObject) {
+        succeedBlock();
+    } andError:^(NSString *err) {
+        errorBlock(err);
+    }];
+}
+
+- (void)getcustomerinfoSucceed:(void(^)(XZNonceUserInfoModel *model))succeedBlock andError:(void(^)(NSString *err))errorBlock{
+    [self requestType:Post andRequesturl:APICustomerInfo andparameters:nil andSucceed:^(id  _Nullable responseObject) {
+        
+        XZNonceUserInfoModel *model = [XZNonceUserInfoModel yy_modelWithJSON:responseObject[@"data"]];
+        succeedBlock(model);
+    } andError:^(NSString *err) {
+        errorBlock(err);
+    }];
+}
+
+- (void)editremark:(NSString *)remark andSucceed:(void(^)(void))succeedBlock andError:(void(^)(NSString *err))errorBlock{
+    NSDictionary *dict = @{@"remark":remark};
+    [self requestType:Post andRequesturl:APIEditremark andparameters:dict andSucceed:^(id  _Nullable responseObject) {
+        succeedBlock();
+    } andError:^(NSString *err) {
+        errorBlock(err);
+    }];
+}
+
+
 - (NSString *)StrTrunDate:(NSString *)DateStr{
     // 格式化时间
     NSDateFormatter* formatter = [[NSDateFormatter alloc] init];
-    formatter.timeZone = [NSTimeZone timeZoneWithName:@"shanghai"];
+    formatter.timeZone         = [NSTimeZone timeZoneWithName:@"shanghai"];
     [formatter setDateStyle:NSDateFormatterMediumStyle];
     [formatter setTimeStyle:NSDateFormatterShortStyle];
     [formatter setDateFormat:@"HH:mm"];

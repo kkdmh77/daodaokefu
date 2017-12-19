@@ -68,7 +68,7 @@
         
         [kUserDefaults setObject:model.token forKey:@"token"];
         
-        [kUserDefaults setBool:YES forKey:@"isLogin"];
+        [kUserDefaults setBool:YES forKey:@"Login"];
         
         UIWindow *window = [UIApplication sharedApplication].keyWindow;
         

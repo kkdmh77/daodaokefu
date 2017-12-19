@@ -49,6 +49,8 @@
 		186F03C11FE279E00024D38E /* DHGifImageOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = 186F03BD1FE279E00024D38E /* DHGifImageOperation.m */; };
 		186F03C21FE279E00024D38E /* DHGuidePageHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = 186F03BF1FE279E00024D38E /* DHGuidePageHUD.m */; };
 		186F03C31FE279E00024D38E /* GuideImage.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 186F03C01FE279E00024D38E /* GuideImage.bundle */; };
+		187227A51FE8B1EB00FE471F /* XZNonceUserInfoModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 187227A41FE8B1EB00FE471F /* XZNonceUserInfoModel.m */; };
+		187227A81FE8BB1900FE471F /* Modificationdatum ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 187227A71FE8BB1900FE471F /* Modificationdatum ViewController.m */; };
 		187D21CE1FE7A18300FDFB1A /* XZClientModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 187D21CD1FE7A18300FDFB1A /* XZClientModel.m */; };
 		187D21D41FE7B4E100FDFB1A /* XZHomeSessionListModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 187D21D31FE7B4E100FDFB1A /* XZHomeSessionListModel.m */; };
 		18885E231FDFA72700F2348F /* LoginViewViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 18885E221FDFA72700F2348F /* LoginViewViewController.xib */; };
@@ -278,6 +280,10 @@
 		186F03BE1FE279E00024D38E /* DHGuidePageHUD.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DHGuidePageHUD.h; sourceTree = "<group>"; };
 		186F03BF1FE279E00024D38E /* DHGuidePageHUD.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DHGuidePageHUD.m; sourceTree = "<group>"; };
 		186F03C01FE279E00024D38E /* GuideImage.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = GuideImage.bundle; sourceTree = "<group>"; };
+		187227A31FE8B1EB00FE471F /* XZNonceUserInfoModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = XZNonceUserInfoModel.h; sourceTree = "<group>"; };
+		187227A41FE8B1EB00FE471F /* XZNonceUserInfoModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = XZNonceUserInfoModel.m; sourceTree = "<group>"; };
+		187227A61FE8BB1900FE471F /* Modificationdatum ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Modificationdatum ViewController.h"; sourceTree = "<group>"; };
+		187227A71FE8BB1900FE471F /* Modificationdatum ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "Modificationdatum ViewController.m"; sourceTree = "<group>"; };
 		187D21CC1FE7A18300FDFB1A /* XZClientModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = XZClientModel.h; path = "daodaokefu/Classes/UserInfo(用户信息)/Model/XZClientModel.h"; sourceTree = SOURCE_ROOT; };
 		187D21CD1FE7A18300FDFB1A /* XZClientModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = XZClientModel.m; path = "daodaokefu/Classes/UserInfo(用户信息)/Model/XZClientModel.m"; sourceTree = SOURCE_ROOT; };
 		187D21D21FE7B4E100FDFB1A /* XZHomeSessionListModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = XZHomeSessionListModel.h; path = "daodaokefu/Classes/UserInfo(用户信息)/Model/XZHomeSessionListModel.h"; sourceTree = SOURCE_ROOT; };
@@ -771,8 +777,8 @@
 		18E44DF01FE131EA0070AE58 /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				181B1FF11FE3C7EE00130046 /* XZUserinfoModel.h */,
-				181B1FF21FE3C7EE00130046 /* XZUserinfoModel.m */,
+				187227A31FE8B1EB00FE471F /* XZNonceUserInfoModel.h */,
+				187227A41FE8B1EB00FE471F /* XZNonceUserInfoModel.m */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -789,6 +795,8 @@
 			children = (
 				18E44DF31FE131FD0070AE58 /* XZUserinfoTableViewController.h */,
 				18E44DF41FE131FD0070AE58 /* XZUserinfoTableViewController.m */,
+				187227A61FE8BB1900FE471F /* Modificationdatum ViewController.h */,
+				187227A71FE8BB1900FE471F /* Modificationdatum ViewController.m */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -1474,6 +1482,8 @@
 		5FBCC14C1D9A232700AD6A6B /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				181B1FF11FE3C7EE00130046 /* XZUserinfoModel.h */,
+				181B1FF21FE3C7EE00130046 /* XZUserinfoModel.m */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -1683,12 +1693,14 @@
 				180ACE1B1FE0FD5200E1154D /* HMScannerBorder.m in Sources */,
 				5F80D6141D9A5D1500F8D164 /* NSString+Extension.m in Sources */,
 				186EE9841FE78E1E009CEE47 /* UIButton+WebCache.m in Sources */,
+				187227A81FE8BB1900FE471F /* Modificationdatum ViewController.m in Sources */,
 				186EE9791FE78E1E009CEE47 /* SDWebImageCoderHelper.m in Sources */,
 				18E44E2D1FE21A0C0070AE58 /* AFURLRequestSerialization.m in Sources */,
 				5F80D6751D9A6E9400F8D164 /* ICMessage.m in Sources */,
 				5F80D5F31D9A4B7900F8D164 /* MASConstraintMaker.m in Sources */,
 				186EE9881FE78E1E009CEE47 /* UIImage+WebP.m in Sources */,
 				186EE97E1FE78E1E009CEE47 /* SDWebImageFrame.m in Sources */,
+				187227A51FE8B1EB00FE471F /* XZNonceUserInfoModel.m in Sources */,
 				180ACE1E1FE0FD5200E1154D /* HMScannerViewController.m in Sources */,
 				186EE9851FE78E1E009CEE47 /* UIImage+ForceDecode.m in Sources */,
 				186EE97F1FE78E1E009CEE47 /* SDWebImageGIFCoder.m in Sources */,

@@ -21,7 +21,8 @@
     // Override point for customization after application launch.
     self.window = [[UIWindow alloc] init];
     self.window.frame = [UIScreen mainScreen].bounds;
-    if((BOOL)[kUserDefaults objectForKey:@"isLogin"] == YES){
+    BOOL ISLOGIN = [kUserDefaults boolForKey:@"Login"];
+    if(ISLOGIN){
         self.window.rootViewController = [[XZTabBarController alloc] init];
     }else{
         self.window.rootViewController = [[XZLoginViewController alloc] init];

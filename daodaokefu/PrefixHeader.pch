@@ -36,8 +36,12 @@
 #define APILiveSession            [APIURL stringByAppendingString:@"/app/live_session"]
 //token二次登录
 #define APILoginbytoken            [APIURL stringByAppendingString:@"/app/login_by_token"]
-
-
+//拉黑当前会话用户
+#define APIBlock_user           [APIURL stringByAppendingString:@"/app/block_user"]
+//获取当前会话客户资料
+#define APICustomerInfo          [APIURL stringByAppendingString:@"/app/get_customer_info"]
+//修改当前会话客户备注
+#define APIEditremark         [APIURL stringByAppendingString:@"/app/edit_remark.do"]
 
 
 

@@ -8,6 +8,7 @@
 
 #import "AFHTTPSessionManager.h"
 #import "XZUserinfoModel.h"
+#import "XZNonceUserInfoModel.h"
 @interface XZNetWorkingManager : AFHTTPSessionManager
 
 /**
@@ -60,4 +61,32 @@
  @param errorBlock   失败回调
  */
 - (void)loginbytoken:(NSString *)token andSucceed:(void(^)(XZUserinfoModel *model))succeedBlock andError:(void(^)(NSString *err))errorBlock;
+
+
+/**
+ 拉黑当前会话用户
+
+ @param succeedBlock 成功回调
+ @param errorBlock   失败回调
+ */
+- (void)PulltheblackSucceed:(void(^)(void))succeedBlock andError:(void(^)(NSString *err))errorBlock;
+
+
+/**
+ 获取当前会话客户资料
+
+ @param succeedBlock 成功回调
+ @param errorBlock   失败回调
+ */
+- (void)getcustomerinfoSucceed:(void(^)(XZNonceUserInfoModel *model))succeedBlock andError:(void(^)(NSString *err))errorBlock;
+
+
+/**
+ 修改当前会话客户备注
+
+ @param remark       新备注名字
+ @param succeedBlock 成功回调
+ @param errorBlock 失败回调
+ */
+- (void)editremark:(NSString *)remark andSucceed:(void(^)(void))succeedBlock andError:(void(^)(NSString *err))errorBlock;
 @end

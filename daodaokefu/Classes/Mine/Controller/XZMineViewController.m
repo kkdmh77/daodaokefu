@@ -90,11 +90,10 @@
 
 // 退出操作
 - (void)logoutAction {
-    
-   
+     [kUserDefaults setBool:NO forKey:@"Login"];
+     [kUserDefaults synchronize];
     [[XZNetWorkingManager sharderinstance] logout];
     
-    [kUserDefaults setBool:NO forKey:@"isLogin"];
     
     kAppWindow.rootViewController = [XZLoginViewController new];
 }

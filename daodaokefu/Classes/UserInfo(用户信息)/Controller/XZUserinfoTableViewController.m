@@ -7,11 +7,21 @@
 //
 
 #import "XZUserinfoTableViewController.h"
+#import "XZNonceUserInfoModel.h"
+#import "Modificationdatum ViewController.h"
 
 @interface XZUserinfoTableViewController ()
 @property (weak, nonatomic) IBOutlet UIButton *blacklistButton;
 
 @property (weak, nonatomic) IBOutlet UIView *footerView;
+@property (weak, nonatomic) IBOutlet UILabel *name;
+@property (weak, nonatomic) IBOutlet UILabel *alias;
+@property (weak, nonatomic) IBOutlet UILabel *sex;
+@property (weak, nonatomic) IBOutlet UILabel *area;
+@property (weak, nonatomic) IBOutlet UILabel *origin;
+@property (weak, nonatomic) IBOutlet UILabel *bindingID;
+@property (weak, nonatomic) IBOutlet UILabel *affiliatedCrew;
+@property (weak, nonatomic) IBOutlet UILabel *OtherInfo;
 
 @end
 
@@ -22,11 +32,27 @@
     
     #pragma mark - 布局UI
     [self setupUI];
+    
+    #pragma mark - 加载用户资料
+    [self loadData];
 }
 
 - (void)setupUI {
     _blacklistButton.layer.cornerRadius = 10;
     self.tableView.backgroundColor =  [UIColor colorWithRed:235 / 255.0 green:235 / 255.0 blue:235 / 255.0 alpha:1];
+}
+
+- (void)loadData {
+    [[XZNetWorkingManager sharderinstance] getcustomerinfoSucceed:^(XZNonceUserInfoModel *model){
+        self.name.text = model.name;
+        self.sex.text  = model.gender == 0 ? @"女":@"男";
+        self.area.text = model.area == nil ? @"暂无": model.area;
+        self.origin.text = model.origin == 0 ? @"Web" : model.origin == 1 ? @"WeChat" : @"mobile";
+        self.bindingID.text = model.openId;
+        
+    } andError:^(NSString *err) {
+        
+    }];
 }
 
 - (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section {
@@ -57,13 +83,32 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     
     [tableView deselectRowAtIndexPath:indexPath animated:NO];
+    
+    if(indexPath.section == 0 && indexPath.row == 1){
+        
+        // 跳转修改备注页面
+        UIStoryboard *sb = [UIStoryboard storyboardWithName:@"Mine" bundle:nil];
+        Modificationdatum_ViewController *vc = [sb instantiateViewControllerWithIdentifier:@"Modificationdatum_ViewController"];
+        vc.textBlock = ^(NSString *text) {
+          
+            self.alias.text = text;
+        };
+        [self.navigationController pushViewController:vc animated:YES];
+    }
 }
 
 
 - (IBAction)laheiAction:(id)sender {
     
+    [[XZNetWorkingManager sharderinstance] PulltheblackSucceed:^{
+        
+        [XZToolManager showSuccessWithStatus:@"拉黑成功"];
+        
+    } andError:^(NSString *err) {
+       
+        [XZToolManager showErrorWithStatus:@"出现问题，请重试"];
+    }];
     
-    // 调用拉黑接口
 }
 
 /*
