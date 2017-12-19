@@ -116,22 +116,6 @@
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "daodaokefu/Classes/Chat/Controller/XZChatViewController.m"
-            timestampString = "535350633.744218"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "197"
-            endingLineNumber = "197"
-            landmarkName = "-tableView:cellForRowAtIndexPath:"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.ExceptionBreakpoint">
          <BreakpointContent
             shouldBeEnabled = "Yes"
@@ -148,7 +132,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "daodaokefu/Classes/UserInfo(&#x7528;&#x6237;&#x4fe1;&#x606f;)/Controller/XZUserinfoTableViewController.m"
-            timestampString = "535351462.07407"
+            timestampString = "535357257.866987"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "103"
@@ -164,7 +148,7 @@
                   moduleName = "daodaokefu"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/apple/Desktop/git/daodaokefu-ios/daodaokefu/Classes/UserInfo(%E7%94%A8%E6%88%B7%E4%BF%A1%E6%81%AF)/Controller/XZUserinfoTableViewController.m"
-                  timestampString = "535351462.271356"
+                  timestampString = "535357258.112422"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "103"
@@ -179,7 +163,7 @@
                   moduleName = "daodaokefu"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/apple/Desktop/git/daodaokefu-ios/daodaokefu/Classes/UserInfo(%E7%94%A8%E6%88%B7%E4%BF%A1%E6%81%AF)/Controller/XZUserinfoTableViewController.m"
-                  timestampString = "535351462.273711"
+                  timestampString = "535357258.114465"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "105"
@@ -196,7 +180,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "daodaokefu/Classes/UserInfo(&#x7528;&#x6237;&#x4fe1;&#x606f;)/Controller/XZUserinfoTableViewController.m"
-            timestampString = "535351462.074175"
+            timestampString = "535357257.867083"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "109"
@@ -211,24 +195,8 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "daodaokefu/Classes/NetWorking/XZNetWorkingManager.m"
-            timestampString = "535351462.074252"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "47"
-            endingLineNumber = "47"
-            landmarkName = "-requestType:andRequesturl:andparameters:andSucceed:andError:"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
             filePath = "daodaokefu/Classes/Login(&#x767b;&#x5f55;)/Controller/XZLoginViewController.m"
-            timestampString = "535351462.074321"
+            timestampString = "535357257.867158"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "71"
@@ -244,7 +212,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "daodaokefu/Classes/UserInfo(&#x7528;&#x6237;&#x4fe1;&#x606f;)/Controller/Modificationdatum ViewController.m"
-            timestampString = "535351462.074381"
+            timestampString = "535357257.867215"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "39"
@@ -260,7 +228,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "daodaokefu/Classes/UserInfo(&#x7528;&#x6237;&#x4fe1;&#x606f;)/Controller/Modificationdatum ViewController.m"
-            timestampString = "535351462.074831"
+            timestampString = "535357257.867272"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "48"
@@ -276,12 +244,108 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "daodaokefu/Classes/UserInfo(&#x7528;&#x6237;&#x4fe1;&#x606f;)/Controller/Modificationdatum ViewController.m"
-            timestampString = "535351462.075089"
+            timestampString = "535357257.867328"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "46"
             endingLineNumber = "46"
             landmarkName = "-saveAction:"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "daodaokefu/Classes/Chat/Controller/XZChatViewController.m"
+            timestampString = "535357257.867383"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "385"
+            endingLineNumber = "385"
+            landmarkName = "-messageSendSucced:andType:"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "daodaokefu/Classes/NetWorking/XZNetWorkingManager.m"
+            timestampString = "535357257.868491"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "165"
+            endingLineNumber = "165"
+            landmarkName = "-SendPictureMessage:andSucceed:andError:"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "daodaokefu/Classes/Chat/Controller/XZChatViewController.m"
+            timestampString = "535357257.868759"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "356"
+            endingLineNumber = "356"
+            landmarkName = "-messageSendSucced:andType:"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "daodaokefu/Classes/Chat/Controller/XZChatViewController.m"
+            timestampString = "535357257.868816"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "359"
+            endingLineNumber = "359"
+            landmarkName = "-messageSendSucced:andType:"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "daodaokefu/Classes/NetWorking/XZNetWorkingManager.m"
+            timestampString = "535357257.868868"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "182"
+            endingLineNumber = "182"
+            landmarkName = "-SendPictureMessage:andSucceed:andError:"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "daodaokefu/Classes/NetWorking/XZNetWorkingManager.m"
+            timestampString = "535357257.869111"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "176"
+            endingLineNumber = "176"
+            landmarkName = "-SendPictureMessage:andSucceed:andError:"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

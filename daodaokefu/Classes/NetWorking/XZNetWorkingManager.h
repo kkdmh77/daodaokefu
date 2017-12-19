@@ -86,7 +86,27 @@
 
  @param remark       新备注名字
  @param succeedBlock 成功回调
- @param errorBlock 失败回调
+ @param errorBlock   失败回调
  */
 - (void)editremark:(NSString *)remark andSucceed:(void(^)(void))succeedBlock andError:(void(^)(NSString *err))errorBlock;
+
+
+/**
+ 发送一条文字消息
+
+ @param messageStr   消息内容
+ @param succeedBlock 成功回调
+ @param errorBlock   失败回调
+ */
+- (void)sendMessage:(NSString *)messageStr andSucceed:(void(^)(void))succeedBlock andError:(void(^)(NSString *err))errorBlock;
+
+
+/**
+ 发送一条图片消息
+
+ @param iamgPath     图片路径
+ @param succeedBlock 成功回调
+ @param errorBlock   失败回调
+ */
+- (void)SendPictureMessage:(NSString *)iamgPath andSucceed:(void(^)(void))succeedBlock andError:(void(^)(NSString *err))errorBlock;
 @end

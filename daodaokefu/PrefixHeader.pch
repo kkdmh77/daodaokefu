@@ -42,7 +42,10 @@
 #define APICustomerInfo          [APIURL stringByAppendingString:@"/app/get_customer_info"]
 //修改当前会话客户备注
 #define APIEditremark         [APIURL stringByAppendingString:@"/app/edit_remark.do"]
-
+//发送一条文字消息
+#define APISendMessage         [APIURL stringByAppendingString:@"/app/send_chat"]
+//发送一条图片消息
+#define APISendPictureMessage         [APIURL stringByAppendingString:@"/app/send_picture"]
 
 
 

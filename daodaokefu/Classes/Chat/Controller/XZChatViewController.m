@@ -11,6 +11,13 @@
 #import "XZUserinfoTableViewController.h"
 #import "UIImageView+WebCache.h"
 
+typedef enum : NSUInteger {
+    TextMessage,
+    ImageMessage,
+    VideoMessage,
+    Mp4Message,
+} MessageType;
+
 @interface XZChatViewController ()<ICChatBoxViewControllerDelegate,UITableViewDelegate,UITableViewDataSource,ICRecordManagerDelegate,UIViewControllerTransitioningDelegate,UIViewControllerAnimatedTransitioning,BaseCellDelegate>
 {
     CGRect _smallRect;
@@ -269,7 +276,7 @@
 {
     ICMessageFrame *messageFrame = [ICMessageHelper createMessageFrame:TypeVideo content:@"[视频]" path:videoPath from:@"gxz" to:self.group.gId fileKey:nil isSender:YES receivedSenderByYourself:NO]; // 创建本地消息
     [self addObject:messageFrame isSender:YES];
-    [self messageSendSucced:messageFrame];
+    [self messageSendSucced:messageFrame andType:TextMessage];
 }
 
 - (void) chatBoxViewController:(ICChatBoxViewController *)chatboxViewController sendFileMessage:(NSString *)fileName
@@ -288,7 +295,7 @@
     messageFrame.model.message.lnk = [lnk jsonString];
     messageFrame.model.message.fileKey = fileKey;
     [self addObject:messageFrame isSender:YES];
-    [self messageSendSucced:messageFrame];
+    [self messageSendSucced:messageFrame andType:TextMessage];
 }
 
 // send text message
@@ -306,7 +313,7 @@
     ICMessageFrame *messageF = [ICMessageHelper createMessageFrame:TypeText content:messageStr path:nil from:@"gxz" to:self.group.gId fileKey:nil isSender:YES receivedSenderByYourself:NO];
     [self addObject:messageF isSender:YES];
     
-    [self messageSendSucced:messageF];
+    [self messageSendSucced:messageF andType:TextMessage];
 }
 
 - (void)otherSendTextMessageWithContent:(NSString *)messageStr
@@ -314,7 +321,7 @@
     ICMessageFrame *messageF = [ICMessageHelper createMessageFrame:TypeText content:messageStr path:nil from:@"gxz" to:self.group.gId fileKey:nil isSender:NO receivedSenderByYourself:NO];
     [self addObject:messageF isSender:YES];
     
-    [self messageSendSucced:messageF];
+    [self messageSendSucced:messageF andType:TextMessage];
 }
 
 // 增加数据源并刷新
@@ -328,30 +335,53 @@
     }
 }
 
-- (void)messageSendSucced:(ICMessageFrame *)messageF
+- (void)messageSendSucced:(ICMessageFrame *)messageF andType:(MessageType)messagetype
 {
     // 判断类型上传
     if(!messageF.model.isSender)return;
     
-    // 此处发送消息给服务端
-    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1.0 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-        messageF.model.message.deliveryState = ICMessageDeliveryState_Delivered;
-//        [self sendImageMessageWithImgPath1:messageF.model.mediaPath];
-        [self timerInvalue]; // 销毁定时器
+    if(messagetype == TextMessage){
         
+        [[XZNetWorkingManager sharderinstance] sendMessage:messageF.model.message.content andSucceed:^{
+            messageF.model.message.deliveryState = ICMessageDeliveryState_Delivered;
+            [self.tableView reloadData];
+        } andError:^(NSString *err) {
+            messageF.model.message.deliveryState = ICMessageDeliveryState_Failure;
+            [self.tableView reloadData];
+        }];
+        
+    }else if(messagetype == ImageMessage){
+        
+        [[XZNetWorkingManager sharderinstance] SendPictureMessage:messageF.model.mediaPath andSucceed:^{
+            messageF.model.message.deliveryState = ICMessageDeliveryState_Delivered;
+            [self.tableView reloadData];
+        } andError:^(NSString *err) {
+            messageF.model.message.deliveryState = ICMessageDeliveryState_Failure;
+            [self.tableView reloadData];
+        }];
+    }
+    
+    
+    
+//    // 此处发送消息给服务端
+//    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1.0 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+//        messageF.model.message.deliveryState = ICMessageDeliveryState_Delivered;
+////        [self sendImageMessageWithImgPath1:messageF.model.mediaPath];
+//        [self timerInvalue]; // 销毁定时器
+//
+////        // 自动回复
+////        ICMessageFrame *messageFs = [ICMessageHelper createMessageFrame:TypeVoice content:@"[语音]" path:messageF.model.mediaPath from:@"gxz" to:self.group.gId fileKey:nil isSender:NO receivedSenderByYourself:NO];
+////        [self addObject:messageFs isSender:YES];
+////        [self messageSendSucced:messageFs];
+//
 //        // 自动回复
-//        ICMessageFrame *messageFs = [ICMessageHelper createMessageFrame:TypeVoice content:@"[语音]" path:messageF.model.mediaPath from:@"gxz" to:self.group.gId fileKey:nil isSender:NO receivedSenderByYourself:NO];
-//        [self addObject:messageFs isSender:YES];
-//        [self messageSendSucced:messageFs];
-        
-        // 自动回复
-        ICMessageFrame *messageFs = [ICMessageHelper createMessageFrame:TypeText content:messageF.model.message.content path:nil from:@"gxz" to:self.group.gId fileKey:nil isSender:NO receivedSenderByYourself:NO];
-        [self addObject:messageFs isSender:YES];
-        [self messageSendSucced:messageFs];
-
-        [self.tableView reloadData];
-        
-    });
+////        ICMessageFrame *messageFs = [ICMessageHelper createMessageFrame:TypeText content:messageF.model.message.content path:nil from:@"gxz" to:self.group.gId fileKey:nil isSender:NO receivedSenderByYourself:NO];
+////        [self addObject:messageFs isSender:YES];
+////        [self messageSendSucced:messageFs];
+////
+//        [self.tableView reloadData];
+//
+//    });
 }
 
 
@@ -371,7 +401,7 @@
     ICMessageFrame *messageF = [ICMessageHelper createMessageFrame:TypePic content:@"[图片]" path:imgPath from:@"gxz" to:self.group.gId fileKey:nil isSender:NO receivedSenderByYourself:NO];
     [self addObject:messageF isSender:YES];
     
-    [self messageSendSucced:messageF];
+    [self messageSendSucced:messageF andType:ImageMessage];
     
 }
 
@@ -381,7 +411,7 @@
     ICMessageFrame *messageF = [ICMessageHelper createMessageFrame:TypePic content:@"[图片]" path:imgPath from:@"gxz" to:self.group.gId fileKey:nil isSender:YES receivedSenderByYourself:NO];
     [self addObject:messageF isSender:YES];
     
-    [self messageSendSucced:messageF];
+    [self messageSendSucced:messageF andType:ImageMessage];
     
 }
 
@@ -393,7 +423,7 @@
     if (voicePath) {
         ICMessageFrame *messageF = [ICMessageHelper createMessageFrame:TypeVoice content:@"[语音]" path:voicePath from:@"gxz" to:self.group.gId fileKey:nil isSender:YES receivedSenderByYourself:NO];
         [self addObject:messageF isSender:YES];
-        [self messageSendSucced:messageF];
+        [self messageSendSucced:messageF andType:Mp4Message];
     }
 }
 

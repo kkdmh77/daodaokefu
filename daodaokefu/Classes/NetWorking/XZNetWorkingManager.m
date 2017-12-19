@@ -151,7 +151,37 @@ typedef enum {
     }];
 }
 
+- (void)sendMessage:(NSString *)messageStr andSucceed:(void(^)(void))succeedBlock andError:(void(^)(NSString *err))errorBlock{
+    NSDictionary *dict = @{@"msg":messageStr};
+    [self requestType:Post andRequesturl:APISendMessage andparameters:dict andSucceed:^(id  _Nullable responseObject) {
+        succeedBlock();
+    } andError:^(NSString *err) {
+        errorBlock(err);
+    }];
+}
 
+- (void)SendPictureMessage:(NSString *)iamgPath andSucceed:(void(^)(void))succeedBlock andError:(void(^)(NSString *err))errorBlock{
+    [self POST:APISendPictureMessage parameters:nil constructingBodyWithBlock:^(id<AFMultipartFormData>  _Nonnull formData) {
+        UIImage *img = [UIImage imageWithContentsOfFile:iamgPath];
+        
+        NSData *data = UIImageJPEGRepresentation(img, 0.5);
+        
+        [formData appendPartWithFileData:data name:@"img" fileName:iamgPath mimeType:@"image/jpeg"];
+    } progress:^(NSProgress * _Nonnull uploadProgress) {
+    
+        NSLog(@"%f",uploadProgress.fractionCompleted);
+        
+    } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+        NSString *code = responseObject[@"code"];
+        if(code.intValue == 0){
+            succeedBlock();
+        }else{
+            errorBlock(responseObject[@"message"]);
+        }
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        errorBlock([NSString stringWithFormat:@"%@",error]);
+    }];
+}
 - (NSString *)StrTrunDate:(NSString *)DateStr{
     // 格式化时间
     NSDateFormatter* formatter = [[NSDateFormatter alloc] init];
