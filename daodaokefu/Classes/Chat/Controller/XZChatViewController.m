@@ -10,7 +10,8 @@
 #import "ICChatHearder.h"
 #import "XZUserinfoTableViewController.h"
 #import "UIImageView+WebCache.h"
-
+#import "XZOneModel.h"
+#import "XZAcceptMessageModel.h"
 typedef enum : NSUInteger {
     TextMessage,
     ImageMessage,
@@ -37,7 +38,7 @@ typedef enum : NSUInteger {
 @property (nonatomic, strong) UITableView *tableView;
 @property (nonatomic, strong) UITextView *textView;
 /** 数据源 */
-@property (nonatomic, strong) NSMutableArray *dataSource;
+@property (nonatomic, copy) NSMutableArray *dataSource;
 /** voice path */
 @property (nonatomic, copy) NSString *voicePath;
 
@@ -135,6 +136,8 @@ typedef enum : NSUInteger {
 
 - (void)addNotification {
     
+    
+    __weak typeof(self) weakself = self;
     [kNotificationCenter addObserverForName:@"clickavatarImageView" object:nil queue:[NSOperationQueue mainQueue] usingBlock:^(NSNotification * _Nonnull note) {
        
         // 1.获取当前的StoryBoard面板
@@ -144,7 +147,7 @@ typedef enum : NSUInteger {
         XZUserinfoTableViewController *userinfoVc = [storyBoard instantiateViewControllerWithIdentifier:@"XZUserinfoTableViewController"];
         
         
-        [self.navigationController pushViewController:userinfoVc animated:YES];
+        [weakself.navigationController pushViewController:userinfoVc animated:YES];
         
     }];
 }
@@ -177,6 +180,71 @@ typedef enum : NSUInteger {
 {
 //    [weadSelf.dataSource addObjectsFromArray:array];
 //    [weadSelf scrollToBottom];
+    
+    __weak typeof(self) weakself = self;
+    [[XZNetWorkingManager sharderinstance] Chatmsganddelta:YES Succeed:^(XZOneModel *model){
+        
+        NSArray<XZAcceptMessageModel *> *modelArray = model.chatLog;
+        for (XZAcceptMessageModel *md in modelArray) {
+            if(md.chatType == 0){ // 文字消息
+                
+             [weakself sendTextMessage:md.content];
+            }else if(md.chatType == 1){ // 图片消息
+                
+                [weakself sendImageMessage:md.content];
+            }
+            
+        }
+        
+    } andError:^(NSString *err) {
+        
+    }];
+}
+
+// 发送一条服务端的文字消息
+- (void)sendTextMessage:(NSString *)String{
+    
+    ICMessageFrame *messageF = [ICMessageHelper createMessageFrame:TypeText content:String path:nil from:@"gxz" to:self.group.gId fileKey:nil isSender:NO receivedSenderByYourself:NO];
+    [self addObject:messageF isSender:YES];
+}
+// 发送一条图片消息
+- (void)sendImageMessage:(NSString *)iamgeUrl{
+    
+    ICMessageFrame *messageF = [ICMessageHelper createMessageFrame:TypePic content:@"[图片]" path:iamgeUrl from:@"gxz" to:self.group.gId fileKey:nil isSender:NO receivedSenderByYourself:NO];
+    NSData *data = [NSData dataWithContentsOfURL:[NSURL URLWithString:iamgeUrl]];
+    
+    UIImage *image = [UIImage imageWithData:data]; // 取得图片
+    CGFloat fixelW = CGImageGetWidth(image.CGImage);
+    
+    CGFloat fixelH = CGImageGetHeight(image.CGImage);
+    if(fixelW == fixelH){
+        
+        messageF.iamgesize = CGSizeMake(SCREEN_WIDTH *0.38 ,SCREEN_WIDTH *0.38);
+        messageF.cellHight = SCREEN_WIDTH *0.38 + 20;
+    }else{
+        messageF.iamgesize = CGSizeMake(fixelW / 7, fixelH / 7);
+        messageF.cellHight = fixelH / 7 + 20;
+    }
+
+
+    
+    NSString *path = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) lastObject];
+    
+    int namecount1 = arc4random_uniform(1000);
+    int namecount2 = arc4random_uniform(1000);
+    int namecount3 = arc4random_uniform(1000);
+    // 得到本地沙盒中名为"MyImage"的路径，"MyImage"是保存的图片名
+    NSString *imageFilePath = [path stringByAppendingPathComponent:[NSString stringWithFormat:@"myImage-%d-%d-%d.png",namecount1,namecount2,namecount3]];
+    // 将取得的图片写入本地的沙盒中，其中0.5表示压缩比例，1表示不压缩，数值越小压缩比例越大
+    BOOL success = [UIImageJPEGRepresentation(image, 1) writeToFile:imageFilePath  atomically:YES];
+    if (success){
+        NSLog(@"写入本地成功");
+        messageF.model.mediaPath = imageFilePath;
+        
+        [self addObject:messageF isSender:YES];
+    }
+    
+
 }
 
 #pragma mark - Tableview data source
@@ -257,12 +325,14 @@ typedef enum : NSUInteger {
 {
     [_chatBoxVC.view setFrame:CGRectMake(0, HEIGHT_SCREEN-HEIGHT_TABBAR, App_Frame_Width, APP_Frame_Height)];
     videoView.hidden = NO;
+    __weak typeof(self) weakself = self;
+    
     [UIView animateWithDuration:0.5 animations:^{
-        self.tableView.height = HEIGHT_SCREEN - videwViewH - HEIGHT_NAVBAR-HEIGHT_STATUSBAR;
-        self.chatBoxVC.view.frame = CGRectMake(0, videwViewX+HEIGHT_NAVBAR+HEIGHT_STATUSBAR, App_Frame_Width, videwViewH);
-        [self scrollToBottom];
+        weakself.tableView.height = HEIGHT_SCREEN - videwViewH - HEIGHT_NAVBAR-HEIGHT_STATUSBAR;
+        weakself.chatBoxVC.view.frame = CGRectMake(0, videwViewX+HEIGHT_NAVBAR+HEIGHT_STATUSBAR, App_Frame_Width, videwViewH);
+        [weakself scrollToBottom];
     } completion:^(BOOL finished) { // 状态改变
-        self.chatBoxVC.chatBox.status = ICChatBoxStatusShowVideo;
+        weakself.chatBoxVC.chatBox.status = ICChatBoxStatusShowVideo;
         // 在这里创建视频设配
         UIView *videoLayerView = [videoView viewWithTag:1000];
         UIView *placeholderView = [videoView viewWithTag:1001];
@@ -340,24 +410,26 @@ typedef enum : NSUInteger {
     // 判断类型上传
     if(!messageF.model.isSender)return;
     
+    __weak typeof(self) weakself = self;
+    
     if(messagetype == TextMessage){
         
         [[XZNetWorkingManager sharderinstance] sendMessage:messageF.model.message.content andSucceed:^{
             messageF.model.message.deliveryState = ICMessageDeliveryState_Delivered;
-            [self.tableView reloadData];
+            [weakself.tableView reloadData];
         } andError:^(NSString *err) {
             messageF.model.message.deliveryState = ICMessageDeliveryState_Failure;
-            [self.tableView reloadData];
+            [weakself.tableView reloadData];
         }];
         
     }else if(messagetype == ImageMessage){
         
         [[XZNetWorkingManager sharderinstance] SendPictureMessage:messageF.model.mediaPath andSucceed:^{
             messageF.model.message.deliveryState = ICMessageDeliveryState_Delivered;
-            [self.tableView reloadData];
+            [weakself.tableView reloadData];
         } andError:^(NSString *err) {
             messageF.model.message.deliveryState = ICMessageDeliveryState_Failure;
-            [self.tableView reloadData];
+            [weakself.tableView reloadData];
         }];
     }
     
@@ -518,9 +590,9 @@ typedef enum : NSUInteger {
     
     // 此处发送消息给服务端
     
-    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1.0 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-        self.voiceHud.hidden = YES;
-    });
+//    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1.0 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+//        self.voiceHud.hidden = YES;
+//    });
 }
 
 // play voice
@@ -597,15 +669,18 @@ typedef enum : NSUInteger {
 
 - (void)animateTransition:(id<UIViewControllerContextTransitioning>)transitionContext
 {
+    
+    __weak typeof(self) weakself = self;
+    
     if (self.presentFlag) {
         UIView *toView              = [transitionContext viewForKey:UITransitionContextToViewKey];
         self.presentImageView.frame = _smallRect;
         [[transitionContext containerView] addSubview:self.presentImageView];
         [UIView animateWithDuration:[self transitionDuration:transitionContext] animations:^{
-            self.presentImageView.frame = _bigRect;
+            weakself.presentImageView.frame = _bigRect;
         } completion:^(BOOL finished) {
             if (finished) {
-                [self.presentImageView removeFromSuperview];
+                [weakself.presentImageView removeFromSuperview];
                 [[transitionContext containerView] addSubview:toView];
                 [transitionContext completeTransition:YES];
             }
@@ -644,16 +719,43 @@ typedef enum : NSUInteger {
 - (void)showLargeImageWithPath:(NSString *)imgPath
                   withMessageF:(ICMessageFrame *)messageF
 {
-    UIImage *image = [[ICMediaManager sharedManager] imageWithLocalPath:imgPath];
-    if (image == nil) {
-        ICLog(@"image is not existed");
-        return;
+    
+    if(messageF.model.isSender){
+        
+        UIImage *image = [[ICMediaManager sharedManager] imageWithLocalPath:imgPath];
+        if (image == nil) {
+            ICLog(@"image is not existed");
+            return;
+        }
+        
+        
+        
+        ICPhotoBrowserController *photoVC = [[ICPhotoBrowserController alloc] initWithImage:image];
+        
+        self.presentImageView.image       = image;
+        photoVC.transitioningDelegate     = self;
+        photoVC.modalPresentationStyle    = UIModalPresentationCustom;
+        [self presentViewController:photoVC animated:YES completion:nil];
+    }else{
+        
+        UIImage *image = [UIImage imageWithContentsOfFile:imgPath];
+        if (image == nil) {
+            ICLog(@"image is not existed");
+            return;
+        }
+        
+        
+        
+        ICPhotoBrowserController *photoVC = [[ICPhotoBrowserController alloc] initWithImage:image];
+        
+        self.presentImageView.image       = image;
+        photoVC.transitioningDelegate     = self;
+        photoVC.modalPresentationStyle    = UIModalPresentationCustom;
+        [self presentViewController:photoVC animated:YES completion:nil];
+        
     }
-    ICPhotoBrowserController *photoVC = [[ICPhotoBrowserController alloc] initWithImage:image];
-    self.presentImageView.image       = image;
-    photoVC.transitioningDelegate     = self;
-    photoVC.modalPresentationStyle    = UIModalPresentationCustom;
-    [self presentViewController:photoVC animated:YES completion:nil];
+    
+    
 }
 
 - (void)timerInvalue
@@ -804,5 +906,15 @@ typedef enum : NSUInteger {
     [self.view endEditing:YES];
 }
 
+- (void)viewWillDisappear:(BOOL)animated{
+    [kNotificationCenter removeObserver:self];
+    [self timerInvalue];
+    [super viewDidDisappear:animated];
+}
+
+- (void)dealloc{
+    
+    NSLog(@"销毁了");
+}
 
 @end

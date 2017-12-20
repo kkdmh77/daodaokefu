@@ -46,7 +46,10 @@
 #define APISendMessage         [APIURL stringByAppendingString:@"/app/send_chat"]
 //发送一条图片消息
 #define APISendPictureMessage         [APIURL stringByAppendingString:@"/app/send_picture"]
-
+//返回快速回复列表
+#define APIGetquickreply         [APIURL stringByAppendingString:@"/app/get_quick_reply"]
+//返回快速回复列表
+#define APIChatMessage         [APIURL stringByAppendingString:@"/app/chat_msg"]
 
 
 
@@ -131,7 +134,7 @@
 /// 强应用
 #define kStrongSelf(type)__strong typeof(type)type = weak##type;
 
-
+#define sWeakSelf __weak typeof(self) weakSelf = self;
 //获取temp
 #define kPathTemp NSTemporaryDirectory()
 

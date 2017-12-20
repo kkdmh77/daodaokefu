@@ -12,6 +12,7 @@
 #import "ICMessage.h"
 #import "ICFileTool.h"
 #import "ICMessageHelper.h"
+#import "UIImageView+WebCache.h"
 
 @interface ICChatMessageImageCell ()
 
@@ -38,6 +39,7 @@
 {
     [super setModelFrame:modelFrame];
 
+
     ICMediaManager *manager = [ICMediaManager sharedManager];
     UIImage *image = [manager imageWithLocalPath:[manager imagePathWithName:modelFrame.model.mediaPath.lastPathComponent]];
     self.imageBtn.frame = modelFrame.picViewF;
@@ -45,6 +47,7 @@
     self.bubbleView.image = nil;
     if (modelFrame.model.isSender) {    // 发送者
         UIImage *arrowImage = [manager arrowMeImage:image size:modelFrame.picViewF.size mediaPath:modelFrame.model.mediaPath isSender:modelFrame.model.isSender];
+//        [self.imageBtn setBackgroundImage:arrowImage forState:UIControlStateNormal];
         [self.imageBtn setBackgroundImage:arrowImage forState:UIControlStateNormal];
     } else {
         NSString *orgImgPath = [manager originImgPath:modelFrame];
@@ -54,8 +57,14 @@
             [self.imageBtn setBackgroundImage:arrowImage forState:UIControlStateNormal];
         } else {
             UIImage *arrowImage = [manager arrowMeImage:image size:modelFrame.picViewF.size mediaPath:modelFrame.model.mediaPath isSender:modelFrame.model.isSender];
+            CGFloat x = modelFrame.picViewF.origin.x;
+            CGFloat y = modelFrame.picViewF.origin.y;
+            CGFloat width = modelFrame.iamgesize.width;
+            CGFloat height = modelFrame.iamgesize.height;
+            self.imageBtn.frame = CGRectMake(x, y, width, height);
             [self.imageBtn setBackgroundImage:arrowImage forState:UIControlStateNormal];
         }
+        
     }
 }
 
@@ -84,13 +93,13 @@
     if (nil == _imageBtn) {
         _imageBtn = [[UIButton alloc] init];
         [_imageBtn addTarget:self action:@selector(imageBtnClick:) forControlEvents:UIControlEventTouchUpInside];
-        _imageBtn.imageEdgeInsets = UIEdgeInsetsMake(0, 0, 0, 0);
         _imageBtn.layer.masksToBounds = YES;
         _imageBtn.layer.cornerRadius = 5;
         _imageBtn.clipsToBounds = YES;
     }
     return _imageBtn;
 }
+
 
 
 

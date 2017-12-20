@@ -37,7 +37,7 @@
 @property (nonatomic, strong) ICMessageModel *model;
 
 /// 图片
-@property (nonatomic, assign, readonly) CGRect picViewF;
+@property (nonatomic, assign) CGRect picViewF;
 
 /// 语音图标
 @property (nonatomic, assign) CGRect voiceIconF;
@@ -48,5 +48,7 @@
 /// 语音未读红点
 @property (nonatomic, assign) CGRect redViewF;
 
+// 图片大小
+@property (nonatomic, assign) CGSize iamgesize;
 
 @end

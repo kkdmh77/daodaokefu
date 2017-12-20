@@ -163,14 +163,9 @@ typedef enum {
 - (void)SendPictureMessage:(NSString *)iamgPath andSucceed:(void(^)(void))succeedBlock andError:(void(^)(NSString *err))errorBlock{
     [self POST:APISendPictureMessage parameters:nil constructingBodyWithBlock:^(id<AFMultipartFormData>  _Nonnull formData) {
         UIImage *img = [UIImage imageWithContentsOfFile:iamgPath];
-        
         NSData *data = UIImageJPEGRepresentation(img, 0.5);
-        
         [formData appendPartWithFileData:data name:@"img" fileName:iamgPath mimeType:@"image/jpeg"];
     } progress:^(NSProgress * _Nonnull uploadProgress) {
-    
-        NSLog(@"%f",uploadProgress.fractionCompleted);
-        
     } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
         NSString *code = responseObject[@"code"];
         if(code.intValue == 0){
@@ -182,6 +177,25 @@ typedef enum {
         errorBlock([NSString stringWithFormat:@"%@",error]);
     }];
 }
+
+- (void)GetquickreplySucceed:(void(^)(void))succeedBlock andError:(void(^)(NSString *err))errorBlock{
+    [self requestType:Post andRequesturl:APIGetquickreply andparameters:nil andSucceed:^(id  _Nullable responseObject) {
+        succeedBlock();
+    } andError:^(NSString *err) {
+        errorBlock(err);
+    }];
+}
+- (void)Chatmsganddelta:(BOOL)delta Succeed:(void(^)(XZOneModel *model))succeedBlock andError:(void(^)(NSString *err))errorBlock{
+    bool bool_ =  delta ? true : false;
+    NSDictionary *dict = @{@"delta":@(bool_)};
+    [self requestType:Post andRequesturl:APIChatMessage andparameters:dict andSucceed:^(id  _Nullable responseObject) {
+        XZOneModel *model =[XZOneModel yy_modelWithJSON:responseObject[@"data"]];
+        succeedBlock(model);
+    } andError:^(NSString *err) {
+        errorBlock(err);
+    }];
+}
+
 - (NSString *)StrTrunDate:(NSString *)DateStr{
     // 格式化时间
     NSDateFormatter* formatter = [[NSDateFormatter alloc] init];

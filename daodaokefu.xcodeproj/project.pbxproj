@@ -51,6 +51,8 @@
 		186F03C31FE279E00024D38E /* GuideImage.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 186F03C01FE279E00024D38E /* GuideImage.bundle */; };
 		187227A51FE8B1EB00FE471F /* XZNonceUserInfoModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 187227A41FE8B1EB00FE471F /* XZNonceUserInfoModel.m */; };
 		187227A81FE8BB1900FE471F /* Modificationdatum ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 187227A71FE8BB1900FE471F /* Modificationdatum ViewController.m */; };
+		187227D41FE910E100FE471F /* XZAcceptMessageModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 187227D31FE910E100FE471F /* XZAcceptMessageModel.m */; };
+		187227D71FE911DF00FE471F /* XZOneModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 187227D61FE911DF00FE471F /* XZOneModel.m */; };
 		187D21CE1FE7A18300FDFB1A /* XZClientModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 187D21CD1FE7A18300FDFB1A /* XZClientModel.m */; };
 		187D21D41FE7B4E100FDFB1A /* XZHomeSessionListModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 187D21D31FE7B4E100FDFB1A /* XZHomeSessionListModel.m */; };
 		18885E231FDFA72700F2348F /* LoginViewViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 18885E221FDFA72700F2348F /* LoginViewViewController.xib */; };
@@ -284,6 +286,10 @@
 		187227A41FE8B1EB00FE471F /* XZNonceUserInfoModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = XZNonceUserInfoModel.m; sourceTree = "<group>"; };
 		187227A61FE8BB1900FE471F /* Modificationdatum ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Modificationdatum ViewController.h"; sourceTree = "<group>"; };
 		187227A71FE8BB1900FE471F /* Modificationdatum ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "Modificationdatum ViewController.m"; sourceTree = "<group>"; };
+		187227D21FE910E100FE471F /* XZAcceptMessageModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = XZAcceptMessageModel.h; sourceTree = "<group>"; };
+		187227D31FE910E100FE471F /* XZAcceptMessageModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = XZAcceptMessageModel.m; sourceTree = "<group>"; };
+		187227D51FE911DF00FE471F /* XZOneModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = XZOneModel.h; sourceTree = "<group>"; };
+		187227D61FE911DF00FE471F /* XZOneModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = XZOneModel.m; sourceTree = "<group>"; };
 		187D21CC1FE7A18300FDFB1A /* XZClientModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = XZClientModel.h; path = "daodaokefu/Classes/UserInfo(用户信息)/Model/XZClientModel.h"; sourceTree = SOURCE_ROOT; };
 		187D21CD1FE7A18300FDFB1A /* XZClientModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = XZClientModel.m; path = "daodaokefu/Classes/UserInfo(用户信息)/Model/XZClientModel.m"; sourceTree = SOURCE_ROOT; };
 		187D21D21FE7B4E100FDFB1A /* XZHomeSessionListModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = XZHomeSessionListModel.h; path = "daodaokefu/Classes/UserInfo(用户信息)/Model/XZHomeSessionListModel.h"; sourceTree = SOURCE_ROOT; };
@@ -1022,6 +1028,10 @@
 				5F80D6741D9A6E9400F8D164 /* ICMessage.m */,
 				5F80D60F1D9A5C5600F8D164 /* XZEmotion.h */,
 				5F80D6101D9A5C5600F8D164 /* XZEmotion.m */,
+				187227D21FE910E100FE471F /* XZAcceptMessageModel.h */,
+				187227D31FE910E100FE471F /* XZAcceptMessageModel.m */,
+				187227D51FE911DF00FE471F /* XZOneModel.h */,
+				187227D61FE911DF00FE471F /* XZOneModel.m */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -1678,6 +1688,7 @@
 				5F80D62F1D9A60E500F8D164 /* ICChatBoxMenuView.m in Sources */,
 				18E44E3D1FE220320070AE58 /* XZNetWorkingManager.m in Sources */,
 				5F80D70B1D9B5D7600F8D164 /* VideoPlayOperation.m in Sources */,
+				187227D41FE910E100FE471F /* XZAcceptMessageModel.m in Sources */,
 				5F80D6781D9A6E9F00F8D164 /* ICMessageFrame.m in Sources */,
 				186EE98A1FE78E1E009CEE47 /* UIImageView+WebCache.m in Sources */,
 				5F80D71A1D9B968800F8D164 /* ICPhotoBrowserController.m in Sources */,
@@ -1736,6 +1747,7 @@
 				5F80D7201D9BBFD300F8D164 /* ICFileScanController.m in Sources */,
 				18E44E4D1FE240C30070AE58 /* SVIndefiniteAnimatedView.m in Sources */,
 				180ACE1A1FE0FD5200E1154D /* HMScanner.m in Sources */,
+				187227D71FE911DF00FE471F /* XZOneModel.m in Sources */,
 				18885E291FDFA7DD00F2348F /* XZLoginView.m in Sources */,
 				5F80D6DB1D9A71CB00F8D164 /* ICMessageHelper.m in Sources */,
 				186EE9751FE78E1E009CEE47 /* NSImage+WebCache.m in Sources */,

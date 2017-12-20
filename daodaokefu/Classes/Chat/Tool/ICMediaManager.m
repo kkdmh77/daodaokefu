@@ -88,6 +88,12 @@ static UIImage *_failedImage;
     if (arrowImage) {
         return arrowImage;
     }
+    
+    UIImage *arrowImagetwo = [UIImage imageWithContentsOfFile:mediaPath];
+    if (arrowImagetwo) {
+        
+        return arrowImagetwo;
+    }
     if ([image isEqual:_failedImage]) {
         return _failedImage;
     }
