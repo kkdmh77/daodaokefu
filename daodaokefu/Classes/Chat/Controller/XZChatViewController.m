@@ -46,6 +46,7 @@ typedef enum : NSUInteger {
 @property (nonatomic, strong) UIImageView *presentImageView;
 @property (nonatomic, assign)  BOOL presentFlag;  // 是否model出控制器
 @property (nonatomic, strong) NSTimer *timer;
+@property (nonatomic, strong) NSTimer *loadtimer;
 @property (nonatomic, strong) ICVoiceHud *voiceHud;
 
 
@@ -57,6 +58,7 @@ typedef enum : NSUInteger {
     [super viewDidLoad];
     
     self.view.backgroundColor = [UIColor whiteColor];
+    self.loadtimer = [NSTimer scheduledTimerWithTimeInterval:3.0 target:self selector:@selector(loadDataSource) userInfo:nil repeats:YES];
     self.title = self.group.gName;
     
     [self addNotification];
@@ -906,9 +908,11 @@ typedef enum : NSUInteger {
     [self.view endEditing:YES];
 }
 
+
 - (void)viewWillDisappear:(BOOL)animated{
     [kNotificationCenter removeObserver:self];
     [self timerInvalue];
+    [self.loadtimer invalidate];
     [super viewDidDisappear:animated];
 }
 
