@@ -24,7 +24,9 @@ typedef enum {
     static XZNetWorkingManager *__INSTANCE__;
     dispatch_once(&onceToken, ^{
         __INSTANCE__ = [XZNetWorkingManager new];
-        __INSTANCE__.responseSerializer.acceptableContentTypes = [NSSet setWithObject:@"text/plain"];
+//        __INSTANCE__.responseSerializer.acceptableContentTypes = [NSSet setWithObject:@"text/plain"];
+    __INSTANCE__.responseSerializer.acceptableContentTypes = [NSSet setWithObjects:@"application/json", @"text/json", @"text/javascript",@"text/plain", nil];
+    
     });
     return __INSTANCE__;
 }
@@ -52,7 +54,7 @@ typedef enum {
             }
         } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
             errorBlock([NSString stringWithFormat:@"%@",error]);
-            [SVProgressHUD showErrorWithStatus:[NSString stringWithFormat:@"%@",error]];
+//            [SVProgressHUD showErrorWithStatus:[NSString stringWithFormat:@"%@",error]];
             dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(3 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
                 [SVProgressHUD dismiss];
             });

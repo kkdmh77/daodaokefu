@@ -57,11 +57,11 @@
             [self.imageBtn setBackgroundImage:arrowImage forState:UIControlStateNormal];
         } else {
             UIImage *arrowImage = [manager arrowMeImage:image size:modelFrame.picViewF.size mediaPath:modelFrame.model.mediaPath isSender:modelFrame.model.isSender];
-            CGFloat x = modelFrame.picViewF.origin.x;
-            CGFloat y = modelFrame.picViewF.origin.y;
-            CGFloat width = modelFrame.iamgesize.width;
-            CGFloat height = modelFrame.iamgesize.height;
-            self.imageBtn.frame = CGRectMake(x, y, width, height);
+//            CGFloat x = modelFrame.picViewF.origin.x;
+//            CGFloat y = modelFrame.picViewF.origin.y;
+//            CGFloat width = modelFrame.iamgesize.width;
+//            CGFloat height = modelFrame.iamgesize.height;
+//            self.imageBtn.frame = CGRectMake(x, y, width, height);
             [self.imageBtn setBackgroundImage:arrowImage forState:UIControlStateNormal];
         }
         

@@ -15,6 +15,7 @@
 #import "XZToolManager.h"
 #import "XZUserinfoModel.h"
 #import "AppDelegate.h"
+#import "MJChiBaoZiHeader.h"
 
 @interface XZMessageViewController ()<UITableViewDataSource,UITableViewDelegate>
 
@@ -57,15 +58,33 @@
             
         } andError:^(NSString *err) {
             
-            
+            [XZToolManager showInfoWithStatus:@"登录状态失效，请重新登录"];
         }];
+        
     }else{
         
             [self loadDataSource];
+        
     }
 }
 - (void)setupUI
 {
+    // 设置回调（一旦进入刷新状态，就调用target的action，也就是调用self的loadNewData方法）
+     MJChiBaoZiHeader*header = [MJChiBaoZiHeader headerWithRefreshingTarget:self refreshingAction:@selector(loadDataSource)];
+    
+    // 隐藏时间
+    header.lastUpdatedTimeLabel.hidden = YES;
+    
+    // 隐藏状态
+    header.stateLabel.hidden = YES;
+    
+    // 马上进入刷新状态
+    [header beginRefreshing];
+    
+    // 设置header
+    self.tableView.mj_header = header;
+    
+    
     self.view.backgroundColor = XZRGB(0xf4f1f1);
     self.tableView.backgroundColor = XZRGB(0xf4f1f1);
     XZGroupSearchController *searchVC    = [[XZGroupSearchController alloc] init];
@@ -91,18 +110,20 @@
 
 - (void)loadDataSource
 {
-    XZGroup *group = [[XZGroup alloc] init];
-    group.unReadCount = 2;
-    group.gName = @"迷宫已失";
-    group.lastMsgString = @"滑板和吉他🎸哪个更好那？";
-    [self.dataArray addObject:group];
+//    XZGroup *group = [[XZGroup alloc] init];
+//    group.unReadCount = 2;
+//    group.gName = @"迷宫已失";
+//    group.lastMsgString = @"滑板和吉他🎸哪个更好那？";
+//    [self.dataArray addObject:group];
     
     [[XZNetWorkingManager sharderinstance] getMessageDataSucceed:^(NSMutableArray *DataArray) {
+        [self.tableView.mj_header endRefreshing];
         self.dataArray = DataArray;
         [self.tableView reloadData];
     } andError:^(NSString *err) {
         
-        [XZToolManager showErrorWithStatus:err];
+        [self.tableView.mj_header endRefreshing];
+        [XZToolManager showInfoWithStatus:@"登录状态失效，请重新登录"];
         
     }];
     

@@ -183,7 +183,10 @@ typedef enum : NSUInteger {
     [[XZNetWorkingManager sharderinstance] Chatmsganddelta:NO Succeed:^(XZOneModel *model){
         
         NSArray<XZAcceptMessageModel *> *modelArray = model.chatLog;
+        XZAcceptMessageModel *m = modelArray.lastObject;
         for (XZAcceptMessageModel *md in modelArray) {
+            
+         
             if(md.chatType == 0){ // 文字消息
                 
                 if(md.isReply){
@@ -251,25 +254,32 @@ typedef enum : NSUInteger {
 // 发送一条图片消息
 - (void)sendImageMessage:(NSString *)iamgeUrl andisSender:(BOOL)isSender{
     
-    ICMessageFrame *messageF = [ICMessageHelper createMessageFrame:TypePic content:@"[图片]" path:iamgeUrl from:@"gxz" to:self.group.gId fileKey:nil isSender:isSender receivedSenderByYourself:NO];
-
     
-    NSString *path = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) lastObject];
+    
+    NSString *path = [NSSearchPathForDirectoriesInDomains(NSCachesDirectory, NSUserDomainMask, YES) lastObject];
     
     NSString *imageFilePath = @"";
     
 
     if ([iamgeUrl containsString:@"http"]) {
        
-        imageFilePath =[path stringByAppendingPathComponent:[NSString stringWithFormat:@"myImage-%@.png",[iamgeUrl substringWithRange:NSMakeRange(32, 38)]]];//截取范围类的字符串]];
+        imageFilePath =[path stringByAppendingPathComponent:[NSString stringWithFormat:@"Chat/MyPic/myImage-%@.png",[iamgeUrl substringWithRange:NSMakeRange(32, 38)]]];//截取范围类的字符串]];
 
     }else{
         
         iamgeUrl = [NSString stringWithFormat:@"%@%@",APIBaseUrl,iamgeUrl];
         
-        imageFilePath =[path stringByAppendingPathComponent:[NSString stringWithFormat:@"myImage-%@.png",[iamgeUrl substringWithRange:NSMakeRange(46, 31)]]];//截取范围类的字符串]];
+        imageFilePath =[path stringByAppendingPathComponent:[NSString stringWithFormat:@"Chat/MyPic/myImage-%@.png",[iamgeUrl substringWithRange:NSMakeRange(46, 32)]]];//截取范围类的字符串]];
     }
+    
+    
+    ICMessageFrame *messageF = [ICMessageHelper createMessageFrame:TypePic content:@"[图片]" path:imageFilePath from:@"gxz" to:self.group.gId fileKey:nil isSender:isSender receivedSenderByYourself:NO];
+    // 设置成发送成功
+    messageF.model.message.deliveryState = ICMessageDeliveryState_Delivered;
+
+    
     if([self isFileExist:imageFilePath]){
+        
         
         UIImage *image = [UIImage imageWithContentsOfFile:imageFilePath];
         CGFloat fixelW = CGImageGetWidth(image.CGImage);
@@ -281,16 +291,13 @@ typedef enum : NSUInteger {
             messageF.cellHight = SCREEN_WIDTH *0.38 + 20;
         }else{
             messageF.iamgesize = CGSizeMake(fixelW / 7, fixelH / 7);
-            messageF.cellHight = fixelH / 7 + 20;
+            messageF.cellHight = fixelH / 7 + 40;
         }
         
         messageF.model.mediaPath = imageFilePath;
         [self addObject:messageF isSender:YES];
     }else{
 
-            
-        
-        
         NSData *data = [NSData dataWithContentsOfURL:[NSURL URLWithString:iamgeUrl]];
         
         UIImage *image = [UIImage imageWithData:data]; // 取得图片
@@ -313,6 +320,9 @@ typedef enum : NSUInteger {
             messageF.model.mediaPath = imageFilePath;
             
             [self addObject:messageF isSender:YES];
+        }else{
+            NSLog(@"写入本地失败");
+            
         }
         
     }
@@ -995,7 +1005,7 @@ typedef enum : NSUInteger {
 {
     NSFileManager *fileManager = [NSFileManager defaultManager];
     BOOL result = [fileManager fileExistsAtPath:fileName];
-    NSLog(@"这个文件已经存在：%@",result?@"是的":@"不存在");
+    NSLog(@"这个文件已经存在：%@",result?[NSString stringWithFormat:@"是的%@",fileName]:@"不存在");
     return result;
 }
 
