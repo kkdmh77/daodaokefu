@@ -69,7 +69,7 @@ typedef enum : NSUInteger {
     
     [self registerCell];
     
-    [self loadDataSource];
+    [self loadDataSources];
 }
 
 
@@ -177,6 +177,43 @@ typedef enum : NSUInteger {
     [self.navigationController pushViewController:userinfoVc animated:YES];
 }
 
+- (void)loadDataSources{
+    
+    __weak typeof(self) weakself = self;
+    [[XZNetWorkingManager sharderinstance] Chatmsganddelta:NO Succeed:^(XZOneModel *model){
+        
+        NSArray<XZAcceptMessageModel *> *modelArray = model.chatLog;
+        for (XZAcceptMessageModel *md in modelArray) {
+            if(md.chatType == 0){ // 文字消息
+                
+                if(md.isReply){
+                    
+                    [weakself sendTextMessage:md.content andisSender:YES];
+                }else{
+                    
+                    [weakself sendTextMessage:md.content andisSender:NO];
+                }
+        
+            }else if(md.chatType == 1){ // 图片消息
+                
+                if(md.isReply){
+                    
+                    [weakself sendImageMessage:md.content andisSender:YES];
+                }else{
+                    
+                    [weakself sendImageMessage:md.content andisSender:NO];
+                }
+                
+                
+            }
+            
+        }
+        
+    } andError:^(NSString *err) {
+        
+    }];
+}
+
 // 加载数据
 - (void)loadDataSource
 {
@@ -188,12 +225,12 @@ typedef enum : NSUInteger {
         
         NSArray<XZAcceptMessageModel *> *modelArray = model.chatLog;
         for (XZAcceptMessageModel *md in modelArray) {
-            if(md.chatType == 0){ // 文字消息
+            if(md.chatType == 0 && !md.isReply){ // 文字消息
                 
-             [weakself sendTextMessage:md.content];
-            }else if(md.chatType == 1){ // 图片消息
+             [weakself sendTextMessage:md.content andisSender:NO];
+            }else if(md.chatType == 1 && !md.isReply){ // 图片消息
                 
-                [weakself sendImageMessage:md.content];
+                [weakself sendImageMessage:md.content andisSender:NO];
             }
             
         }
@@ -204,46 +241,80 @@ typedef enum : NSUInteger {
 }
 
 // 发送一条服务端的文字消息
-- (void)sendTextMessage:(NSString *)String{
+- (void)sendTextMessage:(NSString *)String andisSender:(BOOL)isSender{
     
-    ICMessageFrame *messageF = [ICMessageHelper createMessageFrame:TypeText content:String path:nil from:@"gxz" to:self.group.gId fileKey:nil isSender:NO receivedSenderByYourself:NO];
+    ICMessageFrame *messageF = [ICMessageHelper createMessageFrame:TypeText content:String path:nil from:@"gxz" to:self.group.gId fileKey:nil isSender:isSender receivedSenderByYourself:NO];
+    messageF.model.message.deliveryState = isSender ? ICMessageDeliveryState_Delivered : ICMessageDeliveryState_Delivering;
+    
     [self addObject:messageF isSender:YES];
 }
 // 发送一条图片消息
-- (void)sendImageMessage:(NSString *)iamgeUrl{
+- (void)sendImageMessage:(NSString *)iamgeUrl andisSender:(BOOL)isSender{
     
-    ICMessageFrame *messageF = [ICMessageHelper createMessageFrame:TypePic content:@"[图片]" path:iamgeUrl from:@"gxz" to:self.group.gId fileKey:nil isSender:NO receivedSenderByYourself:NO];
-    NSData *data = [NSData dataWithContentsOfURL:[NSURL URLWithString:iamgeUrl]];
-    
-    UIImage *image = [UIImage imageWithData:data]; // 取得图片
-    CGFloat fixelW = CGImageGetWidth(image.CGImage);
-    
-    CGFloat fixelH = CGImageGetHeight(image.CGImage);
-    if(fixelW == fixelH){
-        
-        messageF.iamgesize = CGSizeMake(SCREEN_WIDTH *0.38 ,SCREEN_WIDTH *0.38);
-        messageF.cellHight = SCREEN_WIDTH *0.38 + 20;
-    }else{
-        messageF.iamgesize = CGSizeMake(fixelW / 7, fixelH / 7);
-        messageF.cellHight = fixelH / 7 + 20;
-    }
-
+    ICMessageFrame *messageF = [ICMessageHelper createMessageFrame:TypePic content:@"[图片]" path:iamgeUrl from:@"gxz" to:self.group.gId fileKey:nil isSender:isSender receivedSenderByYourself:NO];
 
     
     NSString *path = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) lastObject];
     
-    int namecount1 = arc4random_uniform(1000);
-    int namecount2 = arc4random_uniform(1000);
-    int namecount3 = arc4random_uniform(1000);
-    // 得到本地沙盒中名为"MyImage"的路径，"MyImage"是保存的图片名
-    NSString *imageFilePath = [path stringByAppendingPathComponent:[NSString stringWithFormat:@"myImage-%d-%d-%d.png",namecount1,namecount2,namecount3]];
-    // 将取得的图片写入本地的沙盒中，其中0.5表示压缩比例，1表示不压缩，数值越小压缩比例越大
-    BOOL success = [UIImageJPEGRepresentation(image, 1) writeToFile:imageFilePath  atomically:YES];
-    if (success){
-        NSLog(@"写入本地成功");
-        messageF.model.mediaPath = imageFilePath;
+    NSString *imageFilePath = @"";
+    
+
+    if ([iamgeUrl containsString:@"http"]) {
+       
+        imageFilePath =[path stringByAppendingPathComponent:[NSString stringWithFormat:@"myImage-%@.png",[iamgeUrl substringWithRange:NSMakeRange(32, 38)]]];//截取范围类的字符串]];
+
+    }else{
         
+        iamgeUrl = [NSString stringWithFormat:@"%@%@",APIBaseUrl,iamgeUrl];
+        
+        imageFilePath =[path stringByAppendingPathComponent:[NSString stringWithFormat:@"myImage-%@.png",[iamgeUrl substringWithRange:NSMakeRange(46, 31)]]];//截取范围类的字符串]];
+    }
+    if([self isFileExist:imageFilePath]){
+        
+        UIImage *image = [UIImage imageWithContentsOfFile:imageFilePath];
+        CGFloat fixelW = CGImageGetWidth(image.CGImage);
+        
+        CGFloat fixelH = CGImageGetHeight(image.CGImage);
+        if(fixelW == fixelH){
+            
+            messageF.iamgesize = CGSizeMake(SCREEN_WIDTH *0.38 ,SCREEN_WIDTH *0.38);
+            messageF.cellHight = SCREEN_WIDTH *0.38 + 20;
+        }else{
+            messageF.iamgesize = CGSizeMake(fixelW / 7, fixelH / 7);
+            messageF.cellHight = fixelH / 7 + 20;
+        }
+        
+        messageF.model.mediaPath = imageFilePath;
         [self addObject:messageF isSender:YES];
+    }else{
+
+            
+        
+        
+        NSData *data = [NSData dataWithContentsOfURL:[NSURL URLWithString:iamgeUrl]];
+        
+        UIImage *image = [UIImage imageWithData:data]; // 取得图片
+        CGFloat fixelW = CGImageGetWidth(image.CGImage);
+        
+        CGFloat fixelH = CGImageGetHeight(image.CGImage);
+        if(fixelW == fixelH){
+            
+            messageF.iamgesize = CGSizeMake(SCREEN_WIDTH *0.38 ,SCREEN_WIDTH *0.38);
+            messageF.cellHight = SCREEN_WIDTH *0.38 + 20;
+        }else{
+            messageF.iamgesize = CGSizeMake(fixelW / 7, fixelH / 7);
+            messageF.cellHight = fixelH / 7 + 20;
+        }
+        
+        // 将取得的图片写入本地的沙盒中，其中0.5表示压缩比例，1表示不压缩，数值越小压缩比例越大
+        BOOL success = [UIImageJPEGRepresentation(image, 1) writeToFile:imageFilePath  atomically:YES];
+        if (success){
+            NSLog(@"写入本地成功");
+            messageF.model.mediaPath = imageFilePath;
+            
+            [self addObject:messageF isSender:YES];
+        }
+        
     }
     
 
@@ -329,7 +400,7 @@ typedef enum : NSUInteger {
     videoView.hidden = NO;
     __weak typeof(self) weakself = self;
     
-    [UIView animateWithDuration:0.5 animations:^{
+    [UIView animateWithDuration:0.25 animations:^{
         weakself.tableView.height = HEIGHT_SCREEN - videwViewH - HEIGHT_NAVBAR-HEIGHT_STATUSBAR;
         weakself.chatBoxVC.view.frame = CGRectMake(0, videwViewX+HEIGHT_NAVBAR+HEIGHT_STATUSBAR, App_Frame_Width, videwViewH);
         [weakself scrollToBottom];
@@ -919,6 +990,13 @@ typedef enum : NSUInteger {
 - (void)dealloc{
     
     NSLog(@"销毁了");
+}
+-(BOOL) isFileExist:(NSString *)fileName
+{
+    NSFileManager *fileManager = [NSFileManager defaultManager];
+    BOOL result = [fileManager fileExistsAtPath:fileName];
+    NSLog(@"这个文件已经存在：%@",result?@"是的":@"不存在");
+    return result;
 }
 
 @end

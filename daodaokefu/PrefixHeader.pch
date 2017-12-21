@@ -23,9 +23,10 @@
 
 
 /*** ---------------- --------URL相关 -------- -------- -------- */
-
+//beseurl
+#define APIBaseUrl             @"http://workbench.daokf.cn"
 //定义一个API
-#define APIURL                @"http://workbench.daokf.cn/kf/"
+#define APIURL                 @"http://workbench.daokf.cn/kf/"
 //首次登录API
 #define APIfirstLogin              [APIURL stringByAppendingString:@"/app/login"]
 //退出登录API
