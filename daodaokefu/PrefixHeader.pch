@@ -51,6 +51,8 @@
 #define APIGetquickreply         [APIURL stringByAppendingString:@"/app/get_quick_reply"]
 //返回快速回复列表
 #define APIChatMessage         [APIURL stringByAppendingString:@"/app/chat_msg"]
+//语音消息下载地址
+#define APIDownloadvoice        [APIURL stringByAppendingString:@"video_file"]
 
 
 

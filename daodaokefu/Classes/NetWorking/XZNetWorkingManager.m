@@ -73,14 +73,12 @@ typedef enum {
         errorBlock(err);
     }];
 }
-
 - (void)logout {
     
     [self requestType:Post andRequesturl:APIlogOut andparameters:nil andSucceed:^(id  _Nullable responseObject){
     } andError:^(NSString *err) {
     }];
 }
-
 - (void)GethistorySucceed:(void(^)(NSMutableArray *DataArray))succeedBlock andError:(void(^)(NSString *err))errorBlock{
     [self requestType:Post andRequesturl:APIGetRecentUserInf andparameters:nil andSucceed:^(id  _Nullable responseObject) {
         NSArray *arr = [NSArray yy_modelArrayWithClass:[XZClientModel class] json:responseObject[@"data"]];
@@ -115,7 +113,6 @@ typedef enum {
          errorBlock(err);
     }];
 }
-
 - (void)loginbytoken:(NSString *)token andSucceed:(void(^)(XZUserinfoModel *model))succeedBlock andError:(void(^)(NSString *err))errorBlock{
     NSDictionary *dict = @{@"token":token};
     [self requestType:Post andRequesturl:APILoginbytoken andparameters:dict andSucceed:^(id  _Nullable responseObject) {
@@ -125,7 +122,6 @@ typedef enum {
         errorBlock(err);
     }];
 }
-
 - (void)PulltheblackSucceed:(void(^)(void))succeedBlock andError:(void(^)(NSString *err))errorBlock{
     [self requestType:Post andRequesturl:APIBlock_user andparameters:nil andSucceed:^(id  _Nullable responseObject) {
         succeedBlock();
@@ -133,7 +129,6 @@ typedef enum {
         errorBlock(err);
     }];
 }
-
 - (void)getcustomerinfoSucceed:(void(^)(XZNonceUserInfoModel *model))succeedBlock andError:(void(^)(NSString *err))errorBlock{
     [self requestType:Post andRequesturl:APICustomerInfo andparameters:nil andSucceed:^(id  _Nullable responseObject) {
         
@@ -143,7 +138,6 @@ typedef enum {
         errorBlock(err);
     }];
 }
-
 - (void)editremark:(NSString *)remark andSucceed:(void(^)(void))succeedBlock andError:(void(^)(NSString *err))errorBlock{
     NSDictionary *dict = @{@"remark":remark};
     [self requestType:Post andRequesturl:APIEditremark andparameters:dict andSucceed:^(id  _Nullable responseObject) {
@@ -152,7 +146,6 @@ typedef enum {
         errorBlock(err);
     }];
 }
-
 - (void)sendMessage:(NSString *)messageStr andSucceed:(void(^)(void))succeedBlock andError:(void(^)(NSString *err))errorBlock{
     NSDictionary *dict = @{@"msg":messageStr};
     [self requestType:Post andRequesturl:APISendMessage andparameters:dict andSucceed:^(id  _Nullable responseObject) {
@@ -161,7 +154,6 @@ typedef enum {
         errorBlock(err);
     }];
 }
-
 - (void)SendPictureMessage:(NSString *)iamgPath andSucceed:(void(^)(void))succeedBlock andError:(void(^)(NSString *err))errorBlock{
     [self POST:APISendPictureMessage parameters:nil constructingBodyWithBlock:^(id<AFMultipartFormData>  _Nonnull formData) {
         UIImage *img = [UIImage imageWithContentsOfFile:iamgPath];
@@ -179,7 +171,6 @@ typedef enum {
         errorBlock([NSString stringWithFormat:@"%@",error]);
     }];
 }
-
 - (void)GetquickreplySucceed:(void(^)(void))succeedBlock andError:(void(^)(NSString *err))errorBlock{
     [self requestType:Post andRequesturl:APIGetquickreply andparameters:nil andSucceed:^(id  _Nullable responseObject) {
         succeedBlock();
@@ -198,6 +189,27 @@ typedef enum {
     }];
 }
 
+- (void)downloadVoicemediaId:(NSString *)mediaId andcompanyId:(NSInteger)companyId andFilePath:(NSURL *)filepath andSucceed:(void(^)(void))succeedBlock andError:(void(^)(NSString *err))errorBlock{
+    
+    NSDictionary *parameters = @{@"mediaId":mediaId,@"companyId":@(companyId)};
+    
+   NSMutableURLRequest *request =  [[AFHTTPRequestSerializer serializer] requestWithMethod:@"GET" URLString:APIDownloadvoice parameters:parameters error:nil];
+
+    NSURLSessionDownloadTask *downloadTask = [self downloadTaskWithRequest:request progress:^(NSProgress * _Nonnull downloadProgress) {
+    } destination:^NSURL * _Nonnull(NSURL * _Nonnull targetPath, NSURLResponse * _Nonnull response) {
+        
+        return filepath;
+    } completionHandler:^(NSURLResponse * _Nonnull response, NSURL * _Nullable filePath, NSError * _Nullable error) {
+        if(error){
+            errorBlock([NSString stringWithFormat:@"%@",error]);
+        }else{
+            succeedBlock();
+        }
+    }];
+    
+    [downloadTask resume];
+    
+}
 - (NSString *)StrTrunDate:(NSString *)DateStr{
     // 格式化时间
     NSDateFormatter* formatter = [[NSDateFormatter alloc] init];

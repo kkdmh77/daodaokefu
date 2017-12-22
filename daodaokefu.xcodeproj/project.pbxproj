@@ -81,6 +81,7 @@
 		1884811C1FEB7A29005599C4 /* MJDIYAutoFooter.m in Sources */ = {isa = PBXBuildFile; fileRef = 188481141FEB7A28005599C4 /* MJDIYAutoFooter.m */; };
 		1884811D1FEB7A29005599C4 /* MJDIYBackFooter.m in Sources */ = {isa = PBXBuildFile; fileRef = 188481161FEB7A28005599C4 /* MJDIYBackFooter.m */; };
 		1884811E1FEB7A29005599C4 /* MJDIYHeader.m in Sources */ = {isa = PBXBuildFile; fileRef = 188481181FEB7A28005599C4 /* MJDIYHeader.m */; };
+		188481211FEBBB46005599C4 /* XZVoiceMessageModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 188481201FEBBB46005599C4 /* XZVoiceMessageModel.m */; };
 		18885E231FDFA72700F2348F /* LoginViewViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 18885E221FDFA72700F2348F /* LoginViewViewController.xib */; };
 		18885E261FDFA79400F2348F /* XZLoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 18885E251FDFA79400F2348F /* XZLoginViewController.m */; };
 		18885E291FDFA7DD00F2348F /* XZLoginView.m in Sources */ = {isa = PBXBuildFile; fileRef = 18885E281FDFA7DD00F2348F /* XZLoginView.m */; };
@@ -372,6 +373,8 @@
 		188481161FEB7A28005599C4 /* MJDIYBackFooter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MJDIYBackFooter.m; sourceTree = "<group>"; };
 		188481171FEB7A28005599C4 /* MJDIYHeader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MJDIYHeader.h; sourceTree = "<group>"; };
 		188481181FEB7A28005599C4 /* MJDIYHeader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MJDIYHeader.m; sourceTree = "<group>"; };
+		1884811F1FEBBB46005599C4 /* XZVoiceMessageModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = XZVoiceMessageModel.h; sourceTree = "<group>"; };
+		188481201FEBBB46005599C4 /* XZVoiceMessageModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = XZVoiceMessageModel.m; sourceTree = "<group>"; };
 		18885E221FDFA72700F2348F /* LoginViewViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LoginViewViewController.xib; sourceTree = "<group>"; };
 		18885E241FDFA79400F2348F /* XZLoginViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = XZLoginViewController.h; sourceTree = "<group>"; };
 		18885E251FDFA79400F2348F /* XZLoginViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = XZLoginViewController.m; sourceTree = "<group>"; };
@@ -1225,6 +1228,8 @@
 				187227D31FE910E100FE471F /* XZAcceptMessageModel.m */,
 				187227D51FE911DF00FE471F /* XZOneModel.h */,
 				187227D61FE911DF00FE471F /* XZOneModel.m */,
+				1884811F1FEBBB46005599C4 /* XZVoiceMessageModel.h */,
+				188481201FEBBB46005599C4 /* XZVoiceMessageModel.m */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -1836,6 +1841,7 @@
 				18E44E341FE21A0C0070AE58 /* AFNetworkActivityIndicatorManager.m in Sources */,
 				5F80D6311D9A60E500F8D164 /* ICChatBoxMoreViewItem.m in Sources */,
 				5F80D6691D9A6DE200F8D164 /* MJExtensionConst.m in Sources */,
+				188481211FEBBB46005599C4 /* XZVoiceMessageModel.m in Sources */,
 				186EE9811FE78E1E009CEE47 /* SDWebImageManager.m in Sources */,
 				5F80D6D81D9A71CB00F8D164 /* ICFaceManager.m in Sources */,
 				186F03C11FE279E00024D38E /* DHGifImageOperation.m in Sources */,

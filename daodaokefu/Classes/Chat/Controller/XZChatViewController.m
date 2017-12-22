@@ -12,6 +12,7 @@
 #import "UIImageView+WebCache.h"
 #import "XZOneModel.h"
 #import "XZAcceptMessageModel.h"
+#import "AppDelegate.h"
 typedef enum : NSUInteger {
     TextMessage,
     ImageMessage,
@@ -183,7 +184,6 @@ typedef enum : NSUInteger {
     [[XZNetWorkingManager sharderinstance] Chatmsganddelta:NO Succeed:^(XZOneModel *model){
         
         NSArray<XZAcceptMessageModel *> *modelArray = model.chatLog;
-        XZAcceptMessageModel *m = modelArray.lastObject;
         for (XZAcceptMessageModel *md in modelArray) {
             
          
@@ -207,8 +207,13 @@ typedef enum : NSUInteger {
                     [weakself sendImageMessage:md.content andisSender:NO];
                 }
                 
+            }else{  //语音消息
                 
+                NSDictionary *dict = [self dictionaryWithJsonString:md.content];
+                
+                [weakself sendVoiceMessage:dict[@"mediaId"]];
             }
+            
             
         }
         
@@ -234,6 +239,11 @@ typedef enum : NSUInteger {
             }else if(md.chatType == 1 && !md.isReply){ // 图片消息
                 
                 [weakself sendImageMessage:md.content andisSender:NO];
+            }else if(md.chatType == 2 && !md.isReply){ //语音消息
+                
+                NSDictionary *dict = [self dictionaryWithJsonString:md.content];
+                
+                [weakself sendVoiceMessage:dict[@"mediaId"]];
             }
             
         }
@@ -273,12 +283,12 @@ typedef enum : NSUInteger {
     }
     
     
-    ICMessageFrame *messageF = [ICMessageHelper createMessageFrame:TypePic content:@"[图片]" path:imageFilePath from:@"gxz" to:self.group.gId fileKey:nil isSender:isSender receivedSenderByYourself:NO];
-    // 设置成发送成功
-    messageF.model.message.deliveryState = ICMessageDeliveryState_Delivered;
-
     
     if([self isFileExist:imageFilePath]){
+        
+        ICMessageFrame *messageF = [ICMessageHelper createMessageFrame:TypePic content:@"[图片]" path:imageFilePath from:@"gxz" to:self.group.gId fileKey:nil isSender:isSender receivedSenderByYourself:NO];
+        // 设置成发送成功
+        messageF.model.message.deliveryState = ICMessageDeliveryState_Delivered;
         
         
         UIImage *image = [UIImage imageWithContentsOfFile:imageFilePath];
@@ -294,29 +304,31 @@ typedef enum : NSUInteger {
             messageF.cellHight = fixelH / 7 + 40;
         }
         
-        messageF.model.mediaPath = imageFilePath;
         [self addObject:messageF isSender:YES];
     }else{
 
+        
         NSData *data = [NSData dataWithContentsOfURL:[NSURL URLWithString:iamgeUrl]];
         
         UIImage *image = [UIImage imageWithData:data]; // 取得图片
-        CGFloat fixelW = CGImageGetWidth(image.CGImage);
-        
-        CGFloat fixelH = CGImageGetHeight(image.CGImage);
-        if(fixelW == fixelH){
-            
-            messageF.iamgesize = CGSizeMake(SCREEN_WIDTH *0.38 ,SCREEN_WIDTH *0.38);
-            messageF.cellHight = SCREEN_WIDTH *0.38 + 20;
-        }else{
-            messageF.iamgesize = CGSizeMake(fixelW / 7, fixelH / 7);
-            messageF.cellHight = fixelH / 7 + 20;
-        }
+//        if(fixelW == fixelH){
+//
+//            messageF.iamgesize = CGSizeMake(SCREEN_WIDTH *0.38 ,SCREEN_WIDTH *0.38);
+//            messageF.cellHight = SCREEN_WIDTH *0.38 + 20;
+//        }else{
+//            messageF.iamgesize = CGSizeMake(fixelW / 7, fixelH / 7);
+//            messageF.cellHight = fixelH / 7 + 20;
+//        }
         
         // 将取得的图片写入本地的沙盒中，其中0.5表示压缩比例，1表示不压缩，数值越小压缩比例越大
         BOOL success = [UIImageJPEGRepresentation(image, 1) writeToFile:imageFilePath  atomically:YES];
         if (success){
             NSLog(@"写入本地成功");
+            
+            ICMessageFrame *messageF = [ICMessageHelper createMessageFrame:TypePic content:@"[图片]" path:imageFilePath from:@"gxz" to:self.group.gId fileKey:nil isSender:isSender receivedSenderByYourself:NO];
+            // 设置成发送成功
+            messageF.model.message.deliveryState = ICMessageDeliveryState_Delivered;
+            
             messageF.model.mediaPath = imageFilePath;
             
             [self addObject:messageF isSender:YES];
@@ -568,6 +580,33 @@ typedef enum : NSUInteger {
     
     [self messageSendSucced:messageF andType:ImageMessage];
     
+}
+
+// 发送一条语音消息
+- (void)sendVoiceMessage:(NSString *)voiceUrl{
+    
+    AppDelegate *sd = (AppDelegate *)[[UIApplication sharedApplication] delegate];
+    
+    NSString *path = [NSString stringWithFormat:@"%@/Chat/Recoder/%@.amr",kPathCache,voiceUrl];
+    NSURL *url = [NSURL fileURLWithPath:path];
+    [[XZNetWorkingManager sharderinstance] downloadVoicemediaId:voiceUrl andcompanyId:sd.uesrmodel.companyId andFilePath:url andSucceed:^{
+        
+        [self timerInvalue]; // 销毁定时器
+        self.voiceHud.hidden = YES;
+        if (voiceUrl) {
+            ICMessageFrame *messageF = [ICMessageHelper createMessageFrame:TypeVoice content:@"[语音]" path:path from:@"gxz" to:self.group.gId fileKey:nil isSender:NO receivedSenderByYourself:NO];
+            
+            
+            [self addObject:messageF isSender:YES];
+        }
+        
+        
+    } andError:^(NSString *err) {
+        
+    }];
+    
+    
+   
 }
 
 // send voice message
@@ -1008,5 +1047,20 @@ typedef enum : NSUInteger {
     NSLog(@"这个文件已经存在：%@",result?[NSString stringWithFormat:@"是的%@",fileName]:@"不存在");
     return result;
 }
-
+- (NSDictionary *)dictionaryWithJsonString:(NSString *)jsonString {
+    if (jsonString == nil) {
+        return nil;
+    }
+    
+    NSData *jsonData = [jsonString dataUsingEncoding:NSUTF8StringEncoding];
+    NSError *err;
+    NSDictionary *dic = [NSJSONSerialization JSONObjectWithData:jsonData
+                                                        options:NSJSONReadingMutableContainers
+                                                          error:&err];
+    if(err) {
+        NSLog(@"json解析失败：%@",err);
+        return nil;
+    }
+    return dic;
+}
 @end

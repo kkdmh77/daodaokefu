@@ -55,10 +55,19 @@
 
 
 
+// 最新标记
 - (void)imageBtnClick:(UIButton *)btn
 {
    __block NSString *path = [[ICVideoManager shareManager] videoPathForMP4:self.modelFrame.model.mediaPath];
-    [self videoPlay:path];
+    if([path containsString:@"http"]){
+        
+        [self videoPlaytwo:path];
+    }else{
+         [self videoPlay:path];
+    }
+
+    
+    
 }
 
 - (void)videoPlay:(NSString *)path
@@ -66,6 +75,13 @@
     ICAVPlayer *player = [[ICAVPlayer alloc] initWithPlayerURL:[NSURL fileURLWithPath:path]];
     [player presentFromVideoView:self.imageBtn toContainer:App_RootCtr.view animated:YES completion:nil];
 }
+
+- (void)videoPlaytwo:(NSString *)pathUrl
+{
+    ICAVPlayer *player = [[ICAVPlayer alloc] initWithPlayerURL:[NSURL URLWithString:pathUrl]];
+    [player presentFromVideoView:self.imageBtn toContainer:App_RootCtr.view animated:YES completion:nil];
+}
+
 
 #pragma mark - videoPlay
 

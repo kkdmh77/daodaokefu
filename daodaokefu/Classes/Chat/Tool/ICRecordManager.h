@@ -54,7 +54,7 @@
 - (NSString *)receiveVoicePathWithFileKey:(NSString *)fileKey;
 
 // 获取语音时长
-- (NSUInteger)durationWithVideo:(NSURL *)voiceUrl;
+- (NSUInteger)durationWithVideo:(NSString *)voiceUrl;
 
 
 

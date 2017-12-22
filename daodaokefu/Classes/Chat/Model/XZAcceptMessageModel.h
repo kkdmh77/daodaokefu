@@ -7,7 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
-
+#import "XZVoiceMessageModel.h"
 @interface XZAcceptMessageModel : NSObject
 
 // 可能是消息标识之类的
@@ -34,6 +34,5 @@
 
 // 具体的消息内容
 @property (copy, nonatomic) NSString    *content;
-
 
 @end

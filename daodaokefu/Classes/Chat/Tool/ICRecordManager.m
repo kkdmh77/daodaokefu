@@ -220,9 +220,11 @@
     AVAudioSession *audioSession = [AVAudioSession sharedInstance];
     NSError *err = nil;  // 加上这两句，否则声音会很小
     [audioSession setCategory :AVAudioSessionCategoryPlayback error:&err];
+    
     self.player = [[AVAudioPlayer alloc] initWithContentsOfURL:[NSURL fileURLWithPath:recorderPath] error:nil];
+    
     self.player.numberOfLoops = 0;
-    [self.player prepareToPlay];
+    [self.player prepareToPlay]; 
     self.player.delegate = self;
     [self.player play];
 }
@@ -262,15 +264,19 @@
 }
 
 
-
 // 获取语音时长
-- (NSUInteger)durationWithVideo:(NSURL *)voiceUrl{
+- (NSUInteger)durationWithVideo:(NSString *)voiceUrl{
+    
+    NSString *amrPath   = [[voiceUrl stringByDeletingPathExtension] stringByAppendingPathExtension:@"amr"];
+    
+    [VoiceConverter ConvertAmrToWav:amrPath wavSavePath:voiceUrl];
     
     NSDictionary *opts = [NSDictionary dictionaryWithObject:@(NO) forKey:AVURLAssetPreferPreciseDurationAndTimingKey];
-    AVURLAsset *urlAsset = [AVURLAsset URLAssetWithURL:voiceUrl options:opts]; // 初始化视频媒体文件
+    AVURLAsset *urlAsset = [AVURLAsset URLAssetWithURL:[NSURL fileURLWithPath:voiceUrl] options:opts]; // 初始化视频媒体文件
     NSUInteger second = 0;
     second = urlAsset.duration.value / urlAsset.duration.timescale; // 获取视频总时长,单位秒
-    return second;
+    
+    return second == 0 ? 1 : second ;
 }
 
 

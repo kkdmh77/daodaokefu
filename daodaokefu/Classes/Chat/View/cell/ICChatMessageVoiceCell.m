@@ -43,7 +43,8 @@
     [super setModelFrame:modelFrame];
     
     NSString *voicePath = [self mediaPath:modelFrame.model.mediaPath];
-    self.durationLabel.text  = [NSString stringWithFormat:@"%ld''",[[ICRecordManager shareManager] durationWithVideo:[NSURL fileURLWithPath:voicePath]]];
+    
+        self.durationLabel.text  = [NSString stringWithFormat:@"%ld''",[[ICRecordManager shareManager] durationWithVideo:voicePath]];
     if (modelFrame.model.isSender) {  // sender
         self.voiceIcon.image = [UIImage imageNamed:@"right-3"];
         UIImage *image1 = [UIImage imageNamed:@"right-1"];

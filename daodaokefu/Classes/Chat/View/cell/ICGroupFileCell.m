@@ -55,10 +55,12 @@
     
     self.imageV.image   = [ICMessageHelper allocationImage:type.intValue];
     self.sizeLabel.text = [ICFileTool fileSizeWithInteger:size.integerValue];
+    
     self.nameLabel.text = name;
 //    NSString *date = [NSDate dateWithFormatter:@"YYYY/MM/dd HH:mm" timeInterval:message.date/1000.0];
 //    NSString * eName = [ICMessageDatabase getUserNameWithEId:message.from];
 //    self.subLabel.text  = [NSString stringWithFormat:@"%@ 来自%@",date,eName];
+    self.subLabel.text = @"2001/12/01/ 12:01";
     
     [self fileExisted:message.fileKey];
     

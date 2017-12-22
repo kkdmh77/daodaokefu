@@ -146,4 +146,16 @@
  */
 - (void)Chatmsganddelta:(BOOL)delta Succeed:(void(^)(XZOneModel *model))succeedBlock andError:(void(^)(NSString *err))errorBlock;
 
+
+/**
+ 下载语音文件
+
+ @param mediaId       文件唯一标识
+ @param companyId     账号标识
+ @param filepath      文件储存的地址
+ @param succeedBlock  成功回调
+ @param errorBlock    失败回调
+ */
+- (void)downloadVoicemediaId:(NSString *)mediaId andcompanyId:(NSInteger)companyId andFilePath:(NSURL *)filepath andSucceed:(void(^)(void))succeedBlock andError:(void(^)(NSString *err))errorBlock;
+
 @end
