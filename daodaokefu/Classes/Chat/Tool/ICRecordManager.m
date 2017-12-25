@@ -2,7 +2,7 @@
 //  ICRecordManager.m
 //  daodoakefu
 //
-//  Created by 郭现壮 on 16/3/16.
+//  Created by 杨梓垚 on 17/12/16.
 //  Copyright © 2016年 gxz All rights reserved.
 //
 
@@ -269,7 +269,12 @@
     
     NSString *amrPath   = [[voiceUrl stringByDeletingPathExtension] stringByAppendingPathExtension:@"amr"];
     
-    [VoiceConverter ConvertAmrToWav:amrPath wavSavePath:voiceUrl];
+    if(![self isFileExist:voiceUrl]){
+        
+        [VoiceConverter ConvertAmrToWav:amrPath wavSavePath:voiceUrl];
+    }
+    
+    
     
     NSDictionary *opts = [NSDictionary dictionaryWithObject:@(NO) forKey:AVURLAssetPreferPreciseDurationAndTimingKey];
     AVURLAsset *urlAsset = [AVURLAsset URLAssetWithURL:[NSURL fileURLWithPath:voiceUrl] options:opts]; // 初始化视频媒体文件
@@ -279,7 +284,13 @@
     return second == 0 ? 1 : second ;
 }
 
-
+-(BOOL) isFileExist:(NSString *)fileName
+{
+    NSFileManager *fileManager = [NSFileManager defaultManager];
+    BOOL result = [fileManager fileExistsAtPath:fileName];
+    NSLog(@"这个文件已经存在：%@",result?[NSString stringWithFormat:@"是的%@",fileName]:@"不存在");
+    return result;
+}
 
 
 

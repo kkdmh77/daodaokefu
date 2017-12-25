@@ -7,6 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1807D3DF1FF08CD700598711 /* XZCloseSessioTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1807D3DE1FF08CD700598711 /* XZCloseSessioTableViewController.m */; };
+		1807D3E21FF0C82200598711 /* XZselectclientTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1807D3E11FF0C82200598711 /* XZselectclientTableViewController.m */; };
+		1807D3E41FF0CCF700598711 /* XZselectclientTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1807D3E31FF0CCF700598711 /* XZselectclientTableViewCell.xib */; };
+		1807D3E71FF0CEAB00598711 /* XZselectclientTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 1807D3E61FF0CEAB00598711 /* XZselectclientTableViewCell.m */; };
 		180ACDF21FE0C78900E1154D /* 二维码.png in Resources */ = {isa = PBXBuildFile; fileRef = 180ACDF11FE0C78900E1154D /* 二维码.png */; };
 		180ACE181FE0FD5200E1154D /* HMScanerCardViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 180ACE0C1FE0FD5200E1154D /* HMScanerCardViewController.m */; };
 		180ACE191FE0FD5200E1154D /* HMScanner.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 180ACE0D1FE0FD5200E1154D /* HMScanner.bundle */; };
@@ -228,6 +232,13 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		1807D3DD1FF08CD700598711 /* XZCloseSessioTableViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = XZCloseSessioTableViewController.h; sourceTree = "<group>"; };
+		1807D3DE1FF08CD700598711 /* XZCloseSessioTableViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = XZCloseSessioTableViewController.m; sourceTree = "<group>"; };
+		1807D3E01FF0C82200598711 /* XZselectclientTableViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = XZselectclientTableViewController.h; sourceTree = "<group>"; };
+		1807D3E11FF0C82200598711 /* XZselectclientTableViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = XZselectclientTableViewController.m; sourceTree = "<group>"; };
+		1807D3E31FF0CCF700598711 /* XZselectclientTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = XZselectclientTableViewCell.xib; sourceTree = "<group>"; };
+		1807D3E51FF0CEAB00598711 /* XZselectclientTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = XZselectclientTableViewCell.h; sourceTree = "<group>"; };
+		1807D3E61FF0CEAB00598711 /* XZselectclientTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = XZselectclientTableViewCell.m; sourceTree = "<group>"; };
 		180ACDF11FE0C78900E1154D /* 二维码.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "二维码.png"; sourceTree = "<group>"; };
 		180ACE0B1FE0FD5200E1154D /* HMScanerCardViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HMScanerCardViewController.h; sourceTree = "<group>"; };
 		180ACE0C1FE0FD5200E1154D /* HMScanerCardViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HMScanerCardViewController.m; sourceTree = "<group>"; };
@@ -1240,6 +1251,8 @@
 				5F80D6A11D9A70E500F8D164 /* cell */,
 				5F80D67F1D9A70DB00F8D164 /* moreView */,
 				5F80D60B1D9A5BCE00F8D164 /* chatBox */,
+				1807D3DD1FF08CD700598711 /* XZCloseSessioTableViewController.h */,
+				1807D3DE1FF08CD700598711 /* XZCloseSessioTableViewController.m */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -1651,6 +1664,8 @@
 				5FBCC15B1D9A244C00AD6A6B /* XZMessageViewController.m */,
 				5F80D5C11D9A429F00F8D164 /* XZGroupSearchController.h */,
 				5F80D5C21D9A429F00F8D164 /* XZGroupSearchController.m */,
+				1807D3E01FF0C82200598711 /* XZselectclientTableViewController.h */,
+				1807D3E11FF0C82200598711 /* XZselectclientTableViewController.m */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -1673,6 +1688,9 @@
 				5F80D5FC1D9A4BCA00F8D164 /* XZBaseTableViewCell.m */,
 				5F80D5FE1D9A4C4100F8D164 /* XZMessageCell.h */,
 				5F80D5FF1D9A4C4100F8D164 /* XZMessageCell.m */,
+				1807D3E31FF0CCF700598711 /* XZselectclientTableViewCell.xib */,
+				1807D3E51FF0CEAB00598711 /* XZselectclientTableViewCell.h */,
+				1807D3E61FF0CEAB00598711 /* XZselectclientTableViewCell.m */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -1811,6 +1829,7 @@
 				180ACDF21FE0C78900E1154D /* 二维码.png in Resources */,
 				188481061FEB5713005599C4 /* MJRefresh.bundle in Resources */,
 				18E44E4F1FE240C30070AE58 /* SVProgressHUD.bundle in Resources */,
+				1807D3E41FF0CCF700598711 /* XZselectclientTableViewCell.xib in Resources */,
 				181B1FFE1FE3D4E200130046 /* README.md in Resources */,
 				18E44E301FE21A0C0070AE58 /* LICENSE in Resources */,
 				18E44E4B1FE240C30070AE58 /* LICENSE.txt in Resources */,
@@ -1971,6 +1990,7 @@
 				186EE9751FE78E1E009CEE47 /* NSImage+WebCache.m in Sources */,
 				18885E461FDFD00E00F2348F /* IFMMenuItem.m in Sources */,
 				5F80D5BF1D9A3F4800F8D164 /* UIImage+Extension.m in Sources */,
+				1807D3E21FF0C82200598711 /* XZselectclientTableViewController.m in Sources */,
 				18885E311FDFBB3B00F2348F /* XZViewController.m in Sources */,
 				5F80D6E61D9A773100F8D164 /* ICDocumentViewController.m in Sources */,
 				5F80D5F71D9A4B7900F8D164 /* NSArray+MASAdditions.m in Sources */,
@@ -1983,6 +2003,7 @@
 				186F03C21FE279E00024D38E /* DHGuidePageHUD.m in Sources */,
 				5F80D6981D9A70DB00F8D164 /* ICDetailHeadView.m in Sources */,
 				186EE97B1FE78E1E009CEE47 /* SDWebImageCompat.m in Sources */,
+				1807D3E71FF0CEAB00598711 /* XZselectclientTableViewCell.m in Sources */,
 				5F80D66C1D9A6DE200F8D164 /* MJPropertyKey.m in Sources */,
 				5F80D6111D9A5C5600F8D164 /* XZEmotion.m in Sources */,
 				5F80D7161D9B677D00F8D164 /* KILabel.m in Sources */,
@@ -2012,6 +2033,7 @@
 				5F80D6BD1D9A70E500F8D164 /* ICChatForwardCell.m in Sources */,
 				5F80D5C31D9A429F00F8D164 /* XZGroupSearchController.m in Sources */,
 				5F80D6991D9A70DB00F8D164 /* ICFileButton.m in Sources */,
+				1807D3DF1FF08CD700598711 /* XZCloseSessioTableViewController.m in Sources */,
 				18E44E371FE21A0C0070AE58 /* UIImageView+AFNetworking.m in Sources */,
 				18E44E381FE21A0C0070AE58 /* UIProgressView+AFNetworking.m in Sources */,
 				186EE9781FE78E1E009CEE47 /* SDWebImageCoder.m in Sources */,

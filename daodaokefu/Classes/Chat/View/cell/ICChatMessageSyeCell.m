@@ -2,7 +2,7 @@
 //  ICChatMessageSyeCell.m
 //  daodoakefu
 //
-//  Created by 郭现壮 on 16/4/29.
+//  Created by 杨梓垚 on 17/12/29.
 //  Copyright © 2016年 gxz All rights reserved.
 //
 

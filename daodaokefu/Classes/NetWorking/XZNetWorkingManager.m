@@ -25,7 +25,7 @@ typedef enum {
     dispatch_once(&onceToken, ^{
         __INSTANCE__ = [XZNetWorkingManager new];
 //        __INSTANCE__.responseSerializer.acceptableContentTypes = [NSSet setWithObject:@"text/plain"];
-    __INSTANCE__.responseSerializer.acceptableContentTypes = [NSSet setWithObjects:@"application/json", @"text/json", @"text/javascript",@"text/plain", nil];
+    __INSTANCE__.responseSerializer.acceptableContentTypes = [NSSet setWithObjects:@"application/json", @"text/json", @"text/javascript",@"text/plain", @"text/html", nil];
     
     });
     return __INSTANCE__;
@@ -54,7 +54,7 @@ typedef enum {
             }
         } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
             errorBlock([NSString stringWithFormat:@"%@",error]);
-//            [SVProgressHUD showErrorWithStatus:[NSString stringWithFormat:@"%@",error]];
+
             dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(3 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
                 [SVProgressHUD dismiss];
             });
@@ -74,23 +74,14 @@ typedef enum {
     }];
 }
 - (void)logout {
-    
     [self requestType:Post andRequesturl:APIlogOut andparameters:nil andSucceed:^(id  _Nullable responseObject){
     } andError:^(NSString *err) {
     }];
 }
-- (void)GethistorySucceed:(void(^)(NSMutableArray *DataArray))succeedBlock andError:(void(^)(NSString *err))errorBlock{
+- (void)GethistorySucceed:(void(^)(NSArray *DataArray))succeedBlock andError:(void(^)(NSString *err))errorBlock{
     [self requestType:Post andRequesturl:APIGetRecentUserInf andparameters:nil andSucceed:^(id  _Nullable responseObject) {
         NSArray *arr = [NSArray yy_modelArrayWithClass:[XZClientModel class] json:responseObject[@"data"]];
-        NSMutableArray *arrM = [NSMutableArray array];
-        for(XZClientModel *model in arr) {
-            XZGroup *gp      = [XZGroup new];
-            gp.gName         = model.name;
-            gp.imageurl      = model.avatar;
-            gp.lastMsgTime   = [self StrTrunDate:model.lastChatTime];
-            [arrM addObject:gp];
-        }
-        succeedBlock(arrM);
+        succeedBlock(arr);
     } andError:^(NSString *err) {
         errorBlock(err);
     }];
@@ -190,14 +181,10 @@ typedef enum {
 }
 
 - (void)downloadVoicemediaId:(NSString *)mediaId andcompanyId:(NSInteger)companyId andFilePath:(NSURL *)filepath andSucceed:(void(^)(void))succeedBlock andError:(void(^)(NSString *err))errorBlock{
-    
     NSDictionary *parameters = @{@"mediaId":mediaId,@"companyId":@(companyId)};
-    
    NSMutableURLRequest *request =  [[AFHTTPRequestSerializer serializer] requestWithMethod:@"GET" URLString:APIDownloadvoice parameters:parameters error:nil];
-
     NSURLSessionDownloadTask *downloadTask = [self downloadTaskWithRequest:request progress:^(NSProgress * _Nonnull downloadProgress) {
     } destination:^NSURL * _Nonnull(NSURL * _Nonnull targetPath, NSURLResponse * _Nonnull response) {
-        
         return filepath;
     } completionHandler:^(NSURLResponse * _Nonnull response, NSURL * _Nullable filePath, NSError * _Nullable error) {
         if(error){
@@ -206,9 +193,25 @@ typedef enum {
             succeedBlock();
         }
     }];
-    
     [downloadTask resume];
-    
+}
+
+- (void)closeChatandChatStatus:(NSInteger)chatstatus  andSucceed:(void(^)(void))succeedBlock andError:(void(^)(NSString *err))errorBlock{
+    NSDictionary *dict =@{@"status":@(chatstatus)};
+    [self requestType:Post andRequesturl:APIClosechat andparameters:dict andSucceed:^(id  _Nullable responseObject) {
+        succeedBlock();
+    } andError:^(NSString *err) {
+        errorBlock(err);
+    }];
+}
+
+- (void)ceateSessionanduid:(NSInteger)uid andSucceed:(void(^)(void))succeedBlock andError:(void(^)(NSString *err))errorBlock{
+    NSDictionary *dict = @{@"uid":@(uid)};
+    [self requestType:Post andRequesturl:APICreateSession andparameters:dict andSucceed:^(id  _Nullable responseObject) {
+        succeedBlock();
+    } andError:^(NSString *err) {
+        errorBlock(err);
+    }];
 }
 - (NSString *)StrTrunDate:(NSString *)DateStr{
     // 格式化时间

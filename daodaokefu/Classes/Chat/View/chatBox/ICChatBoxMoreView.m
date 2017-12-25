@@ -2,7 +2,7 @@
 //  ICChatBoxMoreView.m
 //  daodoakefu
 //
-//  Created by 郭现壮 on 16/3/11.
+//  Created by 杨梓垚 on 17/12/11.
 //  Copyright © 2016年 gxz All rights reserved.
 //
 

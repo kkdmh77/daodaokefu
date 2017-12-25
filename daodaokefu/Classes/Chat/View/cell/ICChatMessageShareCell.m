@@ -2,7 +2,7 @@
 //  ICChatMessageShareCell.m
 //  daodoakefu
 //
-//  Created by 郭现壮 on 16/9/8.
+//  Created by 杨梓垚 on 17/12/88.
 //  Copyright © 2016年 gxz All rights reserved.
 //
 

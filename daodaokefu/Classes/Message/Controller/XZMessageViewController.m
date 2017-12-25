@@ -2,7 +2,7 @@
 //  XZMessageViewController.m
 //  daodoakefu
 //
-//  Created by 郭现壮 on 16/9/27.
+//  Created by 杨梓垚 on 17/12/20.
 //  Copyright © 2016年 gxz. All rights reserved.
 //
 
@@ -16,12 +16,14 @@
 #import "XZUserinfoModel.h"
 #import "AppDelegate.h"
 #import "MJChiBaoZiHeader.h"
-
+#import "XZselectclientTableViewController.h"
+#import "XZClientModel.h"
 @interface XZMessageViewController ()<UITableViewDataSource,UITableViewDelegate>
 
 @property (nonatomic, weak) UITableView *tableView;
 @property (nonatomic, strong) NSMutableArray *dataArray;
 @property (nonatomic, strong) UISearchController *searchController;
+@property (nonatomic, strong) NSTimer *timer;
 
 @end
 
@@ -29,15 +31,36 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    #pragma mark - 注册通知
+    [self registerNotification];
+    
     #pragma mark - 自动登录
     [self tokenLogin];
     
     [self setupUI];
+    
+    #pragma mark - 启动定时器操作
+    self.timer = [NSTimer scheduledTimerWithTimeInterval:3.0 target:self selector:@selector(refreshData) userInfo:nil repeats:YES];
+}
+
+
+- (void)refreshData {
+    
+    [self loadDataSource];
 }
 
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
+    
+}
+- (void)registerNotification {
+    
+    [kNotificationCenter addObserverForName:HomeRefreshdata object:nil queue:[NSOperationQueue mainQueue] usingBlock:^(NSNotification * _Nonnull note) {
+       
+        [self loadDataSource];
+    }];
     
 }
 
@@ -51,8 +74,6 @@
             AppDelegate *sd=(AppDelegate *)[[UIApplication sharedApplication] delegate];
             
             sd.uesrmodel = model;
-            
-            [kUserDefaults setObject:model.token forKey:@"token"];
             
             [self loadDataSource];
             
@@ -118,12 +139,13 @@
     
     [[XZNetWorkingManager sharderinstance] getMessageDataSucceed:^(NSMutableArray *DataArray) {
         [self.tableView.mj_header endRefreshing];
-        self.dataArray = DataArray;
-        [self.tableView reloadData];
+        if(self.dataArray.count != DataArray.count){
+            self.dataArray = DataArray;
+            [self.tableView reloadData];
+        }
     } andError:^(NSString *err) {
         
         [self.tableView.mj_header endRefreshing];
-        [XZToolManager showInfoWithStatus:@"登录状态失效，请重新登录"];
         
     }];
     
@@ -170,13 +192,19 @@
 
 - (void)addsession {
     
-    XZGroup *group = [[XZGroup alloc] init];
-    group.unReadCount = 6;
-    group.gName = @"张国瑞";
-    group.lastMsgString = @"你看到我的九去哪里了么?";
-    group.imageurl = @"https://avatars1.githubusercontent.com/u/6919743?s=400&v=4";
-    [self.dataArray addObject:group];
-    [self.tableView reloadData];
+    XZselectclientTableViewController *vc = [XZselectclientTableViewController new];
+    vc.messagevc = self;
+    UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:vc];
+    
+    [self presentViewController:nav animated:YES completion:nil];
+    
+//    XZGroup *group = [[XZGroup alloc] init];
+//    group.unReadCount = 6;
+//    group.gName = @"张国瑞";
+//    group.lastMsgString = @"你看到我的九去哪里了么?";
+//    group.imageurl = @"https://avatars1.githubusercontent.com/u/6919743?s=400&v=4";
+//    [self.dataArray addObject:group];
+//    [self.tableView reloadData];
 }
 
 - (void)openScan{

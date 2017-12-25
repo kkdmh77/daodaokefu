@@ -2,7 +2,7 @@
 //  XZMineViewController.m
 //  daodoakefu
 //
-//  Created by 郭现壮 on 16/9/27.
+//  Created by 杨梓垚 on 17/12/20.
 //  Copyright © 2016年 gxz. All rights reserved.
 //
 

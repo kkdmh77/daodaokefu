@@ -2,7 +2,7 @@
 //  XZChatViewController.m
 //  daodoakefu
 //
-//  Created by 郭现壮 on 16/9/27.
+//  Created by 杨梓垚 on 17/12/20.
 //  Copyright © 2016年 gxz. All rights reserved.
 //
 
@@ -13,6 +13,8 @@
 #import "XZOneModel.h"
 #import "XZAcceptMessageModel.h"
 #import "AppDelegate.h"
+#import "XZCloseSessioTableViewController.h"
+
 typedef enum : NSUInteger {
     TextMessage,
     ImageMessage,
@@ -118,8 +120,12 @@ typedef enum : NSUInteger {
     
     UIAlertAction *photoesAlbum = [UIAlertAction actionWithTitle:@"关闭会话" style:UIAlertActionStyleDestructive handler:^(UIAlertAction * _Nonnull action) {
         
+        UIStoryboard *sb = [UIStoryboard storyboardWithName:@"Mine" bundle:nil];
         
-        [self.navigationController popViewControllerAnimated:YES];
+        XZCloseSessioTableViewController *vc = [sb instantiateViewControllerWithIdentifier:@"XZCloseSessioTableViewController"];
+        
+        [self.navigationController pushViewController:vc animated:YES];
+        
     }];
     
     UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
@@ -582,13 +588,37 @@ typedef enum : NSUInteger {
     
 }
 
+-(BOOL) isFileExist:(NSString *)fileName
+{
+    NSFileManager *fileManager = [NSFileManager defaultManager];
+    BOOL result = [fileManager fileExistsAtPath:fileName];
+    NSLog(@"这个文件已经存在：%@",result?[NSString stringWithFormat:@"是的%@",fileName]:@"不存在");
+    return result;
+}
+
 // 发送一条语音消息
 - (void)sendVoiceMessage:(NSString *)voiceUrl{
     
     AppDelegate *sd = (AppDelegate *)[[UIApplication sharedApplication] delegate];
     
     NSString *path = [NSString stringWithFormat:@"%@/Chat/Recoder/%@.amr",kPathCache,voiceUrl];
+    
+    if([self isFileExist:path]){
+        
+        [self timerInvalue]; // 销毁定时器
+        self.voiceHud.hidden = YES;
+        if (voiceUrl) {
+            ICMessageFrame *messageF = [ICMessageHelper createMessageFrame:TypeVoice content:@"[语音]" path:path from:@"gxz" to:self.group.gId fileKey:nil isSender:NO receivedSenderByYourself:NO];
+            
+            
+            [self addObject:messageF isSender:YES];
+        }
+        
+    }else{
+    
     NSURL *url = [NSURL fileURLWithPath:path];
+
+    
     [[XZNetWorkingManager sharderinstance] downloadVoicemediaId:voiceUrl andcompanyId:sd.uesrmodel.companyId andFilePath:url andSucceed:^{
         
         [self timerInvalue]; // 销毁定时器
@@ -605,7 +635,7 @@ typedef enum : NSUInteger {
         
     }];
     
-    
+    }
    
 }
 
@@ -616,6 +646,7 @@ typedef enum : NSUInteger {
     self.voiceHud.hidden = YES;
     if (voicePath) {
         ICMessageFrame *messageF = [ICMessageHelper createMessageFrame:TypeVoice content:@"[语音]" path:voicePath from:@"gxz" to:self.group.gId fileKey:nil isSender:YES receivedSenderByYourself:NO];
+        messageF.model.message.deliveryState =ICMessageDeliveryState_Failure;
         [self addObject:messageF isSender:YES];
         [self messageSendSucced:messageF andType:Mp4Message];
     }
@@ -1040,13 +1071,7 @@ typedef enum : NSUInteger {
     
     NSLog(@"销毁了");
 }
--(BOOL) isFileExist:(NSString *)fileName
-{
-    NSFileManager *fileManager = [NSFileManager defaultManager];
-    BOOL result = [fileManager fileExistsAtPath:fileName];
-    NSLog(@"这个文件已经存在：%@",result?[NSString stringWithFormat:@"是的%@",fileName]:@"不存在");
-    return result;
-}
+
 - (NSDictionary *)dictionaryWithJsonString:(NSString *)jsonString {
     if (jsonString == nil) {
         return nil;

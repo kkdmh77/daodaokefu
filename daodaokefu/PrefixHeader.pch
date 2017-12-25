@@ -2,7 +2,7 @@
 //  PrefixHeader.pch
 //  daodoakefu
 //
-//  Created by 郭现壮 on 16/9/27.
+//  Created by 杨梓垚 on 17/12/20.
 //  Copyright © 2016年 gxz. All rights reserved.
 //
 
@@ -53,8 +53,10 @@
 #define APIChatMessage         [APIURL stringByAppendingString:@"/app/chat_msg"]
 //语音消息下载地址
 #define APIDownloadvoice        [APIURL stringByAppendingString:@"video_file"]
-
-
+//结束会话
+#define APIClosechat       [APIURL stringByAppendingString:@"/app/close_chat"]
+//创建会话
+#define APICreateSession       [APIURL stringByAppendingString:@"/app/create_new_session.do"]
 
 
 
@@ -65,8 +67,7 @@
 
 
 /*** ---------------- --------URL相关结束 -------- -------- -------- */
-
-
+#define HomeRefreshdata             @"HomeRefreshdata"
 
 
 

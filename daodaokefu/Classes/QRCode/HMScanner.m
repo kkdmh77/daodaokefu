@@ -2,7 +2,7 @@
 //  HMScanner.m
 //  HMQRCodeScanner
 //
-//  Created by 刘凡 on 16/1/2.
+//  Created by 刘凡 on 17/12/2.
 //  Copyright © 2016年 itheima. All rights reserved.
 //
 

@@ -2,7 +2,7 @@
 //  ICAVPlayer.h
 //  daodoakefu
 //
-//  Created by guoxianzhuang on 16/7/6.
+//  Created by guoxianzhuang on 17/12/6.
 //  Copyright © 2016年 gxz All rights reserved.
 //
 

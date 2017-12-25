@@ -42,7 +42,7 @@
  @param succeedBlock 成功回调
  @param errorBlock   失败回调
  */
-- (void)GethistorySucceed:(void(^)(NSMutableArray *DataArray))succeedBlock andError:(void(^)(NSString *err))errorBlock;
+- (void)GethistorySucceed:(void(^)(NSArray *DataArray))succeedBlock andError:(void(^)(NSString *err))errorBlock;
 
 
 /**
@@ -158,4 +158,23 @@
  */
 - (void)downloadVoicemediaId:(NSString *)mediaId andcompanyId:(NSInteger)companyId andFilePath:(NSURL *)filepath andSucceed:(void(^)(void))succeedBlock andError:(void(^)(NSString *err))errorBlock;
 
+
+/**
+ 结束回话
+
+ @param chatstatus   会话状态
+ @param succeedBlock 成功回调
+ @param errorBlock   失败回调
+ */
+- (void)closeChatandChatStatus:(NSInteger)chatstatus andSucceed:(void(^)(void))succeedBlock andError:(void(^)(NSString *err))errorBlock;
+
+
+/**
+ 创建会话
+
+ @param uid          客户id
+ @param succeedBlock 成功
+ @param errorBlock   失败回调
+ */
+- (void)ceateSessionanduid:(NSInteger)uid andSucceed:(void(^)(void))succeedBlock andError:(void(^)(NSString *err))errorBlock;
 @end

@@ -2,7 +2,7 @@
 //  ICVoiceHud.h
 //  daodoakefu
 //
-//  Created by 郭现壮 on 16/5/18.
+//  Created by 杨梓垚 on 17/12/18.
 //  Copyright © 2016年 gxz All rights reserved.
 //
 

@@ -2,7 +2,7 @@
 //  HMScanerCardViewController.h
 //  HMQRCodeScanner
 //
-//  Created by 刘凡 on 16/1/3.
+//  Created by 刘凡 on 17/12/3.
 //  Copyright © 2016年 itheima. All rights reserved.
 //
 

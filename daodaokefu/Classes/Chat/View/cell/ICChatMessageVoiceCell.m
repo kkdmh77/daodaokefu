@@ -2,7 +2,7 @@
 //  ICChatMessageVoiceCell.m
 //  daodoakefu
 //
-//  Created by 郭现壮 on 16/3/13.
+//  Created by 杨梓垚 on 17/12/13.
 //  Copyright © 2016年 gxz All rights reserved.
 //
 
@@ -85,6 +85,7 @@
 - (void)voiceButtonClicked:(UIButton *)voiceBtn
 {
     voiceBtn.selected = !voiceBtn.selected;
+    // 设置消息已
     [self routerEventWithName:GXRouterEventVoiceTapEventName
                      userInfo:@{MessageKey : self.modelFrame,
                                 VoiceIcon  : self.voiceIcon,
