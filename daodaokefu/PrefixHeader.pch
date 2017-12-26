@@ -57,10 +57,12 @@
 #define APIClosechat       [APIURL stringByAppendingString:@"/app/close_chat"]
 //创建会话
 #define APICreateSession       [APIURL stringByAppendingString:@"/app/create_new_session.do"]
-
-
-
-
+//切换会话
+#define APIChangeChat     [APIURL stringByAppendingString:@"/app/chat_change"]
+//转接会话
+#define APITransferSession    [APIURL stringByAppendingString:@"/app/chat_transfer"]
+//获取在线客服
+#define APIOnline_reception    [APIURL stringByAppendingString:@"/app/online_reception"]
 
 
 

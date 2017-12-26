@@ -18,6 +18,7 @@
 #import "MJChiBaoZiHeader.h"
 #import "XZselectclientTableViewController.h"
 #import "XZClientModel.h"
+#import "XZLoginViewController.h"
 @interface XZMessageViewController ()<UITableViewDataSource,UITableViewDelegate>
 
 @property (nonatomic, weak) UITableView *tableView;
@@ -79,7 +80,8 @@
             
         } andError:^(NSString *err) {
             
-            [XZToolManager showInfoWithStatus:@"登录状态失效，请重新登录"];
+            kAppWindow.rootViewController = [XZLoginViewController new];
+    
         }];
         
     }else{
@@ -294,13 +296,23 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
+     XZGroup *group               = self.dataArray[indexPath.row];
     
     [tableView deselectRowAtIndexPath:indexPath animated:YES];// 取消选中
     
-    XZGroup *group               = self.dataArray[indexPath.row];
-    XZChatViewController *chatVc = [[XZChatViewController alloc] init];
-    chatVc.group                 = group;
-    [self.navigationController pushViewController:chatVc animated:YES];
+    
+    [[XZNetWorkingManager sharderinstance] ChangeChatandsessionId:group.sessionId andSucceed:^{
+        
+        XZChatViewController *chatVc = [[XZChatViewController alloc] init];
+        chatVc.group                 = group;
+        [self.navigationController pushViewController:chatVc animated:YES];
+        
+    } andError:^(NSString *err) {
+        
+    }];
+    
+  
+   
 }
 
 

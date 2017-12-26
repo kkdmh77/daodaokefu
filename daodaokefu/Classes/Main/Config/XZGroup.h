@@ -11,6 +11,7 @@
 
 @interface XZGroup : NSObject
 
+@property (nonatomic, assign)NSInteger sessionId;
 // 组名称
 @property (nonatomic, copy) NSString *gName;
 // 组ID

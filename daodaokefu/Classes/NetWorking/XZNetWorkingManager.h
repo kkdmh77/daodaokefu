@@ -10,6 +10,7 @@
 #import "XZUserinfoModel.h"
 #import "XZNonceUserInfoModel.h"
 #import "XZOneModel.h"
+#import "XZTransferSessionModel.h"
 @interface XZNetWorkingManager : AFHTTPSessionManager
 
 /**
@@ -177,4 +178,35 @@
  @param errorBlock   失败回调
  */
 - (void)ceateSessionanduid:(NSInteger)uid andSucceed:(void(^)(void))succeedBlock andError:(void(^)(NSString *err))errorBlock;
+
+
+/**
+ 切换会话
+
+ @param sessionId    用户会话ID
+ @param succeedBlock 成功回调
+ @param errorBlock   失败回调
+ */
+- (void)ChangeChatandsessionId:(NSInteger)sessionId andSucceed:(void(^)(void))succeedBlock andError:(void(^)(NSString *err))errorBlock;
+
+
+/**
+ 获取在线客服
+
+ @param succeedBlock 成功回调
+ @param errorBlock   失败回调
+ */
+- (void)GetOnlineReceptionandSucceed:(void(^)(NSArray<XZTransferSessionthreeModel *> *DataArray))succeedBlock andError:(void(^)(NSString *err))errorBlock;
+
+
+/**
+ 转接会话
+ 
+ @param receptionId  客服ID
+ @param succeedBlock 成功回调
+ @param errorBlock   失败回调
+ */
+- (void)TransferSessionandreceptionId:(NSString *)receptionId andSucceed:(void(^)(void))succeedBlock andError:(void(^)(NSString *err))errorBlock;
+
+
 @end

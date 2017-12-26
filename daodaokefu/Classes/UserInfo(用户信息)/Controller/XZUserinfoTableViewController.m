@@ -45,6 +45,7 @@
 - (void)loadData {
     [[XZNetWorkingManager sharderinstance] getcustomerinfoSucceed:^(XZNonceUserInfoModel *model){
         self.name.text = model.name;
+        self.alias.text = model.remark;
         self.sex.text  = model.gender == 0 ? @"女":@"男";
         self.area.text = model.area == nil ? @"暂无": model.area;
         self.origin.text = model.origin == 0 ? @"Web" : model.origin == 1 ? @"WeChat" : @"mobile";

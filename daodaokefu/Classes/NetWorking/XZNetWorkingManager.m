@@ -10,6 +10,7 @@
 #import "YYModel.h"
 #import "XZClientModel.h"
 #import "XZHomeSessionListModel.h"
+#import "XZTransferSessionthreeModel.h"
 
 typedef enum {
     Get      = 0,
@@ -97,6 +98,7 @@ typedef enum {
             gp.unReadCount   = model.unreadCount;
             gp.lastMsgTime   = [self StrTrunDate:model.lastChatLogTime];
             gp.lastMsgString = model.lastChatLog;
+            gp.sessionId     = model.sessionId;
             [arrM addObject:gp];
         }
         succeedBlock(arrM);
@@ -208,6 +210,34 @@ typedef enum {
 - (void)ceateSessionanduid:(NSInteger)uid andSucceed:(void(^)(void))succeedBlock andError:(void(^)(NSString *err))errorBlock{
     NSDictionary *dict = @{@"uid":@(uid)};
     [self requestType:Post andRequesturl:APICreateSession andparameters:dict andSucceed:^(id  _Nullable responseObject) {
+        succeedBlock();
+    } andError:^(NSString *err) {
+        errorBlock(err);
+    }];
+}
+
+- (void)ChangeChatandsessionId:(NSInteger)sessionId andSucceed:(void(^)(void))succeedBlock andError:(void(^)(NSString *err))errorBlock{
+    NSDictionary *dict = @{@"sessionId":@(sessionId)};
+    [self requestType:Post andRequesturl:APIChangeChat andparameters:dict andSucceed:^(id  _Nullable responseObject) {
+        succeedBlock();
+    } andError:^(NSString *err) {
+        errorBlock(err);
+    }];
+}
+
+- (void)GetOnlineReceptionandSucceed:(void(^)(NSArray<XZTransferSessionthreeModel *> *DataArray))succeedBlock andError:(void(^)(NSString *err))errorBlock{
+    [self requestType:Post andRequesturl:APIOnline_reception andparameters:nil andSucceed:^(id  _Nullable responseObject) {
+        NSString *array = responseObject[@"data"];
+        NSArray<XZTransferSessionthreeModel *> *modelArray = [NSArray yy_modelArrayWithClass:[XZTransferSessionModel class] json:array];
+        succeedBlock(modelArray);
+    } andError:^(NSString *err) {
+        errorBlock(err);
+    }];
+}
+
+- (void)TransferSessionandreceptionId:(NSString *)receptionId andSucceed:(void(^)(void))succeedBlock andError:(void(^)(NSString *err))errorBlock{
+    NSDictionary *dict = @{@"receptionId":receptionId};
+    [self requestType:Get andRequesturl:APITransferSession andparameters:dict andSucceed:^(id  _Nullable responseObject) {
         succeedBlock();
     } andError:^(NSString *err) {
         errorBlock(err);

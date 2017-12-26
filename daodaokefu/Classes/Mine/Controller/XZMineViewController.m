@@ -92,6 +92,7 @@
 - (void)logoutAction {
      [kUserDefaults setBool:NO forKey:@"Login"];
      [kUserDefaults synchronize];
+    
     [[XZNetWorkingManager sharderinstance] logout];
     
     

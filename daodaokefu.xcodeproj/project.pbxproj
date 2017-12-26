@@ -11,6 +11,7 @@
 		1807D3E21FF0C82200598711 /* XZselectclientTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1807D3E11FF0C82200598711 /* XZselectclientTableViewController.m */; };
 		1807D3E41FF0CCF700598711 /* XZselectclientTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1807D3E31FF0CCF700598711 /* XZselectclientTableViewCell.xib */; };
 		1807D3E71FF0CEAB00598711 /* XZselectclientTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 1807D3E61FF0CEAB00598711 /* XZselectclientTableViewCell.m */; };
+		1807D3EA1FF0FDFC00598711 /* XZTransferSessionTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1807D3E91FF0FDFC00598711 /* XZTransferSessionTableViewController.m */; };
 		180ACDF21FE0C78900E1154D /* 二维码.png in Resources */ = {isa = PBXBuildFile; fileRef = 180ACDF11FE0C78900E1154D /* 二维码.png */; };
 		180ACE181FE0FD5200E1154D /* HMScanerCardViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 180ACE0C1FE0FD5200E1154D /* HMScanerCardViewController.m */; };
 		180ACE191FE0FD5200E1154D /* HMScanner.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 180ACE0D1FE0FD5200E1154D /* HMScanner.bundle */; };
@@ -24,6 +25,11 @@
 		181B1FFE1FE3D4E200130046 /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = 181B1FF61FE3D4E200130046 /* README.md */; };
 		181B1FFF1FE3D4E200130046 /* NSObject+YYModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 181B1FF91FE3D4E200130046 /* NSObject+YYModel.m */; };
 		181B20001FE3D4E200130046 /* YYClassInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 181B1FFB1FE3D4E200130046 /* YYClassInfo.m */; };
+		184605AC1FF1E1670087EC1A /* XZTransferSessionTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 184605AB1FF1E1670087EC1A /* XZTransferSessionTableViewCell.m */; };
+		184605AE1FF1E2A50087EC1A /* XZTransferSessionTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 184605AD1FF1E2A50087EC1A /* XZTransferSessionTableViewCell.xib */; };
+		184605B11FF1EEFE0087EC1A /* XZTransferSessionModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 184605B01FF1EEFE0087EC1A /* XZTransferSessionModel.m */; };
+		184605B41FF219460087EC1A /* XZTransferSessionTwoModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 184605B31FF219460087EC1A /* XZTransferSessionTwoModel.m */; };
+		184605B71FF2198C0087EC1A /* XZTransferSessionthreeModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 184605B61FF2198C0087EC1A /* XZTransferSessionthreeModel.m */; };
 		186EE9731FE78E1E009CEE47 /* MKAnnotationView+WebCache.m in Sources */ = {isa = PBXBuildFile; fileRef = 186EE93E1FE78E1D009CEE47 /* MKAnnotationView+WebCache.m */; };
 		186EE9741FE78E1E009CEE47 /* NSData+ImageContentType.m in Sources */ = {isa = PBXBuildFile; fileRef = 186EE9401FE78E1D009CEE47 /* NSData+ImageContentType.m */; };
 		186EE9751FE78E1E009CEE47 /* NSImage+WebCache.m in Sources */ = {isa = PBXBuildFile; fileRef = 186EE9421FE78E1D009CEE47 /* NSImage+WebCache.m */; };
@@ -239,6 +245,8 @@
 		1807D3E31FF0CCF700598711 /* XZselectclientTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = XZselectclientTableViewCell.xib; sourceTree = "<group>"; };
 		1807D3E51FF0CEAB00598711 /* XZselectclientTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = XZselectclientTableViewCell.h; sourceTree = "<group>"; };
 		1807D3E61FF0CEAB00598711 /* XZselectclientTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = XZselectclientTableViewCell.m; sourceTree = "<group>"; };
+		1807D3E81FF0FDFC00598711 /* XZTransferSessionTableViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = XZTransferSessionTableViewController.h; sourceTree = "<group>"; };
+		1807D3E91FF0FDFC00598711 /* XZTransferSessionTableViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = XZTransferSessionTableViewController.m; sourceTree = "<group>"; };
 		180ACDF11FE0C78900E1154D /* 二维码.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "二维码.png"; sourceTree = "<group>"; };
 		180ACE0B1FE0FD5200E1154D /* HMScanerCardViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HMScanerCardViewController.h; sourceTree = "<group>"; };
 		180ACE0C1FE0FD5200E1154D /* HMScanerCardViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HMScanerCardViewController.m; sourceTree = "<group>"; };
@@ -262,6 +270,15 @@
 		181B1FFA1FE3D4E200130046 /* YYClassInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YYClassInfo.h; sourceTree = "<group>"; };
 		181B1FFB1FE3D4E200130046 /* YYClassInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YYClassInfo.m; sourceTree = "<group>"; };
 		181B1FFC1FE3D4E200130046 /* YYModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YYModel.h; sourceTree = "<group>"; };
+		184605AA1FF1E1670087EC1A /* XZTransferSessionTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = XZTransferSessionTableViewCell.h; sourceTree = "<group>"; };
+		184605AB1FF1E1670087EC1A /* XZTransferSessionTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = XZTransferSessionTableViewCell.m; sourceTree = "<group>"; };
+		184605AD1FF1E2A50087EC1A /* XZTransferSessionTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = XZTransferSessionTableViewCell.xib; sourceTree = "<group>"; };
+		184605AF1FF1EEFE0087EC1A /* XZTransferSessionModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = XZTransferSessionModel.h; path = daodaokefu/Classes/Message/View/XZTransferSessionModel.h; sourceTree = SOURCE_ROOT; };
+		184605B01FF1EEFE0087EC1A /* XZTransferSessionModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = XZTransferSessionModel.m; path = daodaokefu/Classes/Message/View/XZTransferSessionModel.m; sourceTree = SOURCE_ROOT; };
+		184605B21FF219460087EC1A /* XZTransferSessionTwoModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = XZTransferSessionTwoModel.h; path = daodaokefu/Classes/Message/View/XZTransferSessionTwoModel.h; sourceTree = SOURCE_ROOT; };
+		184605B31FF219460087EC1A /* XZTransferSessionTwoModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = XZTransferSessionTwoModel.m; path = daodaokefu/Classes/Message/View/XZTransferSessionTwoModel.m; sourceTree = SOURCE_ROOT; };
+		184605B51FF2198C0087EC1A /* XZTransferSessionthreeModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = XZTransferSessionthreeModel.h; path = daodaokefu/Classes/Message/View/XZTransferSessionthreeModel.h; sourceTree = SOURCE_ROOT; };
+		184605B61FF2198C0087EC1A /* XZTransferSessionthreeModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = XZTransferSessionthreeModel.m; path = daodaokefu/Classes/Message/View/XZTransferSessionthreeModel.m; sourceTree = SOURCE_ROOT; };
 		186EE93D1FE78E1D009CEE47 /* MKAnnotationView+WebCache.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "MKAnnotationView+WebCache.h"; sourceTree = "<group>"; };
 		186EE93E1FE78E1D009CEE47 /* MKAnnotationView+WebCache.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "MKAnnotationView+WebCache.m"; sourceTree = "<group>"; };
 		186EE93F1FE78E1D009CEE47 /* NSData+ImageContentType.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSData+ImageContentType.h"; sourceTree = "<group>"; };
@@ -1666,6 +1683,8 @@
 				5F80D5C21D9A429F00F8D164 /* XZGroupSearchController.m */,
 				1807D3E01FF0C82200598711 /* XZselectclientTableViewController.h */,
 				1807D3E11FF0C82200598711 /* XZselectclientTableViewController.m */,
+				1807D3E81FF0FDFC00598711 /* XZTransferSessionTableViewController.h */,
+				1807D3E91FF0FDFC00598711 /* XZTransferSessionTableViewController.m */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -1677,6 +1696,12 @@
 				187D21CD1FE7A18300FDFB1A /* XZClientModel.m */,
 				187D21D21FE7B4E100FDFB1A /* XZHomeSessionListModel.h */,
 				187D21D31FE7B4E100FDFB1A /* XZHomeSessionListModel.m */,
+				184605AF1FF1EEFE0087EC1A /* XZTransferSessionModel.h */,
+				184605B01FF1EEFE0087EC1A /* XZTransferSessionModel.m */,
+				184605B21FF219460087EC1A /* XZTransferSessionTwoModel.h */,
+				184605B31FF219460087EC1A /* XZTransferSessionTwoModel.m */,
+				184605B51FF2198C0087EC1A /* XZTransferSessionthreeModel.h */,
+				184605B61FF2198C0087EC1A /* XZTransferSessionthreeModel.m */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -1691,6 +1716,9 @@
 				1807D3E31FF0CCF700598711 /* XZselectclientTableViewCell.xib */,
 				1807D3E51FF0CEAB00598711 /* XZselectclientTableViewCell.h */,
 				1807D3E61FF0CEAB00598711 /* XZselectclientTableViewCell.m */,
+				184605AA1FF1E1670087EC1A /* XZTransferSessionTableViewCell.h */,
+				184605AB1FF1E1670087EC1A /* XZTransferSessionTableViewCell.m */,
+				184605AD1FF1E2A50087EC1A /* XZTransferSessionTableViewCell.xib */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -1827,6 +1855,7 @@
 			files = (
 				5F80D7271D9BCF5100F8D164 /* emoji.plist in Resources */,
 				180ACDF21FE0C78900E1154D /* 二维码.png in Resources */,
+				184605AE1FF1E2A50087EC1A /* XZTransferSessionTableViewCell.xib in Resources */,
 				188481061FEB5713005599C4 /* MJRefresh.bundle in Resources */,
 				18E44E4F1FE240C30070AE58 /* SVProgressHUD.bundle in Resources */,
 				1807D3E41FF0CCF700598711 /* XZselectclientTableViewCell.xib in Resources */,
@@ -1859,6 +1888,7 @@
 			files = (
 				18E44E341FE21A0C0070AE58 /* AFNetworkActivityIndicatorManager.m in Sources */,
 				5F80D6311D9A60E500F8D164 /* ICChatBoxMoreViewItem.m in Sources */,
+				184605AC1FF1E1670087EC1A /* XZTransferSessionTableViewCell.m in Sources */,
 				5F80D6691D9A6DE200F8D164 /* MJExtensionConst.m in Sources */,
 				188481211FEBBB46005599C4 /* XZVoiceMessageModel.m in Sources */,
 				186EE9811FE78E1E009CEE47 /* SDWebImageManager.m in Sources */,
@@ -1918,6 +1948,7 @@
 				186EE98A1FE78E1E009CEE47 /* UIImageView+WebCache.m in Sources */,
 				5F80D71A1D9B968800F8D164 /* ICPhotoBrowserController.m in Sources */,
 				18885E341FDFBC2400F2348F /* XZToolManager.m in Sources */,
+				184605B41FF219460087EC1A /* XZTransferSessionTwoModel.m in Sources */,
 				18E44E511FE240C30070AE58 /* SVRadialGradientLayer.m in Sources */,
 				188480FD1FEB5712005599C4 /* MJRefreshAutoGifFooter.m in Sources */,
 				188481091FEB5713005599C4 /* UIScrollView+MJExtension.m in Sources */,
@@ -1965,6 +1996,7 @@
 				5F80D6341D9A60E500F8D164 /* ICEmotionMenuButton.m in Sources */,
 				180ACE1C1FE0FD5200E1154D /* HMScannerController.m in Sources */,
 				18885E451FDFD00E00F2348F /* IFMMenuContainerView.m in Sources */,
+				184605B71FF2198C0087EC1A /* XZTransferSessionthreeModel.m in Sources */,
 				5F80D6EC1D9A7D0400F8D164 /* NSDictionary+Extension.m in Sources */,
 				5F80D6DC1D9A71CB00F8D164 /* ICRecordManager.m in Sources */,
 				18E44E2B1FE21A0C0070AE58 /* AFNetworkReachabilityManager.m in Sources */,
@@ -1984,6 +2016,7 @@
 				187227D71FE911DF00FE471F /* XZOneModel.m in Sources */,
 				188481021FEB5713005599C4 /* MJRefreshBackStateFooter.m in Sources */,
 				1884811D1FEB7A29005599C4 /* MJDIYBackFooter.m in Sources */,
+				184605B11FF1EEFE0087EC1A /* XZTransferSessionModel.m in Sources */,
 				18885E291FDFA7DD00F2348F /* XZLoginView.m in Sources */,
 				188480FA1FEB5712005599C4 /* MJRefreshComponent.m in Sources */,
 				5F80D6DB1D9A71CB00F8D164 /* ICMessageHelper.m in Sources */,
@@ -2032,6 +2065,7 @@
 				5F80D6D91D9A71CB00F8D164 /* ICFileTool.m in Sources */,
 				5F80D6BD1D9A70E500F8D164 /* ICChatForwardCell.m in Sources */,
 				5F80D5C31D9A429F00F8D164 /* XZGroupSearchController.m in Sources */,
+				1807D3EA1FF0FDFC00598711 /* XZTransferSessionTableViewController.m in Sources */,
 				5F80D6991D9A70DB00F8D164 /* ICFileButton.m in Sources */,
 				1807D3DF1FF08CD700598711 /* XZCloseSessioTableViewController.m in Sources */,
 				18E44E371FE21A0C0070AE58 /* UIImageView+AFNetworking.m in Sources */,

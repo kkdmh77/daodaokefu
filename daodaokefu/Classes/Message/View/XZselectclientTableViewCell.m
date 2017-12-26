@@ -40,39 +40,34 @@
 /** 通过行数, 返回更新时间 */
 - (NSString *)updateTimeForRow:(NSString *)str {
     // 获取当前时时间戳 1466386762.345715 十位整数 6位小数
-    NSTimeInterval currentTime = [[NSDate date] timeIntervalSince1970];
+    NSDate *currentDate = [NSDate date];
+    NSDate *timeDate = [NSDate dateWithTimeIntervalSince1970:[str doubleValue] / 1000];
     
-    NSDate *date = [NSDate dateWithTimeIntervalSince1970:[str doubleValue] / 1000];
+    NSTimeInterval timeInterval = [currentDate timeIntervalSinceDate:timeDate];
     
-    NSTimeInterval createTime = [date timeIntervalSince1970];
-    // 时间差
-    NSTimeInterval time = currentTime - createTime;
-    
-    // 秒转小时
-    NSInteger hours = time/3600;
-    if(time/36 <= 10){
-        
-        return @"刚刚";
-    }else if (hours < 60){
-    
-        return [NSString stringWithFormat: @"%ld分钟前",(long)time/36];
-        
-    }else if (hours<24) {
-        return [NSString stringWithFormat:@"%ld小时前",hours];
+    long temp = 0;
+    NSString *result;
+    if (timeInterval/60 < 1)
+    {
+        result = [NSString stringWithFormat:@"刚刚"];
     }
-    //秒转天数
-    NSInteger days = time/3600/24;
-    if (days < 30) {
-        return [NSString stringWithFormat:@"%ld天前",days];
+    else if((temp = timeInterval/60) <60){
+        result = [NSString stringWithFormat:@"%ld分钟前",temp];
     }
-    //秒转月
-    NSInteger months = time/3600/24/30;
-    if (months < 12) {
-        return [NSString stringWithFormat:@"%ld月前",months];
+    else if((temp = temp/60) <24){
+        result = [NSString stringWithFormat:@"%ld小时前",temp];
     }
-    //秒转年
-    NSInteger years = time/3600/24/30/12;
-    return [NSString stringWithFormat:@"%ld年前",years];
+    else if((temp = temp/24) <30){
+        result = [NSString stringWithFormat:@"%ld天前",temp];
+    }
+    else if((temp = temp/30) <12){
+        result = [NSString stringWithFormat:@"%ld月前",temp];
+    }
+    else{
+        temp = temp/12;
+        result = [NSString stringWithFormat:@"%ld年前",temp];
+    }
+    return  result;
 }
 
 

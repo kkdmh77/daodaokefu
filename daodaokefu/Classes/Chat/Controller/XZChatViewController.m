@@ -14,6 +14,7 @@
 #import "XZAcceptMessageModel.h"
 #import "AppDelegate.h"
 #import "XZCloseSessioTableViewController.h"
+#import "XZTransferSessionTableViewController.h"
 
 typedef enum : NSUInteger {
     TextMessage,
@@ -115,6 +116,10 @@ typedef enum : NSUInteger {
     }];
     
     UIAlertAction *changeAction = [UIAlertAction actionWithTitle:@"转接会话" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+       
+        XZTransferSessionTableViewController *vc = [XZTransferSessionTableViewController new];
+        
+        [self.navigationController pushViewController:vc animated:YES];
         
     }];
     
