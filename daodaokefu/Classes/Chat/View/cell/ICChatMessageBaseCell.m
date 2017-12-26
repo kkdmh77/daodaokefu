@@ -139,7 +139,7 @@
              [self.headImageView.imageView sd_setImageWithURL:[NSURL URLWithString:modelFrame.model.Senderimageurl]];
         }else{
             
-            [self.headImageView.imageView setImage:[UIImage imageNamed:@"猫"]];
+            [self.headImageView.imageView setImage:[UIImage imageNamed:@"头像无数据"]];
         }
        
     }

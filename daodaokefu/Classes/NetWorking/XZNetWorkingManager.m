@@ -25,9 +25,7 @@ typedef enum {
     static XZNetWorkingManager *__INSTANCE__;
     dispatch_once(&onceToken, ^{
         __INSTANCE__ = [XZNetWorkingManager new];
-//        __INSTANCE__.responseSerializer.acceptableContentTypes = [NSSet setWithObject:@"text/plain"];
-    __INSTANCE__.responseSerializer.acceptableContentTypes = [NSSet setWithObjects:@"application/json", @"text/json", @"text/javascript",@"text/plain", @"text/html", nil];
-    
+        __INSTANCE__.responseSerializer.acceptableContentTypes = [NSSet setWithObjects:@"application/json", @"text/json", @"text/javascript",@"text/plain", @"text/html", nil];
     });
     return __INSTANCE__;
 }
@@ -239,6 +237,24 @@ typedef enum {
     NSDictionary *dict = @{@"receptionId":receptionId};
     [self requestType:Get andRequesturl:APITransferSession andparameters:dict andSucceed:^(id  _Nullable responseObject) {
         succeedBlock();
+    } andError:^(NSString *err) {
+        errorBlock(err);
+    }];
+}
+
+- (void)GetHistorySessionandSucceed:(void(^)(NSMutableArray *DataArray))succeedBlock andError:(void(^)(NSString *err))errorBlock{
+    [self requestType:Post andRequesturl:APIGetHistorySession andparameters:nil andSucceed:^(id  _Nullable responseObject) {
+        NSArray *arr = [NSArray yy_modelArrayWithClass:[XZHomeSessionListModel class] json:responseObject[@"data"]];
+        NSMutableArray *arrM = [NSMutableArray array];
+        for(XZHomeSessionListModel *model in arr) {
+            XZGroup *gp      = [XZGroup new];
+            gp.gName         = model.name;
+            gp.imageurl      = model.avatar;
+            gp.lastMsgTime   = [self StrTrunDate:model.lastChatLogTime];
+            gp.lastMsgString = model.lastChatLog;
+            [arrM addObject:gp];
+        }
+        succeedBlock(arrM);
     } andError:^(NSString *err) {
         errorBlock(err);
     }];

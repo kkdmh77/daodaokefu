@@ -63,6 +63,8 @@
 #define APITransferSession    [APIURL stringByAppendingString:@"/app/chat_transfer"]
 //获取在线客服
 #define APIOnline_reception    [APIURL stringByAppendingString:@"/app/online_reception"]
+// 获取历史会话列表
+#define APIGetHistorySession    [APIURL stringByAppendingString:@"/app/get_history_session"]
 
 
 

@@ -32,4 +32,9 @@
 @property (copy,nonatomic) NSString *lastChatLogTime;
 
 @property (assign, nonatomic) NSInteger origin;
+/*------------------------*/
+
+@property (copy, nonatomic) NSString *name;
+
+@property (copy, nonatomic) NSString *avatar;
 @end

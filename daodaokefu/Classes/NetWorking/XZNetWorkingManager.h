@@ -209,4 +209,12 @@
 - (void)TransferSessionandreceptionId:(NSString *)receptionId andSucceed:(void(^)(void))succeedBlock andError:(void(^)(NSString *err))errorBlock;
 
 
+/**
+ 获取历史会话列表
+
+ @param succeedBlock 成功回调
+ @param errorBlock   失败回调
+ */
+- (void)GetHistorySessionandSucceed:(void(^)(NSMutableArray *DataArray))succeedBlock andError:(void(^)(NSString *err))errorBlock;
+
 @end

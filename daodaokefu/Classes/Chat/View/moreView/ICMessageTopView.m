@@ -61,9 +61,9 @@
     if (isSender) {
         self.timeLabel.text    = currentDate;
         self.timeLabel.textAlignment = NSTextAlignmentRight;
-        self.nameLabel.hidden  = YES;
+//        self.nameLabel.hidden  = YES;
     } else {
-        self.nameLabel.hidden  = NO;
+//        self.nameLabel.hidden  = NO;
         self.timeLabel.text    = currentDate;
         self.timeLabel.textAlignment = NSTextAlignmentLeft;
         self.nameLabel.text      = name;

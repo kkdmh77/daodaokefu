@@ -58,7 +58,7 @@ static const CGFloat leftPadding = 9;
         self.backgroundColor = [UIColor whiteColor];
     }
     if (group.unReadCount > 0) {
-        [self.unreadLabel setTitle:[NSString stringWithFormat:@"%d",group.unReadCount] forState:UIControlStateNormal];
+        [self.unreadLabel setTitle:[NSString stringWithFormat:@"%ld",(long)group.unReadCount] forState:UIControlStateNormal];
         self.unreadLabel.backgroundColor     = [UIColor redColor];
     } else {
         [self.unreadLabel setTitle:@" " forState:UIControlStateNormal];
@@ -74,7 +74,7 @@ static const CGFloat leftPadding = 9;
         _avatarImageView.image = [UIImage imageNamed:group.photoId];
     }else{
         
-       _avatarImageView.image = [UIImage imageNamed:@"猫"];
+       _avatarImageView.image = [UIImage imageNamed:@"头像无数据"];
     }
     
     

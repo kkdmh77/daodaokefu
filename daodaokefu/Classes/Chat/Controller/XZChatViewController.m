@@ -69,8 +69,6 @@ typedef enum : NSUInteger {
     
     [self setupUI];
     
-    [self setupNavUI];
-    
     [self registerCell];
     
     [self loadDataSources];
@@ -80,14 +78,27 @@ typedef enum : NSUInteger {
 - (void)setupUI
 {
     self.view.backgroundColor = IColor(240, 237, 237);
-    // 注意添加顺序
+     self.tableView.backgroundColor = IColor(240, 237, 237);
+    
     [self addChildViewController:self.chatBoxVC];
     [self.view addSubview:self.chatBoxVC.view];
     [self.view addSubview:self.tableView];
-    
-    self.tableView.backgroundColor = IColor(240, 237, 237);
     // self.view的高度有时候是不准确的
     self.tableView.frame = CGRectMake(0, HEIGHT_NAVBAR+HEIGHT_STATUSBAR, self.view.width, APP_Frame_Height-HEIGHT_TABBAR-HEIGHT_NAVBAR-HEIGHT_STATUSBAR);
+    // 注意添加顺序
+    if(_isHistory){
+        
+      self.tableView.frame = CGRectMake(0, HEIGHT_NAVBAR+HEIGHT_STATUSBAR, self.view.width, self.view.height);
+        self.chatBoxVC.chatBox.hidden = YES;
+        
+    }else{
+        self.tableView.frame = CGRectMake(0, HEIGHT_NAVBAR+HEIGHT_STATUSBAR, self.view.width, APP_Frame_Height-HEIGHT_TABBAR-HEIGHT_NAVBAR-HEIGHT_STATUSBAR);
+        self.chatBoxVC.chatBox.hidden = NO;
+        [self setupNavUI];
+    }
+   
+   
+   
     
 }
 

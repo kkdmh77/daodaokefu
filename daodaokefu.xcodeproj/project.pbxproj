@@ -30,6 +30,7 @@
 		184605B11FF1EEFE0087EC1A /* XZTransferSessionModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 184605B01FF1EEFE0087EC1A /* XZTransferSessionModel.m */; };
 		184605B41FF219460087EC1A /* XZTransferSessionTwoModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 184605B31FF219460087EC1A /* XZTransferSessionTwoModel.m */; };
 		184605B71FF2198C0087EC1A /* XZTransferSessionthreeModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 184605B61FF2198C0087EC1A /* XZTransferSessionthreeModel.m */; };
+		184605BA1FF231D60087EC1A /* XZHistorySessionTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 184605B91FF231D60087EC1A /* XZHistorySessionTableViewController.m */; };
 		186EE9731FE78E1E009CEE47 /* MKAnnotationView+WebCache.m in Sources */ = {isa = PBXBuildFile; fileRef = 186EE93E1FE78E1D009CEE47 /* MKAnnotationView+WebCache.m */; };
 		186EE9741FE78E1E009CEE47 /* NSData+ImageContentType.m in Sources */ = {isa = PBXBuildFile; fileRef = 186EE9401FE78E1D009CEE47 /* NSData+ImageContentType.m */; };
 		186EE9751FE78E1E009CEE47 /* NSImage+WebCache.m in Sources */ = {isa = PBXBuildFile; fileRef = 186EE9421FE78E1D009CEE47 /* NSImage+WebCache.m */; };
@@ -279,6 +280,8 @@
 		184605B31FF219460087EC1A /* XZTransferSessionTwoModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = XZTransferSessionTwoModel.m; path = daodaokefu/Classes/Message/View/XZTransferSessionTwoModel.m; sourceTree = SOURCE_ROOT; };
 		184605B51FF2198C0087EC1A /* XZTransferSessionthreeModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = XZTransferSessionthreeModel.h; path = daodaokefu/Classes/Message/View/XZTransferSessionthreeModel.h; sourceTree = SOURCE_ROOT; };
 		184605B61FF2198C0087EC1A /* XZTransferSessionthreeModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = XZTransferSessionthreeModel.m; path = daodaokefu/Classes/Message/View/XZTransferSessionthreeModel.m; sourceTree = SOURCE_ROOT; };
+		184605B81FF231D60087EC1A /* XZHistorySessionTableViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = XZHistorySessionTableViewController.h; sourceTree = "<group>"; };
+		184605B91FF231D60087EC1A /* XZHistorySessionTableViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = XZHistorySessionTableViewController.m; sourceTree = "<group>"; };
 		186EE93D1FE78E1D009CEE47 /* MKAnnotationView+WebCache.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "MKAnnotationView+WebCache.h"; sourceTree = "<group>"; };
 		186EE93E1FE78E1D009CEE47 /* MKAnnotationView+WebCache.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "MKAnnotationView+WebCache.m"; sourceTree = "<group>"; };
 		186EE93F1FE78E1D009CEE47 /* NSData+ImageContentType.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSData+ImageContentType.h"; sourceTree = "<group>"; };
@@ -1685,6 +1688,8 @@
 				1807D3E11FF0C82200598711 /* XZselectclientTableViewController.m */,
 				1807D3E81FF0FDFC00598711 /* XZTransferSessionTableViewController.h */,
 				1807D3E91FF0FDFC00598711 /* XZTransferSessionTableViewController.m */,
+				184605B81FF231D60087EC1A /* XZHistorySessionTableViewController.h */,
+				184605B91FF231D60087EC1A /* XZHistorySessionTableViewController.m */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -2045,6 +2050,7 @@
 				186EE97D1FE78E1E009CEE47 /* SDWebImageDownloaderOperation.m in Sources */,
 				186EE98C1FE78E1E009CEE47 /* UIView+WebCacheOperation.m in Sources */,
 				18885E261FDFA79400F2348F /* XZLoginViewController.m in Sources */,
+				184605BA1FF231D60087EC1A /* XZHistorySessionTableViewController.m in Sources */,
 				5FBCC1441D9A222400AD6A6B /* XZNavigationController.m in Sources */,
 				186EE9761FE78E1E009CEE47 /* SDImageCache.m in Sources */,
 				5F80D6C61D9A70E500F8D164 /* ICChatSystemCell.m in Sources */,

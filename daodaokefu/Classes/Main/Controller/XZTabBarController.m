@@ -9,7 +9,7 @@
 #import "XZTabBarController.h"
 #import "XZMineViewController.h"
 #import "XZMessageViewController.h"
-#import "XZContactViewController.h"
+#import "XZHistorySessionTableViewController.h"
 #import "XZDiscoverViewController.h"
 #import "XZNavigationController.h"
 
@@ -25,7 +25,7 @@
     XZMessageViewController *messageVc = [[XZMessageViewController alloc] init];
     [self addChildVc:messageVc title:@"当前会话" image:@"当前会话-未点亮" selectedImage:@"当前会话-点亮"];
     
-    XZContactViewController *contactsVc = [[XZContactViewController alloc] init];
+    XZHistorySessionTableViewController *contactsVc = [[XZHistorySessionTableViewController alloc] init];
     [self addChildVc:contactsVc title:@"历史会话" image:@"历史会话--未点亮" selectedImage:@"历史会话--点亮"];
     
     // 1.获取当前的StoryBoard面板

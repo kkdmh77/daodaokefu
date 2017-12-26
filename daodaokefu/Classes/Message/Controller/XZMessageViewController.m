@@ -26,6 +26,8 @@
 @property (nonatomic, strong) UISearchController *searchController;
 @property (nonatomic, strong) NSTimer *timer;
 
+@property (nonatomic, weak) UIImageView *vv;
+
 @end
 
 @implementation XZMessageViewController
@@ -43,6 +45,24 @@
     
     #pragma mark - 启动定时器操作
     self.timer = [NSTimer scheduledTimerWithTimeInterval:3.0 target:self selector:@selector(refreshData) userInfo:nil repeats:YES];
+}
+
+- (UIView *)createButton{
+
+    
+    
+    UIImageView *imageview = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"创建新会话"]];
+    self.vv = imageview;
+    imageview.frame = CGRectMake(0, 0, 100, 100);
+    
+    imageview.centerX = SCREEN_WIDTH / 2;
+    imageview.centerY = (SCREEN_HEIGHT - 64) / 2 - 80;
+    imageview.userInteractionEnabled = YES;
+    
+    UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(addsession)];
+    
+    [imageview addGestureRecognizer:tap];
+    return imageview;
 }
 
 
@@ -125,6 +145,7 @@
     searchController.hidesNavigationBarDuringPresentation = YES;
     self.tableView.frame  = CGRectMake(0,0, self.view.width, SCREEN_HEIGHT);
 //
+     [self.tableView addSubview:[self createButton]];
     UIBarButtonItem *rigthItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"加号"] style:UIBarButtonItemStylePlain target:self action:@selector(rightBarButtonAction)];
     
     self.navigationItem.rightBarButtonItem = rigthItem;
@@ -139,12 +160,18 @@
 //    group.lastMsgString = @"滑板和吉他🎸哪个更好那？";
 //    [self.dataArray addObject:group];
     
+   
+    
     [[XZNetWorkingManager sharderinstance] getMessageDataSucceed:^(NSMutableArray *DataArray) {
         [self.tableView.mj_header endRefreshing];
+        self.vv.hidden = DataArray.count == 0 ? NO : YES;
+        
         if(self.dataArray.count != DataArray.count){
             self.dataArray = DataArray;
             [self.tableView reloadData];
         }
+        
+        
     } andError:^(NSString *err) {
         
         [self.tableView.mj_header endRefreshing];
