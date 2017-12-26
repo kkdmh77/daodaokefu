@@ -239,7 +239,7 @@
 - (void)openScan{
    
     NSString *cardName = @"迷宫已失 - 土土";
-    UIImage *avatar = [UIImage imageNamed:@"咖啡"];
+    UIImage *avatar = [UIImage imageNamed:@"用户-3"];
     
     // 实例化扫描控制器
     HMScannerController *scanner = [HMScannerController scannerWithCardName:cardName avatar:avatar completion:^(NSString *stringValue) {

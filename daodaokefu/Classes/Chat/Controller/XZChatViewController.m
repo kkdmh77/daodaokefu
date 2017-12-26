@@ -62,7 +62,7 @@ typedef enum : NSUInteger {
     [super viewDidLoad];
     
     self.view.backgroundColor = [UIColor whiteColor];
-    self.loadtimer = [NSTimer scheduledTimerWithTimeInterval:3.0 target:self selector:@selector(loadDataSource) userInfo:nil repeats:YES];
+    
     self.title = self.group.gName;
     
     [self addNotification];
@@ -95,6 +95,8 @@ typedef enum : NSUInteger {
         self.tableView.frame = CGRectMake(0, HEIGHT_NAVBAR+HEIGHT_STATUSBAR, self.view.width, APP_Frame_Height-HEIGHT_TABBAR-HEIGHT_NAVBAR-HEIGHT_STATUSBAR);
         self.chatBoxVC.chatBox.hidden = NO;
         [self setupNavUI];
+        
+        self.loadtimer = [NSTimer scheduledTimerWithTimeInterval:3.0 target:self selector:@selector(loadDataSource) userInfo:nil repeats:YES];
     }
    
    
