@@ -19,7 +19,7 @@
                 <rect key="frame" x="0.0" y="0.0" width="378" height="79.5"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="用户-3" translatesAutoresizingMaskIntoConstraints="NO" id="YnP-tO-dj7">
+                    <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="用户-3" translatesAutoresizingMaskIntoConstraints="NO" id="YnP-tO-dj7">
                         <rect key="frame" x="15" y="10" width="60" height="60"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="60" id="ko9-Yc-M17"/>
@@ -33,7 +33,7 @@
                         <nil key="highlightedColor"/>
                     </label>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="10分钟前" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="If0-sh-xgo">
-                        <rect key="frame" x="296" y="30" width="66" height="19.5"/>
+                        <rect key="frame" x="286" y="30" width="66" height="19.5"/>
                         <fontDescription key="fontDescription" type="system" pointSize="16"/>
                         <color key="textColor" red="0.29803922770000002" green="0.29803922770000002" blue="0.29803922770000002" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
@@ -53,7 +53,7 @@
                     <constraint firstItem="C0g-MS-ejt" firstAttribute="centerY" secondItem="Tyt-Xp-cuw" secondAttribute="centerY" id="SE8-ib-MIw"/>
                     <constraint firstItem="If0-sh-xgo" firstAttribute="centerY" secondItem="Tyt-Xp-cuw" secondAttribute="centerY" id="ZDN-b7-w4s"/>
                     <constraint firstAttribute="bottom" secondItem="reg-M1-mTI" secondAttribute="bottom" id="ZuS-gl-GNH"/>
-                    <constraint firstItem="If0-sh-xgo" firstAttribute="trailing" secondItem="Tyt-Xp-cuw" secondAttribute="trailingMargin" id="e6X-hL-v3S"/>
+                    <constraint firstItem="If0-sh-xgo" firstAttribute="trailing" secondItem="Tyt-Xp-cuw" secondAttribute="trailingMargin" constant="-10" id="e6X-hL-v3S"/>
                     <constraint firstItem="YnP-tO-dj7" firstAttribute="centerY" secondItem="Tyt-Xp-cuw" secondAttribute="centerY" id="eCD-9x-vQc"/>
                     <constraint firstItem="YnP-tO-dj7" firstAttribute="leading" secondItem="Tyt-Xp-cuw" secondAttribute="leading" constant="15" id="l7x-x4-O4Z"/>
                 </constraints>

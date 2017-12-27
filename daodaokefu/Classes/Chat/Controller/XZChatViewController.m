@@ -343,6 +343,8 @@ typedef enum : NSUInteger {
     
     NSString *imageFilePath = @"";
     
+    
+    
 
     if ([iamgeUrl containsString:@"http"]) {
        
@@ -352,9 +354,16 @@ typedef enum : NSUInteger {
         
         iamgeUrl = [NSString stringWithFormat:@"%@%@",APIBaseUrl,iamgeUrl];
         
-        imageFilePath =[path stringByAppendingPathComponent:[NSString stringWithFormat:@"Chat/MyPic/myImage-%@.png",[iamgeUrl substringWithRange:NSMakeRange(46, 32)]]];//截取范围类的字符串]];
+        imageFilePath =[path stringByAppendingPathComponent:[NSString stringWithFormat:@"Chat/MyPic/myImage-%@.png",[iamgeUrl substringWithRange:NSMakeRange(46, 31)]]];//截取范围类的字符串]];
     }
+    NSString *cachePath = NSSearchPathForDirectoriesInDomains(NSCachesDirectory, NSUserDomainMask, YES).firstObject;
     
+    NSString *pathstr = [NSString stringWithFormat:@"%@/Chat/MyPic",cachePath];
+    
+    if(![self isFileExist: pathstr]){
+        
+        [[NSFileManager defaultManager] createDirectoryAtPath:pathstr withIntermediateDirectories:YES attributes:nil error:nil];
+    }
     
     
     if([self isFileExist:imageFilePath]){

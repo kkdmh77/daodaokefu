@@ -65,7 +65,7 @@
     }
     else{
         temp = temp/12;
-        result = [NSString stringWithFormat:@"%ld年前",temp];
+        result = [NSString stringWithFormat:@"未知"];
     }
     return  result;
 }
