@@ -65,6 +65,8 @@
 #define APIOnline_reception    [APIURL stringByAppendingString:@"/app/online_reception"]
 // 获取历史会话列表
 #define APIGetHistorySession    [APIURL stringByAppendingString:@"/app/get_history_session"]
+//获取历史会话
+#define APISessionChatLog    [APIURL stringByAppendingString:@"/app/session_chatlog"]
 
 
 

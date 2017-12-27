@@ -98,11 +98,14 @@
     
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     
-    XZChatViewController *chatVc = [[XZChatViewController alloc] init];
-    chatVc.isHistory             = YES;
-    XZGroup *gp                  = self.listArray[indexPath.row];
-    chatVc.group                 = gp;
-    [self.navigationController pushViewController:chatVc animated:YES];
+     XZGroup *gp                  = self.listArray[indexPath.row];
+    
+        XZChatViewController *chatVc = [[XZChatViewController alloc] init];
+        chatVc.isHistory             = YES;
+        
+        chatVc.group                 = gp;
+        [self.navigationController pushViewController:chatVc animated:YES];
+
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section{

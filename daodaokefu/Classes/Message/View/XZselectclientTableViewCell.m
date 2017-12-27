@@ -29,7 +29,7 @@
     
     _model = model;
     
-    [self.avatarimage sd_setImageWithURL:[NSURL URLWithString:model.avatar] placeholderImage:[UIImage imageNamed:@""]];
+    [self.avatarimage sd_setImageWithURL:[NSURL URLWithString:model.avatar] placeholderImage:[UIImage imageNamed:@"用户-3"]];
     
     self.namelabel.text = model.name;
     

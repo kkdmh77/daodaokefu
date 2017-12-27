@@ -205,45 +205,94 @@ typedef enum : NSUInteger {
 - (void)loadDataSources{
     
     __weak typeof(self) weakself = self;
-    [[XZNetWorkingManager sharderinstance] Chatmsganddelta:NO Succeed:^(XZOneModel *model){
+    
+    if(_isHistory){
         
-        NSArray<XZAcceptMessageModel *> *modelArray = model.chatLog;
-        for (XZAcceptMessageModel *md in modelArray) {
+        [[XZNetWorkingManager sharderinstance] SessionChatLogandsessionId:_group.sessionId andSucceed:^(NSArray *model){
             
-         
-            if(md.chatType == 0){ // 文字消息
+            
+            for (XZAcceptMessageModel *md in model) {
                 
-                if(md.isReply){
+                
+                if(md.chatType == 0){ // 文字消息
                     
-                    [weakself sendTextMessage:md.content andisSender:YES];
-                }else{
+                    if(md.isReply){
+                        
+                        [weakself sendTextMessage:md.content andisSender:YES];
+                    }else{
+                        
+                        [weakself sendTextMessage:md.content andisSender:NO];
+                    }
                     
-                    [weakself sendTextMessage:md.content andisSender:NO];
+                }else if(md.chatType == 1){ // 图片消息
+                    
+                    if(md.isReply){
+                        
+                        [weakself sendImageMessage:md.content andisSender:YES];
+                    }else{
+                        
+                        [weakself sendImageMessage:md.content andisSender:NO];
+                    }
+                    
+                }else{  //语音消息
+                    
+                    NSDictionary *dict = [self dictionaryWithJsonString:md.content];
+                    
+                    [weakself sendVoiceMessage:dict[@"mediaId"]];
                 }
-        
-            }else if(md.chatType == 1){ // 图片消息
                 
-                if(md.isReply){
-                    
-                    [weakself sendImageMessage:md.content andisSender:YES];
-                }else{
-                    
-                    [weakself sendImageMessage:md.content andisSender:NO];
-                }
                 
-            }else{  //语音消息
-                
-                NSDictionary *dict = [self dictionaryWithJsonString:md.content];
-                
-                [weakself sendVoiceMessage:dict[@"mediaId"]];
             }
             
+        } andError:^(NSString *err) {
             
-        }
+        }];
+    }else{
         
-    } andError:^(NSString *err) {
         
-    }];
+        [[XZNetWorkingManager sharderinstance] Chatmsganddelta:NO Succeed:^(XZOneModel *model){
+            
+            NSArray<XZAcceptMessageModel *> *modelArray = model.chatLog;
+            for (XZAcceptMessageModel *md in modelArray) {
+                
+                
+                if(md.chatType == 0){ // 文字消息
+                    
+                    if(md.isReply){
+                        
+                        [weakself sendTextMessage:md.content andisSender:YES];
+                    }else{
+                        
+                        [weakself sendTextMessage:md.content andisSender:NO];
+                    }
+                    
+                }else if(md.chatType == 1){ // 图片消息
+                    
+                    if(md.isReply){
+                        
+                        [weakself sendImageMessage:md.content andisSender:YES];
+                    }else{
+                        
+                        [weakself sendImageMessage:md.content andisSender:NO];
+                    }
+                    
+                }else{  //语音消息
+                    
+                    NSDictionary *dict = [self dictionaryWithJsonString:md.content];
+                    
+                    [weakself sendVoiceMessage:dict[@"mediaId"]];
+                }
+                
+                
+            }
+            
+        } andError:^(NSString *err) {
+            
+        }];
+        
+    }
+    
+ 
 }
 
 // 加载数据

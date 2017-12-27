@@ -97,6 +97,8 @@ typedef enum {
             gp.lastMsgTime   = [self StrTrunDate:model.lastChatLogTime];
             gp.lastMsgString = model.lastChatLog;
             gp.sessionId     = model.sessionId;
+            gp.origin        = model.origin;
+            gp.isActive      = model.isCurrent;
             [arrM addObject:gp];
         }
         succeedBlock(arrM);
@@ -252,6 +254,9 @@ typedef enum {
             gp.imageurl      = model.avatar;
             gp.lastMsgTime   = [self StrTrunDate:model.lastChatLogTime];
             gp.lastMsgString = model.lastChatLog;
+            gp.sessionId     = model.sessionId;
+            gp.isActive      = model.isCurrent;
+            gp.origin        = -1;
             [arrM addObject:gp];
         }
         succeedBlock(arrM);
@@ -259,6 +264,17 @@ typedef enum {
         errorBlock(err);
     }];
 }
+
+- (void)SessionChatLogandsessionId:(NSInteger)sessionId andSucceed:(void(^)(NSArray *model))succeedBlock andError:(void(^)(NSString *err))errorBlock{
+    NSDictionary *dict = @{@"sessionId":@(sessionId)};
+    [self requestType:Post andRequesturl:APISessionChatLog andparameters:dict andSucceed:^(id  _Nullable responseObject) {
+        NSArray *model =[NSArray yy_modelArrayWithClass:[XZOneModel class] json:responseObject[@"data"]];
+        succeedBlock(model);
+    } andError:^(NSString *err) {
+        errorBlock(err);
+    }];
+}
+
 - (NSString *)StrTrunDate:(NSString *)DateStr{
     // 格式化时间
     NSDateFormatter* formatter = [[NSDateFormatter alloc] init];

@@ -31,7 +31,7 @@
 // 最后消息时间
 @property (copy,nonatomic) NSString *lastChatLogTime;
 
-@property (assign, nonatomic) NSInteger origin;
+@property (assign, nonatomic) int origin;
 /*------------------------*/
 
 @property (copy, nonatomic) NSString *name;

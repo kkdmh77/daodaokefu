@@ -76,8 +76,19 @@ static const CGFloat leftPadding = 9;
         
        _avatarImageView.image = [UIImage imageNamed:@"头像无数据"];
     }
-    
-    
+        if(group.origin == 0){
+            
+            _weChatStatusImageView.image = group.isActive ? [UIImage imageNamed:@"pc-在线-"] :  [UIImage imageNamed:@"pc-离线"];
+            
+        }else if(group.origin == 1){
+            
+            _weChatStatusImageView.image = group.isActive ? [UIImage imageNamed:@"wechat-在线"] :  [UIImage imageNamed:@"wechat-离线"];
+            
+        }else if(group.origin == 2){
+            
+            _weChatStatusImageView.image = group.isActive ? [UIImage imageNamed:@"phone-在线"] :  [UIImage imageNamed:@"phone-离线"];
+    }
+   
     
     [_messageLabel setText:group.lastMsgString];
     [_usernameLabel setText:group.gName];
@@ -105,12 +116,12 @@ static const CGFloat leftPadding = 9;
     }];
     [_usernameLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(self.mas_top).offset(13);
-        make.left.equalTo(_avatarImageView.mas_right).offset(8);
+        make.left.equalTo(_avatarImageView.mas_right).offset(15);
         make.right.equalTo(_dateLabel.mas_left).offset(-5);
     }];
     [_messageLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(_usernameLabel.mas_bottom).offset(4);
-        make.left.equalTo(_avatarImageView.mas_right).offset(8);
+        make.left.equalTo(_avatarImageView.mas_right).offset(15);
         make.right.equalTo(_dateLabel.mas_left).offset(-5);
     }];
     
@@ -147,7 +158,6 @@ static const CGFloat leftPadding = 9;
         UIImageView *imageV = [[UIImageView alloc] init];
         [self.contentView addSubview:imageV];
         _weChatStatusImageView = imageV;
-        _weChatStatusImageView.image = [UIImage imageNamed:@"wechat-在线"];
     }
     return _weChatStatusImageView;
     

@@ -48,4 +48,7 @@
 // 头像图片的URL地址
 @property (nonatomic, copy) NSString *imageurl;
 
+@property (nonatomic, assign)int origin;
+
+@property (nonatomic, assign) BOOL isActive;
 @end

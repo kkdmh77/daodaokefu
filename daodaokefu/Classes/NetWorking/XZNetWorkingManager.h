@@ -217,4 +217,13 @@
  */
 - (void)GetHistorySessionandSucceed:(void(^)(NSMutableArray *DataArray))succeedBlock andError:(void(^)(NSString *err))errorBlock;
 
+
+/**
+ 获取历史会话的聊天记录
+
+ @param sessionId    会话ID
+ @param succeedBlock 成功回调
+ @param errorBlock   失败回调
+ */
+- (void)SessionChatLogandsessionId:(NSInteger)sessionId andSucceed:(void(^)(NSArray *model))succeedBlock andError:(void(^)(NSString *err))errorBlock;
 @end
