@@ -84,11 +84,10 @@ typedef enum : NSUInteger {
     [self.view addSubview:self.chatBoxVC.view];
     [self.view addSubview:self.tableView];
     // self.view的高度有时候是不准确的
-    self.tableView.frame = CGRectMake(0, HEIGHT_NAVBAR+HEIGHT_STATUSBAR, self.view.width, APP_Frame_Height-HEIGHT_TABBAR-HEIGHT_NAVBAR-HEIGHT_STATUSBAR);
     // 注意添加顺序
     if(_isHistory){
         
-      self.tableView.frame = CGRectMake(0, HEIGHT_NAVBAR+HEIGHT_STATUSBAR, self.view.width, self.view.height);
+      self.tableView.frame = CGRectMake(0, HEIGHT_NAVBAR+HEIGHT_STATUSBAR, self.view.width, self.view.height - 70);
         self.chatBoxVC.chatBox.hidden = YES;
         
     }else{
