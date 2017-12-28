@@ -11,6 +11,7 @@
 #import "XZClientModel.h"
 #import "XZHomeSessionListModel.h"
 #import "XZTransferSessionthreeModel.h"
+#import "XZReplyModel.h"
 
 typedef enum {
     Get      = 0,
@@ -270,6 +271,15 @@ typedef enum {
     [self requestType:Post andRequesturl:APISessionChatLog andparameters:dict andSucceed:^(id  _Nullable responseObject) {
         NSArray *model =[NSArray yy_modelArrayWithClass:[XZOneModel class] json:responseObject[@"data"]];
         succeedBlock(model);
+    } andError:^(NSString *err) {
+        errorBlock(err);
+    }];
+}
+
+- (void)GetReportStrandSucceed:(void(^)(NSArray *model))succeedBlock andError:(void(^)(NSString *err))errorBlock{
+    [self requestType:Post andRequesturl:APIreport andparameters:nil andSucceed:^(id  _Nullable responseObject) {
+        NSArray *array = [NSArray yy_modelArrayWithClass:[XZReplyModel class] json:responseObject[@"data"]];
+        succeedBlock(array);
     } andError:^(NSString *err) {
         errorBlock(err);
     }];

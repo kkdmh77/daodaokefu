@@ -97,6 +97,7 @@ typedef enum : NSUInteger {
         [self setupNavUI];
         
         self.loadtimer = [NSTimer scheduledTimerWithTimeInterval:3.0 target:self selector:@selector(loadDataSource) userInfo:nil repeats:YES];
+
     }
    
    

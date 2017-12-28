@@ -226,4 +226,13 @@
  @param errorBlock   失败回调
  */
 - (void)SessionChatLogandsessionId:(NSInteger)sessionId andSucceed:(void(^)(NSArray *model))succeedBlock andError:(void(^)(NSString *err))errorBlock;
+
+
+/**
+ 获取常用语
+
+ @param succeedBlock 成功回调
+ @param errorBlock   失败回调
+ */
+- (void)GetReportStrandSucceed:(void(^)(NSArray *model))succeedBlock andError:(void(^)(NSString *err))errorBlock;
 @end

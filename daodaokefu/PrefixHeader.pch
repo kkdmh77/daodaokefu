@@ -24,51 +24,51 @@
 
 /*** ---------------- --------URL相关 -------- -------- -------- */
 //beseurl
-#define APIBaseUrl             @"http://workbench.daokf.cn"
+#define APIBaseUrl               @"http://workbench.daokf.cn"
 //定义一个API
-#define APIURL                 @"http://workbench.daokf.cn/kf/"
+#define APIURL                   @"http://workbench.daokf.cn/kf/"
 //首次登录API
-#define APIfirstLogin              [APIURL stringByAppendingString:@"/app/login"]
+#define APIfirstLogin            [APIURL stringByAppendingString:@"/app/login"]
 //退出登录API
-#define APIlogOut              [APIURL stringByAppendingString:@"/app/logout"]
+#define APIlogOut                [APIURL stringByAppendingString:@"/app/logout"]
 //获取客户历史会话列表
-#define APIGetRecentUserInf              [APIURL stringByAppendingString:@"/app/get_recent_user_info"]
+#define APIGetRecentUserInf      [APIURL stringByAppendingString:@"/app/get_recent_user_info"]
 //获取活跃会话
-#define APILiveSession            [APIURL stringByAppendingString:@"/app/live_session"]
+#define APILiveSession           [APIURL stringByAppendingString:@"/app/live_session"]
 //token二次登录
-#define APILoginbytoken            [APIURL stringByAppendingString:@"/app/login_by_token"]
+#define APILoginbytoken          [APIURL stringByAppendingString:@"/app/login_by_token"]
 //拉黑当前会话用户
-#define APIBlock_user           [APIURL stringByAppendingString:@"/app/block_user"]
+#define APIBlock_user            [APIURL stringByAppendingString:@"/app/block_user"]
 //获取当前会话客户资料
 #define APICustomerInfo          [APIURL stringByAppendingString:@"/app/get_customer_info"]
 //修改当前会话客户备注
-#define APIEditremark         [APIURL stringByAppendingString:@"/app/edit_remark.do"]
+#define APIEditremark            [APIURL stringByAppendingString:@"/app/edit_remark.do"]
 //发送一条文字消息
-#define APISendMessage         [APIURL stringByAppendingString:@"/app/send_chat"]
+#define APISendMessage           [APIURL stringByAppendingString:@"/app/send_chat"]
 //发送一条图片消息
-#define APISendPictureMessage         [APIURL stringByAppendingString:@"/app/send_picture"]
+#define APISendPictureMessage    [APIURL stringByAppendingString:@"/app/send_picture"]
 //返回快速回复列表
 #define APIGetquickreply         [APIURL stringByAppendingString:@"/app/get_quick_reply"]
 //返回快速回复列表
-#define APIChatMessage         [APIURL stringByAppendingString:@"/app/chat_msg"]
+#define APIChatMessage           [APIURL stringByAppendingString:@"/app/chat_msg"]
 //语音消息下载地址
-#define APIDownloadvoice        [APIURL stringByAppendingString:@"video_file"]
+#define APIDownloadvoice         [APIURL stringByAppendingString:@"video_file"]
 //结束会话
-#define APIClosechat       [APIURL stringByAppendingString:@"/app/close_chat"]
+#define APIClosechat             [APIURL stringByAppendingString:@"/app/close_chat"]
 //创建会话
-#define APICreateSession       [APIURL stringByAppendingString:@"/app/create_new_session.do"]
+#define APICreateSession         [APIURL stringByAppendingString:@"/app/create_new_session.do"]
 //切换会话
-#define APIChangeChat     [APIURL stringByAppendingString:@"/app/chat_change"]
+#define APIChangeChat            [APIURL stringByAppendingString:@"/app/chat_change"]
 //转接会话
-#define APITransferSession    [APIURL stringByAppendingString:@"/app/chat_transfer"]
+#define APITransferSession       [APIURL stringByAppendingString:@"/app/chat_transfer"]
 //获取在线客服
-#define APIOnline_reception    [APIURL stringByAppendingString:@"/app/online_reception"]
-// 获取历史会话列表
-#define APIGetHistorySession    [APIURL stringByAppendingString:@"/app/get_history_session"]
+#define APIOnline_reception      [APIURL stringByAppendingString:@"/app/online_reception"]
+//获取历史会话列表
+#define APIGetHistorySession     [APIURL stringByAppendingString:@"/app/get_history_session"]
 //获取历史会话
-#define APISessionChatLog    [APIURL stringByAppendingString:@"/app/session_chatlog"]
-
-
+#define APISessionChatLog        [APIURL stringByAppendingString:@"/app/session_chatlog"]
+//常用语
+#define APIreport                [APIURL stringByAppendingString:@"/app/get_quick_reply"]
 
 
 

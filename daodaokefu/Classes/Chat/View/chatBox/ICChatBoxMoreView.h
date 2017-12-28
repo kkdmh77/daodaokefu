@@ -12,8 +12,9 @@
 typedef NS_ENUM(NSInteger, ICChatBoxItem){
     ICChatBoxItemAlbum = 0,   // Album
     ICChatBoxItemCamera,      // Camera
-    ICChatBoxItemVideo,       // Video
-    ICChatBoxItemDoc          // pdf 
+    ICChatBoxItemoftenlanguage,//常用语
+    ICChatBoxItemDoc,         // pdf
+    ICChatBoxItemVideo       // Video
 };
 
 @class ICChatBoxMoreView;

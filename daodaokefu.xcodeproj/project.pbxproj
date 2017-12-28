@@ -105,6 +105,7 @@
 		18885E461FDFD00E00F2348F /* IFMMenuItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 18885E411FDFD00E00F2348F /* IFMMenuItem.m */; };
 		18885E471FDFD00E00F2348F /* IFMMenuView.m in Sources */ = {isa = PBXBuildFile; fileRef = 18885E431FDFD00E00F2348F /* IFMMenuView.m */; };
 		18885E491FDFDE2F00F2348F /* Mine.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 18885E481FDFDE2F00F2348F /* Mine.storyboard */; };
+		18DCB3591FF494E50002A6A7 /* XZReplyModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 18DCB3581FF494E50002A6A7 /* XZReplyModel.m */; };
 		18E44DF51FE131FD0070AE58 /* XZUserinfoTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 18E44DF41FE131FD0070AE58 /* XZUserinfoTableViewController.m */; };
 		18E44DFD1FE20F470070AE58 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 18E44DFB1FE20F470070AE58 /* AppDelegate.m */; };
 		18E44DFF1FE20F520070AE58 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 18E44DFE1FE20F520070AE58 /* main.m */; };
@@ -427,6 +428,8 @@
 		18885E421FDFD00E00F2348F /* IFMMenuView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IFMMenuView.h; sourceTree = "<group>"; };
 		18885E431FDFD00E00F2348F /* IFMMenuView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IFMMenuView.m; sourceTree = "<group>"; };
 		18885E481FDFDE2F00F2348F /* Mine.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Mine.storyboard; sourceTree = "<group>"; };
+		18DCB3571FF494E50002A6A7 /* XZReplyModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = XZReplyModel.h; sourceTree = "<group>"; };
+		18DCB3581FF494E50002A6A7 /* XZReplyModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = XZReplyModel.m; sourceTree = "<group>"; };
 		18E44DF31FE131FD0070AE58 /* XZUserinfoTableViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = XZUserinfoTableViewController.h; sourceTree = "<group>"; };
 		18E44DF41FE131FD0070AE58 /* XZUserinfoTableViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = XZUserinfoTableViewController.m; sourceTree = "<group>"; };
 		18E44DFB1FE20F470070AE58 /* AppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AppDelegate.m; path = daodaokefu/AppDelegate.m; sourceTree = SOURCE_ROOT; };
@@ -1012,6 +1015,8 @@
 			children = (
 				187227A31FE8B1EB00FE471F /* XZNonceUserInfoModel.h */,
 				187227A41FE8B1EB00FE471F /* XZNonceUserInfoModel.m */,
+				18DCB3571FF494E50002A6A7 /* XZReplyModel.h */,
+				18DCB3581FF494E50002A6A7 /* XZReplyModel.m */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -1977,6 +1982,7 @@
 				1884810A1FEB5713005599C4 /* UIScrollView+MJRefresh.m in Sources */,
 				186EE9881FE78E1E009CEE47 /* UIImage+WebP.m in Sources */,
 				186EE97E1FE78E1E009CEE47 /* SDWebImageFrame.m in Sources */,
+				18DCB3591FF494E50002A6A7 /* XZReplyModel.m in Sources */,
 				187227A51FE8B1EB00FE471F /* XZNonceUserInfoModel.m in Sources */,
 				180ACE1E1FE0FD5200E1154D /* HMScannerViewController.m in Sources */,
 				188480FE1FEB5712005599C4 /* MJRefreshAutoNormalFooter.m in Sources */,

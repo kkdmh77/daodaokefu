@@ -99,6 +99,7 @@
     return _scrollView;
 }
 
+
 - (UIPageControl *)pageControl
 {
     if (nil == _pageControl) {
@@ -131,6 +132,7 @@
 {
     [self.scrollView scrollRectToVisible:CGRectMake(pageControl.currentPage * App_Frame_Width, 0, App_Frame_Width, self.scrollView.height) animated:YES];
 }
+
 
 
 

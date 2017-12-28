@@ -17,8 +17,9 @@
 #import "UIImage+Extension.h"
 #import "ICDocumentViewController.h"
 #import "ICTools.h"
+#import "XZReplyModel.h"
 
-@interface ICChatBoxViewController ()<ICChatBoxDelegate,ICChatBoxMoreViewDelegate,UINavigationControllerDelegate, UIImagePickerControllerDelegate,ICDocumentDelegate>
+@interface ICChatBoxViewController ()<ICChatBoxDelegate,ICChatBoxMoreViewDelegate,UINavigationControllerDelegate, UIImagePickerControllerDelegate,ICDocumentDelegate,UITableViewDelegate,UITableViewDataSource>
 
 @property (nonatomic, assign) CGRect keyboardFrame;
 
@@ -33,6 +34,9 @@
 
 @property (nonatomic, weak) ICVideoView *videoView;
 
+@property (nonatomic, strong) UITableView *titleTableView;
+
+@property (nonatomic, strong )NSArray *titleArray;
 @end
 
 @implementation ICChatBoxViewController
@@ -45,6 +49,8 @@
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillHide:) name:UIKeyboardWillHideNotification object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardFrameWillChange:) name:UIKeyboardWillChangeFrameNotification object:nil];
+    
+    
 }
 
 #pragma mark - Public Methods
@@ -73,6 +79,7 @@
             } completion:^(BOOL finished) {
                 [self.chatBoxFaceView removeFromSuperview];
                 [self.chatBoxMoreView removeFromSuperview];
+                [self.titleTableView removeFromSuperview];
                 // 状态改变
                 self.chatBox.status = ICChatBoxStatusNothing;
             }];
@@ -181,10 +188,12 @@
                                  imageName:@"sharemore_pic"];
         ICChatBoxMoreViewItem *takePictureItem = [ICChatBoxMoreViewItem createChatBoxMoreItemWithTitle:@"拍摄"
                                  imageName:@"sharemore_video"];
-        ICChatBoxMoreViewItem *videoItem = [ICChatBoxMoreViewItem createChatBoxMoreItemWithTitle:@"小视频"
-                                 imageName:@"sharemore_sight"];
-        ICChatBoxMoreViewItem *docItem   = [ICChatBoxMoreViewItem createChatBoxMoreItemWithTitle:@"文件" imageName:@"sharemore_wallet"];
-        [_chatBoxMoreView setItems:[[NSMutableArray alloc] initWithObjects:photosItem, takePictureItem, videoItem,docItem, nil]];
+//        ICChatBoxMoreViewItem *videoItem = [ICChatBoxMoreViewItem createChatBoxMoreItemWithTitle:@"小视频"
+//                                 imageName:@"sharemore_sight"];
+//        ICChatBoxMoreViewItem *docItem   = [ICChatBoxMoreViewItem createChatBoxMoreItemWithTitle:@"文件" imageName:@"sharemore_wallet"];
+        
+        ICChatBoxMoreViewItem *Commonlanguage   = [ICChatBoxMoreViewItem createChatBoxMoreItemWithTitle:@"常用语" imageName:@"常用语"];
+        [_chatBoxMoreView setItems:[[NSMutableArray alloc] initWithObjects:photosItem, takePictureItem, Commonlanguage,nil]];
     }
     return _chatBoxMoreView;
 }
@@ -239,6 +248,9 @@
         docVC.delegate = self;
         XZNavigationController *nav = [[XZNavigationController alloc] initWithRootViewController:docVC];
         [self presentViewController:nav animated:YES completion:nil];
+    }else if(itemType == ICChatBoxItemoftenlanguage){
+        
+        [self.view addSubview:self.titleTableView];
     }
 }
 
@@ -285,6 +297,7 @@
         dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
             [self.chatBoxFaceView removeFromSuperview];
             [self.chatBoxMoreView removeFromSuperview];
+            [self.titleTableView removeFromSuperview];
         });
         return;
     } else if (toStatus == ICChatBoxStatusShowVoice) {    // 语音输入按钮
@@ -295,6 +308,7 @@
         } completion:^(BOOL finished) {
             [self.chatBoxFaceView removeFromSuperview];
             [self.chatBoxMoreView removeFromSuperview];
+            [self.titleTableView removeFromSuperview];
         }];
     } else if (toStatus == ICChatBoxStatusShowFace) {     // 表情面板
         if (fromStatus == ICChatBoxStatusShowVoice || fromStatus == ICChatBoxStatusNothing) {
@@ -312,6 +326,7 @@
                 self.chatBoxFaceView.y = HEIGHT_TABBAR;
             } completion:^(BOOL finished) {
                 [self.chatBoxMoreView removeFromSuperview];
+                [self.titleTableView removeFromSuperview];
             }];
             if (fromStatus != ICChatBoxStatusShowMore) {
                 [UIView animateWithDuration:0.2 animations:^{
@@ -431,8 +446,88 @@
     }
 }
 
+- (UITableView *)titleTableView{
+    
+    if(nil == _titleTableView){
+
+        UITableView *tableview = [[UITableView alloc] initWithFrame:CGRectMake(0, 49, self.view.width, self.view.height) style:UITableViewStyleGrouped];
+        tableview.separatorStyle = UITableViewCellSeparatorStyleSingleLine;
+        _titleTableView = tableview;
+
+        _titleTableView.dataSource = self;
+        _titleTableView.delegate = self;
+        
+        
+        
+        [[XZNetWorkingManager sharderinstance] GetReportStrandSucceed:^(NSArray *model) {
+            
+            self.titleArray = model;
+            [self.titleTableView reloadData];
+            
+        } andError:^(NSString *err) {
+            
+        }];
+}
+    
+    return _titleTableView;
+}
+
+#pragma mark - TableViewDelegate
+
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
+    
+    return 1;
+}
+
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+    
+    return self.titleArray.count;
+}
 
 
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+    static NSString *CellIdentifier = @"titltableviewCell";
+    
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+    
+    if(cell == nil){
+        
+        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
+        
+    }
+    
+    XZReplyModel *model = self.titleArray[indexPath.row];
+    
+    cell.textLabel.text = model.title;
+    
+    return cell;
+}
 
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+    
+    [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    
+    XZReplyModel *model = self.titleArray[indexPath.row];
+    
+    [self.delegate chatBoxViewController:self sendTextMessage:model.title];
+    
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section{
+    
+    return 0.01;
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{
+    
+    return 0.01f;
+}
+
+- (void)viewWillDisappear:(BOOL)animated{
+    
+    [super viewWillDisappear:animated];
+    
+    [self.view removeFromSuperview];
+}
 
 @end
