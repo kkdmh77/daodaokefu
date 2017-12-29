@@ -25,6 +25,7 @@
 		181B1FFE1FE3D4E200130046 /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = 181B1FF61FE3D4E200130046 /* README.md */; };
 		181B1FFF1FE3D4E200130046 /* NSObject+YYModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 181B1FF91FE3D4E200130046 /* NSObject+YYModel.m */; };
 		181B20001FE3D4E200130046 /* YYClassInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 181B1FFB1FE3D4E200130046 /* YYClassInfo.m */; };
+		183FECB61FF5DE98008756D6 /* UIColor+ColorChange.m in Sources */ = {isa = PBXBuildFile; fileRef = 183FECB51FF5DE98008756D6 /* UIColor+ColorChange.m */; };
 		184605AC1FF1E1670087EC1A /* XZTransferSessionTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 184605AB1FF1E1670087EC1A /* XZTransferSessionTableViewCell.m */; };
 		184605AE1FF1E2A50087EC1A /* XZTransferSessionTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 184605AD1FF1E2A50087EC1A /* XZTransferSessionTableViewCell.xib */; };
 		184605B11FF1EEFE0087EC1A /* XZTransferSessionModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 184605B01FF1EEFE0087EC1A /* XZTransferSessionModel.m */; };
@@ -272,6 +273,8 @@
 		181B1FFA1FE3D4E200130046 /* YYClassInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YYClassInfo.h; sourceTree = "<group>"; };
 		181B1FFB1FE3D4E200130046 /* YYClassInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YYClassInfo.m; sourceTree = "<group>"; };
 		181B1FFC1FE3D4E200130046 /* YYModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YYModel.h; sourceTree = "<group>"; };
+		183FECB41FF5DE98008756D6 /* UIColor+ColorChange.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UIColor+ColorChange.h"; sourceTree = "<group>"; };
+		183FECB51FF5DE98008756D6 /* UIColor+ColorChange.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "UIColor+ColorChange.m"; sourceTree = "<group>"; };
 		184605AA1FF1E1670087EC1A /* XZTransferSessionTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = XZTransferSessionTableViewCell.h; sourceTree = "<group>"; };
 		184605AB1FF1E1670087EC1A /* XZTransferSessionTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = XZTransferSessionTableViewCell.m; sourceTree = "<group>"; };
 		184605AD1FF1E2A50087EC1A /* XZTransferSessionTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = XZTransferSessionTableViewCell.xib; sourceTree = "<group>"; };
@@ -1651,6 +1654,8 @@
 				18E44DFC1FE20F470070AE58 /* AppDelegate.h */,
 				18E44DFB1FE20F470070AE58 /* AppDelegate.m */,
 				18E44DFE1FE20F520070AE58 /* main.m */,
+				183FECB41FF5DE98008756D6 /* UIColor+ColorChange.h */,
+				183FECB51FF5DE98008756D6 /* UIColor+ColorChange.m */,
 			);
 			path = Other;
 			sourceTree = "<group>";
@@ -2089,6 +2094,7 @@
 				1884811C1FEB7A29005599C4 /* MJDIYAutoFooter.m in Sources */,
 				5F80D5D01D9A46B000F8D164 /* XZGroup.m in Sources */,
 				188481011FEB5713005599C4 /* MJRefreshBackNormalFooter.m in Sources */,
+				183FECB61FF5DE98008756D6 /* UIColor+ColorChange.m in Sources */,
 				5F80D5F21D9A4B7900F8D164 /* MASConstraint.m in Sources */,
 				18E44E2C1FE21A0C0070AE58 /* AFSecurityPolicy.m in Sources */,
 				186EE9741FE78E1E009CEE47 /* NSData+ImageContentType.m in Sources */,

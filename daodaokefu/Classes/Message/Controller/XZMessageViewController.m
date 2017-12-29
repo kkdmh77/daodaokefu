@@ -130,19 +130,19 @@
     
     self.view.backgroundColor = XZRGB(0xf4f1f1);
     self.tableView.backgroundColor = XZRGB(0xf4f1f1);
-    XZGroupSearchController *searchVC    = [[XZGroupSearchController alloc] init];
+//    XZGroupSearchController *searchVC    = [[XZGroupSearchController alloc] init];
 //    searchVC.delegate                    = self;
-    UISearchController *searchController = [[UISearchController alloc] initWithSearchResultsController:searchVC];
-    [searchController.searchBar sizeToFit];
-    self.tableView.tableHeaderView = searchController.searchBar;
-    _searchController              = searchController;
-    [searchController.searchBar setBarTintColor:BACKGROUNDCOLOR];
-    [searchController.searchBar.layer setBorderWidth:0.5f];
-    [searchController.searchBar.layer setBorderColor:BACKGROUNDCOLOR.CGColor];
-    searchController.dimsBackgroundDuringPresentation = YES;
-    self.definesPresentationContext = YES;
-    searchController.view.backgroundColor = [UIColor whiteColor];
-    searchController.hidesNavigationBarDuringPresentation = YES;
+//    UISearchController *searchController = [[UISearchController alloc] initWithSearchResultsController:searchVC];
+//    [searchController.searchBar sizeToFit];
+//    self.tableView.tableHeaderView = searchController.searchBar;
+//    _searchController              = searchController;
+//    [searchController.searchBar setBarTintColor:BACKGROUNDCOLOR];
+//    [searchController.searchBar.layer setBorderWidth:0.5f];
+//    [searchController.searchBar.layer setBorderColor:BACKGROUNDCOLOR.CGColor];
+//    searchController.dimsBackgroundDuringPresentation = YES;
+//    self.definesPresentationContext = YES;
+//    searchController.view.backgroundColor = [UIColor whiteColor];
+//    searchController.hidesNavigationBarDuringPresentation = YES;
     self.tableView.frame  = CGRectMake(0,0, self.view.width, SCREEN_HEIGHT);
 //
      [self.tableView addSubview:[self createButton]];
@@ -182,7 +182,9 @@
 
 - (void)rightBarButtonAction {
     
+     [self addsession];
     
+    /**
     __weak typeof(self) weakself = self;
     NSMutableArray *menuItems = [[NSMutableArray alloc] initWithObjects:
                                  
@@ -217,6 +219,8 @@
     menu.menuSegmenteLineStyle = IFMMenuSegmenteLineStylefollowContent;  //分割线类型
     
     [menu showFromNavigationController:self.navigationController WithX:self.view.frame.size.width - 60];
+    
+    */
 }
 
 - (void)addsession {

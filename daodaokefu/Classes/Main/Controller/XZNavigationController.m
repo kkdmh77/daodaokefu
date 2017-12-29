@@ -7,12 +7,25 @@
 //
 
 #import "XZNavigationController.h"
-
+#import "UIColor+ColorChange.h"
 @interface XZNavigationController ()
 
 @end
 
 @implementation XZNavigationController
+
+- (void)viewDidLoad{
+    [super viewDidLoad];
+    
+    self.navigationBar.barTintColor = [UIColor colorWithHexString:viewcolor];
+    [self.navigationBar setTitleTextAttributes:
+     @{NSFontAttributeName:[UIFont systemFontOfSize:18],
+       NSForegroundColorAttributeName:[UIColor whiteColor]}];
+    
+    self.navigationBar.tintColor = [UIColor whiteColor];
+
+}
+
 
 + (void)initialize
 {

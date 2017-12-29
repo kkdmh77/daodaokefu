@@ -74,8 +74,8 @@
 
 /*** ---------------- --------URL相关结束 -------- -------- -------- */
 #define HomeRefreshdata             @"HomeRefreshdata"
-
-
+// 总体颜色
+#define viewcolor             @"6f83e8"
 
 
 

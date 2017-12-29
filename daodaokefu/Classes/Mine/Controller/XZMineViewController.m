@@ -53,9 +53,9 @@
         [self logoutAction];
     }
     
-    if(indexPath.section == 0 || indexPath.section == 2){
+    if(indexPath.section == 2){
         
-        [XZToolManager showConfirmAlertView:@"提示" andMessage:@"此功能正在开发中,请敬请期待!" andVC:self];
+        [XZToolManager showConfirmAlertView:@"提示" andMessage:@"更多问题请关注微信公众号咨询!" andVC:self];
     }
     
     
