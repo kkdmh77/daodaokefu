@@ -19,7 +19,7 @@
                 <rect key="frame" x="0.0" y="0.0" width="378" height="79.5"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="用户-3" translatesAutoresizingMaskIntoConstraints="NO" id="YnP-tO-dj7">
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="头像无数据" translatesAutoresizingMaskIntoConstraints="NO" id="YnP-tO-dj7">
                         <rect key="frame" x="15" y="10" width="60" height="60"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="60" id="ko9-Yc-M17"/>
@@ -68,6 +68,6 @@
         </tableViewCell>
     </objects>
     <resources>
-        <image name="用户-3" width="64" height="64"/>
+        <image name="头像无数据" width="64" height="64"/>
     </resources>
 </document>

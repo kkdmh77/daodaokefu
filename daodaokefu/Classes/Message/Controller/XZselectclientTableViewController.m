@@ -88,26 +88,21 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     
-    
-    
     XZClientModel *model = self.listArray[indexPath.row];
-    
-    [[XZNetWorkingManager sharderinstance] ceateSessionanduid:model.id andSucceed:^{
         
         XZGroup *gp      = [XZGroup new];
         gp.gName         = model.name;
         gp.imageurl      = model.avatar;
-        
+        gp.sessionId     = model.id;
+    
+
         XZChatViewController *chatVc = [[XZChatViewController alloc] init];
         chatVc.group                 = gp;
+        chatVc.isCreate              = YES;
         [self.messagevc.navigationController pushViewController:chatVc animated:NO];
         [self dismissViewControllerAnimated:YES completion:nil];
         
-    } andError:^(NSString *err) {
-        
-        [XZToolManager showErrorWithStatus:@"创建会话失败"];
-    }];
-    
+  
    
 }
 

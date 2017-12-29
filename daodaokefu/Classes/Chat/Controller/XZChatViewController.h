@@ -13,4 +13,6 @@
 @property (nonatomic, strong) XZGroup *group;
 
 @property (nonatomic, assign) BOOL isHistory;
+
+@property (nonatomic, assign) BOOL isCreate;
 @end

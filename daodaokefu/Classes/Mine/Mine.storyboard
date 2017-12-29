@@ -32,7 +32,7 @@
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="J9F-3K-O0Q">
                                                     <rect key="frame" x="0.0" y="0.0" width="375" height="70"/>
                                                     <subviews>
-                                                        <imageView userInteractionEnabled="NO" contentMode="redraw" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="用户-3" translatesAutoresizingMaskIntoConstraints="NO" id="iob-UX-8vA">
+                                                        <imageView userInteractionEnabled="NO" contentMode="redraw" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="头像无数据" translatesAutoresizingMaskIntoConstraints="NO" id="iob-UX-8vA">
                                                             <rect key="frame" x="10" y="10" width="50" height="50"/>
                                                             <constraints>
                                                                 <constraint firstAttribute="height" constant="50" id="6B1-Ej-Xg5"/>
@@ -754,9 +754,9 @@
     </scenes>
     <resources>
         <image name="向右" width="25" height="25"/>
+        <image name="头像无数据" width="64" height="64"/>
         <image name="性别" width="25" height="25"/>
         <image name="用户" width="25" height="25"/>
         <image name="用户-2" width="25" height="25"/>
-        <image name="用户-3" width="64" height="64"/>
     </resources>
 </document>

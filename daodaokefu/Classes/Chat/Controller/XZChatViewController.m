@@ -71,7 +71,11 @@ typedef enum : NSUInteger {
     
     [self registerCell];
     
-    [self loadDataSources];
+    if(!_isCreate){
+      [self loadDataSources];
+    }
+    
+ 
 }
 
 
@@ -95,8 +99,9 @@ typedef enum : NSUInteger {
         self.chatBoxVC.chatBox.hidden = NO;
         [self setupNavUI];
         
-        self.loadtimer = [NSTimer scheduledTimerWithTimeInterval:3.0 target:self selector:@selector(loadDataSource) userInfo:nil repeats:YES];
-
+        if(!_isCreate){
+             self.loadtimer = [NSTimer scheduledTimerWithTimeInterval:3.0 target:self selector:@selector(loadDataSource) userInfo:nil repeats:YES];
+        }
     }
    
    
@@ -218,27 +223,27 @@ typedef enum : NSUInteger {
                     
                     if(md.isReply){
                         
-                        [weakself sendTextMessage:md.content andisSender:YES];
+                        [weakself sendTextMessage:md.content andisSender:YES isAnimation:NO];
                     }else{
                         
-                        [weakself sendTextMessage:md.content andisSender:NO];
+                        [weakself sendTextMessage:md.content andisSender:NO isAnimation:NO];
                     }
                     
                 }else if(md.chatType == 1){ // 图片消息
                     
                     if(md.isReply){
                         
-                        [weakself sendImageMessage:md.content andisSender:YES];
+                        [weakself sendImageMessage:md.content andisSender:YES isAnimation:YES];
                     }else{
                         
-                        [weakself sendImageMessage:md.content andisSender:NO];
+                        [weakself sendImageMessage:md.content andisSender:NO isAnimation:NO];
                     }
                     
                 }else{  //语音消息
                     
                     NSDictionary *dict = [self dictionaryWithJsonString:md.content];
                     
-                    [weakself sendVoiceMessage:dict[@"mediaId"]];
+                    [weakself sendVoiceMessage:dict[@"mediaId"] isAnimation:NO];
                 }
                 
                 
@@ -260,27 +265,27 @@ typedef enum : NSUInteger {
                     
                     if(md.isReply){
                         
-                        [weakself sendTextMessage:md.content andisSender:YES];
+                        [weakself sendTextMessage:md.content andisSender:YES isAnimation:NO];
                     }else{
                         
-                        [weakself sendTextMessage:md.content andisSender:NO];
+                        [weakself sendTextMessage:md.content andisSender:NO isAnimation:NO];
                     }
                     
                 }else if(md.chatType == 1){ // 图片消息
                     
                     if(md.isReply){
                         
-                        [weakself sendImageMessage:md.content andisSender:YES];
+                        [weakself sendImageMessage:md.content andisSender:YES isAnimation:NO];
                     }else{
                         
-                        [weakself sendImageMessage:md.content andisSender:NO];
+                        [weakself sendImageMessage:md.content andisSender:NO isAnimation:NO];
                     }
                     
                 }else{  //语音消息
                     
                     NSDictionary *dict = [self dictionaryWithJsonString:md.content];
                     
-                    [weakself sendVoiceMessage:dict[@"mediaId"]];
+                    [weakself sendVoiceMessage:dict[@"mediaId"] isAnimation:NO];
                 }
                 
                 
@@ -308,15 +313,15 @@ typedef enum : NSUInteger {
         for (XZAcceptMessageModel *md in modelArray) {
             if(md.chatType == 0 && !md.isReply){ // 文字消息
                 
-             [weakself sendTextMessage:md.content andisSender:NO];
+             [weakself sendTextMessage:md.content andisSender:NO isAnimation:YES];
             }else if(md.chatType == 1 && !md.isReply){ // 图片消息
                 
-                [weakself sendImageMessage:md.content andisSender:NO];
+                [weakself sendImageMessage:md.content andisSender:NO isAnimation:YES];
             }else if(md.chatType == 2 && !md.isReply){ //语音消息
                 
                 NSDictionary *dict = [self dictionaryWithJsonString:md.content];
                 
-                [weakself sendVoiceMessage:dict[@"mediaId"]];
+                [weakself sendVoiceMessage:dict[@"mediaId"] isAnimation:YES];
             }
             
         }
@@ -327,15 +332,15 @@ typedef enum : NSUInteger {
 }
 
 // 发送一条服务端的文字消息
-- (void)sendTextMessage:(NSString *)String andisSender:(BOOL)isSender{
+- (void)sendTextMessage:(NSString *)String andisSender:(BOOL)isSender isAnimation:(BOOL)isAnimation{
     
     ICMessageFrame *messageF = [ICMessageHelper createMessageFrame:TypeText content:String path:nil from:@"gxz" to:self.group.gId fileKey:nil isSender:isSender receivedSenderByYourself:NO];
     messageF.model.message.deliveryState = isSender ? ICMessageDeliveryState_Delivered : ICMessageDeliveryState_Delivering;
     
-    [self addObject:messageF isSender:YES];
+    [self addObject:messageF isSender:YES isAnimation:isAnimation];
 }
 // 发送一条图片消息
-- (void)sendImageMessage:(NSString *)iamgeUrl andisSender:(BOOL)isSender{
+- (void)sendImageMessage:(NSString *)iamgeUrl andisSender:(BOOL)isSender isAnimation:(BOOL)isAnimation{
     
     
     
@@ -386,7 +391,7 @@ typedef enum : NSUInteger {
             messageF.cellHight = fixelH / 7 + 40;
         }
         
-        [self addObject:messageF isSender:YES];
+        [self addObject:messageF isSender:YES isAnimation:isAnimation];
     }else{
 
         
@@ -413,7 +418,7 @@ typedef enum : NSUInteger {
             
             messageF.model.mediaPath = imageFilePath;
             
-            [self addObject:messageF isSender:YES];
+            [self addObject:messageF isSender:YES isAnimation:isAnimation];
         }else{
             NSLog(@"写入本地失败");
             
@@ -490,7 +495,7 @@ typedef enum : NSUInteger {
         [self.tableView reloadData];
         _isKeyBoardAppear  = NO;
     } else {
-        [self scrollToBottom];
+        [self scrollToBottomisAnimation:YES];
         _isKeyBoardAppear  = YES;
     }
     if (self.textView == nil) {
@@ -507,7 +512,7 @@ typedef enum : NSUInteger {
     [UIView animateWithDuration:0.25 animations:^{
         weakself.tableView.height = HEIGHT_SCREEN - videwViewH - HEIGHT_NAVBAR-HEIGHT_STATUSBAR;
         weakself.chatBoxVC.view.frame = CGRectMake(0, videwViewX+HEIGHT_NAVBAR+HEIGHT_STATUSBAR, App_Frame_Width, videwViewH);
-        [weakself scrollToBottom];
+        [weakself scrollToBottomisAnimation:YES];
     } completion:^(BOOL finished) { // 状态改变
         weakself.chatBoxVC.chatBox.status = ICChatBoxStatusShowVideo;
         // 在这里创建视频设配
@@ -522,7 +527,7 @@ typedef enum : NSUInteger {
 - (void)chatBoxViewController:(ICChatBoxViewController *)chatboxViewController sendVideoMessage:(NSString *)videoPath
 {
     ICMessageFrame *messageFrame = [ICMessageHelper createMessageFrame:TypeVideo content:@"[视频]" path:videoPath from:@"gxz" to:self.group.gId fileKey:nil isSender:YES receivedSenderByYourself:NO]; // 创建本地消息
-    [self addObject:messageFrame isSender:YES];
+    [self addObject:messageFrame isSender:YES isAnimation:YES];
     [self messageSendSucced:messageFrame andType:TextMessage];
 }
 
@@ -541,7 +546,7 @@ typedef enum : NSUInteger {
     NSDictionary *lnk = @{@"s":@((long)s),@"x":x,@"n":lastName};
     messageFrame.model.message.lnk = [lnk jsonString];
     messageFrame.model.message.fileKey = fileKey;
-    [self addObject:messageFrame isSender:YES];
+    [self addObject:messageFrame isSender:YES isAnimation:YES];
     [self messageSendSucced:messageFrame andType:TextMessage];
 }
 
@@ -558,7 +563,7 @@ typedef enum : NSUInteger {
 - (void)sendTextMessageWithContent:(NSString *)messageStr
 {
     ICMessageFrame *messageF = [ICMessageHelper createMessageFrame:TypeText content:messageStr path:nil from:@"gxz" to:self.group.gId fileKey:nil isSender:YES receivedSenderByYourself:NO];
-    [self addObject:messageF isSender:YES];
+    [self addObject:messageF isSender:YES isAnimation:YES];
     
     [self messageSendSucced:messageF andType:TextMessage];
 }
@@ -566,24 +571,43 @@ typedef enum : NSUInteger {
 - (void)otherSendTextMessageWithContent:(NSString *)messageStr
 {
     ICMessageFrame *messageF = [ICMessageHelper createMessageFrame:TypeText content:messageStr path:nil from:@"gxz" to:self.group.gId fileKey:nil isSender:NO receivedSenderByYourself:NO];
-    [self addObject:messageF isSender:YES];
+    [self addObject:messageF isSender:YES isAnimation:YES];
     
     [self messageSendSucced:messageF andType:TextMessage];
 }
 
 // 增加数据源并刷新
 - (void)addObject:(ICMessageFrame *)messageF
-         isSender:(BOOL)isSender
+         isSender:(BOOL)isSender isAnimation:(BOOL)isAnimation
 {
+    
     [self.dataSource addObject:messageF];
     [self.tableView reloadData];
     if (isSender || _isKeyBoardAppear) {
-        [self scrollToBottom];
+        [self scrollToBottomisAnimation:isAnimation];
     }
 }
 
 - (void)messageSendSucced:(ICMessageFrame *)messageF andType:(MessageType)messagetype
 {
+    
+    if(_isCreate){
+        
+        [[XZNetWorkingManager sharderinstance] ceateSessionanduid:_group.sessionId andSucceed:^{
+            _isCreate = NO;
+            [self sendMessage:messageF andType:messagetype];
+        } andError:^(NSString *err) {
+            
+        }];
+    }else{
+        [self sendMessage:messageF andType:messagetype];
+
+    }
+    
+}
+
+- (void)sendMessage:(ICMessageFrame *)messageF andType:(MessageType)messagetype{
+    
     // 判断类型上传
     if(!messageF.model.isSender)return;
     
@@ -609,28 +633,6 @@ typedef enum : NSUInteger {
             [weakself.tableView reloadData];
         }];
     }
-    
-    
-    
-//    // 此处发送消息给服务端
-//    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1.0 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-//        messageF.model.message.deliveryState = ICMessageDeliveryState_Delivered;
-////        [self sendImageMessageWithImgPath1:messageF.model.mediaPath];
-//        [self timerInvalue]; // 销毁定时器
-//
-////        // 自动回复
-////        ICMessageFrame *messageFs = [ICMessageHelper createMessageFrame:TypeVoice content:@"[语音]" path:messageF.model.mediaPath from:@"gxz" to:self.group.gId fileKey:nil isSender:NO receivedSenderByYourself:NO];
-////        [self addObject:messageFs isSender:YES];
-////        [self messageSendSucced:messageFs];
-//
-//        // 自动回复
-////        ICMessageFrame *messageFs = [ICMessageHelper createMessageFrame:TypeText content:messageF.model.message.content path:nil from:@"gxz" to:self.group.gId fileKey:nil isSender:NO receivedSenderByYourself:NO];
-////        [self addObject:messageFs isSender:YES];
-////        [self messageSendSucced:messageFs];
-////
-//        [self.tableView reloadData];
-//
-//    });
 }
 
 
@@ -648,7 +650,7 @@ typedef enum : NSUInteger {
 - (void)sendImageMessageWithImgPath1:(NSString *)imgPath
 {
     ICMessageFrame *messageF = [ICMessageHelper createMessageFrame:TypePic content:@"[图片]" path:imgPath from:@"gxz" to:self.group.gId fileKey:nil isSender:NO receivedSenderByYourself:NO];
-    [self addObject:messageF isSender:YES];
+    [self addObject:messageF isSender:YES isAnimation:YES];
     
     [self messageSendSucced:messageF andType:ImageMessage];
     
@@ -658,7 +660,7 @@ typedef enum : NSUInteger {
 - (void)sendImageMessageWithImgPath:(NSString *)imgPath
 {
     ICMessageFrame *messageF = [ICMessageHelper createMessageFrame:TypePic content:@"[图片]" path:imgPath from:@"gxz" to:self.group.gId fileKey:nil isSender:YES receivedSenderByYourself:NO];
-    [self addObject:messageF isSender:YES];
+    [self addObject:messageF isSender:YES isAnimation:YES];
     
     [self messageSendSucced:messageF andType:ImageMessage];
     
@@ -673,7 +675,7 @@ typedef enum : NSUInteger {
 }
 
 // 发送一条语音消息
-- (void)sendVoiceMessage:(NSString *)voiceUrl{
+- (void)sendVoiceMessage:(NSString *)voiceUrl isAnimation:(BOOL)isAnimation{
     
     AppDelegate *sd = (AppDelegate *)[[UIApplication sharedApplication] delegate];
     
@@ -687,7 +689,7 @@ typedef enum : NSUInteger {
             ICMessageFrame *messageF = [ICMessageHelper createMessageFrame:TypeVoice content:@"[语音]" path:path from:@"gxz" to:self.group.gId fileKey:nil isSender:NO receivedSenderByYourself:NO];
             
             
-            [self addObject:messageF isSender:YES];
+            [self addObject:messageF isSender:YES isAnimation:isAnimation];
         }
         
     }else{
@@ -703,7 +705,7 @@ typedef enum : NSUInteger {
             ICMessageFrame *messageF = [ICMessageHelper createMessageFrame:TypeVoice content:@"[语音]" path:path from:@"gxz" to:self.group.gId fileKey:nil isSender:NO receivedSenderByYourself:NO];
             
             
-            [self addObject:messageF isSender:YES];
+            [self addObject:messageF isSender:YES isAnimation:isAnimation];
         }
         
         
@@ -723,7 +725,7 @@ typedef enum : NSUInteger {
     if (voicePath) {
         ICMessageFrame *messageF = [ICMessageHelper createMessageFrame:TypeVoice content:@"[语音]" path:voicePath from:@"gxz" to:self.group.gId fileKey:nil isSender:YES receivedSenderByYourself:NO];
         messageF.model.message.deliveryState =ICMessageDeliveryState_Failure;
-        [self addObject:messageF isSender:YES];
+        [self addObject:messageF isSender:YES isAnimation:YES];
         [self messageSendSucced:messageF andType:Mp4Message];
     }
 }
@@ -937,10 +939,10 @@ typedef enum : NSUInteger {
 
 #pragma mark - private
 
-- (void) scrollToBottom
+- (void) scrollToBottomisAnimation:(BOOL)isAnimation
 {
     if (self.dataSource.count > 0) {
-        [self.tableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:self.dataSource.count-1 inSection:0] atScrollPosition:UITableViewScrollPositionBottom animated:YES];
+        [self.tableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:self.dataSource.count-1 inSection:0] atScrollPosition:UITableViewScrollPositionBottom animated:isAnimation];
     }
 }
 

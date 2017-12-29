@@ -129,7 +129,7 @@
         } else {
             self.bubbleView.image = [UIImage imageNamed:@"liaotianbeijing2"];
         }
-        [self.headImageView.imageView setImage:[UIImage imageNamed:@"用户-3"]];
+        [self.headImageView.imageView setImage:[UIImage imageNamed:@"头像无数据"]];
     } else {    // 接收者
         self.retryButton.hidden  = YES;
         self.bubbleView.image    = [UIImage imageNamed:@"liaotianbeijing1"];
