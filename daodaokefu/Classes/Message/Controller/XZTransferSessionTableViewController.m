@@ -16,6 +16,8 @@
 
 @property (nonatomic, strong)XZTransferSessionTableViewCell *cell;
 
+@property (nonatomic, strong)UIImageView *vv;
+
 @end
 
 @implementation XZTransferSessionTableViewController{
@@ -38,11 +40,27 @@
     
     self.title = @"其他在线客服";
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"确定" style:UIBarButtonItemStyleDone target:self action:@selector(rightBarButtonItemAction)];
+    [self.navigationItem.rightBarButtonItem setTitleTextAttributes:@{NSForegroundColorAttributeName:[UIColor whiteColor]} forState:UIControlStateNormal];
     self.tableView.rowHeight = 80;
     [self.tableView setSeparatorStyle:UITableViewCellSeparatorStyleSingleLineEtched];
     // 注册cell
     [self.tableView registerNib:[UINib nibWithNibName:@"XZTransferSessionTableViewCell" bundle:nil] forCellReuseIdentifier:@"XZTransferSessionTableViewCell"];
+    [self.tableView addSubview:[self createButton]];
 }
+
+- (UIView *)createButton{
+    
+    
+    UIImageView *imageview = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"空数据"]];
+    self.vv = imageview;
+    imageview.frame = CGRectMake(0, 0, 100, 100);
+    
+    imageview.centerX = SCREEN_WIDTH / 2;
+    imageview.centerY = (SCREEN_HEIGHT - 64) / 2 - 80;
+    
+    return imageview;
+}
+
 
 - (void)loadData {
     
@@ -50,6 +68,7 @@
         
         self.listArray = DataArray;
         
+        self.vv.hidden = self.listArray.count == 0 ? NO : YES;
         [self.tableView reloadData];
         
     } andError:^(NSString *err) {

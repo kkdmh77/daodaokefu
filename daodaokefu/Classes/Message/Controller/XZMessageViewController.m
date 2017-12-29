@@ -50,7 +50,6 @@
 - (UIView *)createButton{
 
     
-    
     UIImageView *imageview = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"创建新会话"]];
     self.vv = imageview;
     imageview.frame = CGRectMake(0, 0, 100, 100);

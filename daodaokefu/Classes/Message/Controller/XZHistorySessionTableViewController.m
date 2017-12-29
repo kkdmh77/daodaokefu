@@ -16,6 +16,8 @@
 
 @property (nonatomic, strong) NSArray *listArray;
 
+@property (nonatomic, strong) UIImageView *vv;
+
 @end
 
 @implementation XZHistorySessionTableViewController
@@ -38,6 +40,8 @@
     
     self.tableView.rowHeight = 67.0;
     
+    [self.tableView addSubview:[self createButton]];
+    
     // 设置回调（一旦进入刷新状态，就调用target的action，也就是调用self的loadNewData方法）
     MJChiBaoZiHeader*header = [MJChiBaoZiHeader headerWithRefreshingTarget:self refreshingAction:@selector(loadData)];
     
@@ -55,12 +59,26 @@
     
 }
 
+- (UIView *)createButton{
+    
+    
+    UIImageView *imageview = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"空数据"]];
+    self.vv = imageview;
+    imageview.frame = CGRectMake(0, 0, 100, 100);
+    
+    imageview.centerX = SCREEN_WIDTH / 2;
+    imageview.centerY = (SCREEN_HEIGHT - 64) / 2 - 80;
+    
+    return imageview;
+}
+
+
 - (void)loadData {
     
     [[XZNetWorkingManager sharderinstance] GetHistorySessionandSucceed:^(NSMutableArray *DataArray) {
         [self.tableView.mj_header endRefreshing];
         self.listArray = DataArray;
-        
+        self.vv.hidden = self.listArray.count == 0 ? NO:YES;
         [self.tableView reloadData];
     } andError:^(NSString *err) {
         [self.tableView.mj_header endRefreshing];

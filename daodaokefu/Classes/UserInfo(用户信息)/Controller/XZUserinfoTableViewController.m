@@ -104,6 +104,8 @@
     [[XZNetWorkingManager sharderinstance] PulltheblackSucceed:^{
         
         [XZToolManager showSuccessWithStatus:@"拉黑成功"];
+        [kNotificationCenter postNotificationName:HomeRefreshdata object:nil];
+        [self.navigationController popToRootViewControllerAnimated:YES];
         
     } andError:^(NSString *err) {
        

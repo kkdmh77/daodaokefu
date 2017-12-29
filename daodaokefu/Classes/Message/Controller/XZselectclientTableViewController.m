@@ -13,6 +13,8 @@
 
 @property (strong, nonatomic) NSArray *listArray;
 
+@property (nonatomic, strong) UIImageView *vv;
+
 @end
 
 @implementation XZselectclientTableViewController
@@ -39,6 +41,21 @@
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     
     [self.tableView registerNib:[UINib nibWithNibName:@"XZselectclientTableViewCell" bundle:nil] forCellReuseIdentifier:@"XZselectclientTableViewCell"];
+    [self.tableView addSubview:[self createButton]];
+    
+}
+
+- (UIView *)createButton{
+    
+    
+    UIImageView *imageview = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"空数据"]];
+    self.vv = imageview;
+    imageview.frame = CGRectMake(0, 0, 100, 100);
+    
+    imageview.centerX = SCREEN_WIDTH / 2;
+    imageview.centerY = (SCREEN_HEIGHT - 64) / 2 - 80;
+    
+    return imageview;
 }
 
 - (void)loadDataSource {
@@ -47,6 +64,7 @@
         
         self.listArray = DataArray;
         
+        self.vv.hidden = self.listArray.count == 0 ? NO : YES;
         [self.tableView reloadData];
         
     } andError:^(NSString *err) {
