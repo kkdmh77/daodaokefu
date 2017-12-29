@@ -13,4 +13,5 @@
 
 @property (nonatomic,strong)XZMessageViewController *messagevc;
 
+@property (nonatomic,strong)NSArray *modelArray;
 @end

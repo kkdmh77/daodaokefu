@@ -9,7 +9,6 @@
 #import "XZselectclientTableViewController.h"
 #import "XZselectclientTableViewCell.h"
 #import "XZChatViewController.h"
-
 @interface XZselectclientTableViewController ()
 
 @property (strong, nonatomic) NSArray *listArray;
@@ -88,12 +87,30 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     
+    
+    
     XZClientModel *model = self.listArray[indexPath.row];
-        
+    
         XZGroup *gp      = [XZGroup new];
         gp.gName         = model.name;
         gp.imageurl      = model.avatar;
         gp.sessionId     = model.id;
+    
+    for (XZGroup *md in _modelArray) {
+        if([model.name isEqualToString:md.gName]){
+            
+            [[XZNetWorkingManager sharderinstance] ChangeChatandsessionId:md.sessionId andSucceed:^{
+            XZChatViewController *chatVc = [[XZChatViewController alloc] init];
+                chatVc.group                 = gp;
+                [self.messagevc.navigationController pushViewController:chatVc animated:NO];
+                [self dismissViewControllerAnimated:YES completion:nil];
+            } andError:^(NSString *err) {
+                
+            }];
+            
+            return;
+        }
+     }
     
 
         XZChatViewController *chatVc = [[XZChatViewController alloc] init];

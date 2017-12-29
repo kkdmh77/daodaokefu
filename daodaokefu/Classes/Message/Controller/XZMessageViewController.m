@@ -226,18 +226,12 @@
 - (void)addsession {
     
     XZselectclientTableViewController *vc = [XZselectclientTableViewController new];
+    vc.modelArray = self.dataArray;
     vc.messagevc = self;
     UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:vc];
     
     [self presentViewController:nav animated:YES completion:nil];
     
-//    XZGroup *group = [[XZGroup alloc] init];
-//    group.unReadCount = 6;
-//    group.gName = @"张国瑞";
-//    group.lastMsgString = @"你看到我的九去哪里了么?";
-//    group.imageurl = @"https://avatars1.githubusercontent.com/u/6919743?s=400&v=4";
-//    [self.dataArray addObject:group];
-//    [self.tableView reloadData];
 }
 
 - (void)openScan{

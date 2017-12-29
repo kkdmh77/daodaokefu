@@ -26,7 +26,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "daodaokefu/Classes/Chat/Controller/XZChatViewController.m"
-            timestampString = "536211223.334012"
+            timestampString = "536222242.604383"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "219"
@@ -42,7 +42,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "daodaokefu/Classes/Chat/Controller/XZChatViewController.m"
-            timestampString = "536211223.334898"
+            timestampString = "536222242.60446"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "226"
@@ -58,7 +58,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "daodaokefu/Classes/Chat/Controller/XZChatViewController.m"
-            timestampString = "536211223.335625"
+            timestampString = "536222242.604517"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "229"
@@ -202,7 +202,7 @@
                   moduleName = "daodaokefu"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/apple/Desktop/git/daodaokefu-ios/daodaokefu/Classes/Message/Controller/XZTransferSessionTableViewController.m"
-                  timestampString = "536144804.167884"
+                  timestampString = "536222242.901579"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "64"
@@ -217,7 +217,7 @@
                   moduleName = "daodaokefu"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/apple/Desktop/git/daodaokefu-ios/daodaokefu/Classes/Message/Controller/XZTransferSessionTableViewController.m"
-                  timestampString = "536144804.169639"
+                  timestampString = "536222242.904843"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "64"
@@ -250,7 +250,7 @@
                   moduleName = "daodaokefu"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/apple/Desktop/git/daodaokefu-ios/daodaokefu/Classes/NetWorking/XZNetWorkingManager.m"
-                  timestampString = "536144804.173619"
+                  timestampString = "536222242.909313"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "241"
@@ -265,7 +265,7 @@
                   moduleName = "daodaokefu"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/apple/Desktop/git/daodaokefu-ios/daodaokefu/Classes/NetWorking/XZNetWorkingManager.m"
-                  timestampString = "536144804.175325"
+                  timestampString = "536222242.911071"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "241"
@@ -336,6 +336,70 @@
             startingLineNumber = "45"
             endingLineNumber = "45"
             landmarkName = "-requestType:andRequesturl:andparameters:andSucceed:andError:"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "daodaokefu/Classes/Message/Controller/XZselectclientTableViewController.m"
+            timestampString = "536222242.604804"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "102"
+            endingLineNumber = "102"
+            landmarkName = "-tableView:didSelectRowAtIndexPath:"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "-[XZselectclientTableViewController tableView:didSelectRowAtIndexPath:]"
+                  moduleName = "daodaokefu"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/apple/Desktop/git/daodaokefu-ios/daodaokefu/Classes/Message/Controller/XZselectclientTableViewController.m"
+                  timestampString = "536222242.929361"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "102"
+                  endingLineNumber = "102"
+                  offsetFromSymbolStart = "864">
+               </Location>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "__71-[XZselectclientTableViewController tableView:didSelectRowAtIndexPath:]_block_invoke"
+                  moduleName = "daodaokefu"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/apple/Desktop/git/daodaokefu-ios/daodaokefu/Classes/Message/Controller/XZselectclientTableViewController.m"
+                  timestampString = "536222242.931094"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "102"
+                  endingLineNumber = "102"
+                  offsetFromSymbolStart = "32">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "daodaokefu/Classes/NetWorking/XZNetWorkingManager.m"
+            timestampString = "536222432.793043"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "91"
+            endingLineNumber = "91"
+            landmarkName = "-getMessageDataSucceed:andError:"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
