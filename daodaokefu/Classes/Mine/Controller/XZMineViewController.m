@@ -47,16 +47,13 @@
     
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     
-    if(indexPath.section == 3){
+    if(indexPath.section == 2){
         
         // 登出
         [self logoutAction];
     }
     
-    if(indexPath.section == 2){
-        
-        [XZToolManager showConfirmAlertView:@"提示" andMessage:@"更多问题请关注微信公众号咨询!" andVC:self];
-    }
+   
     
     
     
